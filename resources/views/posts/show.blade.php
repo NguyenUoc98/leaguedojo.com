@@ -151,6 +151,15 @@ $images = json_decode($post->image);
                     </div>
                 </div>
 
+                <!-- ad_ngang -->
+                <ins class="adsbygoogle"
+                    style="display:inline-block;width:100%;height:100px"
+                    data-ad-client="ca-pub-1747924550904432"
+                    data-ad-slot="9889684921"></ins>
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+
                 <!-- More Post In The Same Category -->
                 <div class="related-post-area bg-white mb-30 px-30 pt-30 pb-0 box-shadow">
                     <div class="section-heading">

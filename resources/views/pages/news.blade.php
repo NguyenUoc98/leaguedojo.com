@@ -283,8 +283,17 @@ Carbon::setlocale('vi');
             </div>
         </div>
 
+        <!-- ad_ngang -->
+        <ins class="adsbygoogle"
+            style="display:inline-block;width:100%;height:90px"
+            data-ad-client="ca-pub-1747924550904432"
+            data-ad-slot="9889684921"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+
         <!-- Dojos -->
-        <div class="trending-now-posts mb-30">
+        <div class="trending-now-posts mb-30 mt-30">
             <div class="section-heading">
                 <h5>Các cơ sở tập luyện</h5>
             </div>
@@ -308,11 +317,9 @@ Carbon::setlocale('vi');
 
         <!-- ad_ngang -->
         <ins class="adsbygoogle"
-            style="display:block"
+            style="display:inline-block;width:100%;height:90px"
             data-ad-client="ca-pub-1747924550904432"
-            data-ad-slot="9889684921"
-            data-ad-format="auto"
-            data-full-width-responsive="true"></ins>
+            data-ad-slot="9889684921"></ins>
         <script>
             (adsbygoogle = window.adsbygoogle || []).push({});
         </script>
@@ -357,6 +364,15 @@ Carbon::setlocale('vi');
             </div>
             @endforeach
         </div>
+
+        <!-- Ad_vuoong_sitebar -->
+        <ins class="adsbygoogle"
+            style="display:inline-block;width:100%;height:250px"
+            data-ad-client="ca-pub-1747924550904432"
+            data-ad-slot="6977098049"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
 
         <!-- New Video -->
         <div class="single-sidebar-widget p-4">

@@ -52,9 +52,6 @@
 <!-- ##### Archive Post Area Start ##### -->
 <div class="archive-post-area">
     <div class="container px-0">
-        <!-- <div class="section-heading bg-white box-shadow">
-            <h5>Đăng ký tập luyện</h5>
-        </div> -->
         <form action="{{ route('workout-registrations.store') }}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="row bg-white box-shadow py-4 p-15 mx-0 mb-4">
@@ -312,6 +309,16 @@
                 </div>
             </div>
         </form>
+
+        <!-- ad_ngang -->
+        <ins class="adsbygoogle"
+            style="display:inline-block;width:100%;height:200px"
+            data-ad-client="ca-pub-1747924550904432"
+            data-ad-slot="9889684921"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+        
     </div>
 </div>
 <!-- ##### Archive Post Area End ##### -->

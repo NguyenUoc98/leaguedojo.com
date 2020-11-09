@@ -18,7 +18,7 @@
             <i class="fa fa-facebook" style="font-size: larger;"></i>
             <span>Karate League Dojo - K.L.D</span>
         </a>
-        <div class="fb-page" data-href="https://www.facebook.com/LEAGUEDOJO/" vdata-small-header="false"
+        <div class="fb-page w-100" data-href="https://www.facebook.com/LEAGUEDOJO/" vdata-small-header="false"
             data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
             <blockquote cite="https://www.facebook.com/LEAGUEDOJO/" class="fb-xfbml-parse-ignore">
                 <a href="https://www.facebook.com/LEAGUEDOJO/">Karate League Dojo - K.L.D</a>
@@ -51,13 +51,11 @@
 <div class="single-sidebar-widget">
 
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <!-- Ad_doc_sidebar -->
+    <!-- qc dọc -->
     <ins class="adsbygoogle"
-        style="display:block"
+        style="display:inline-block;width:100%;height:600px"
         data-ad-client="ca-pub-1747924550904432"
-        data-ad-slot="3006063446"
-        data-ad-format="auto"
-        data-full-width-responsive="true"></ins>
+        data-ad-slot="1452436482"></ins>
     <script>
         (adsbygoogle = window.adsbygoogle || []).push({});
     </script>

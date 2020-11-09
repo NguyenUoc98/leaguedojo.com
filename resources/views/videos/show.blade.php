@@ -175,6 +175,15 @@ Carbon::setlocale('vi');
                 </div>
             </div>
 
+            <!-- ad_ngang -->
+            <ins class="adsbygoogle"
+                style="display:inline-block;width:100%;height:100px"
+                data-ad-client="ca-pub-1747924550904432"
+                data-ad-slot="9889684921"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+
             <!-- Site Comments -->
             <div class="post-a-comment-area bg-white p-4">
                 @comments(['model' => $video])
