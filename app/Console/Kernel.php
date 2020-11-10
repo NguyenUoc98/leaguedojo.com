@@ -25,7 +25,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('sendmail:birthday')
-                 ->daily('09:01')
+                 ->dailyAt('09:01')
                  ->withoutOverlapping();
     }
 
