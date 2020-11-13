@@ -58,8 +58,15 @@
                     <!-- Single Catagory Post -->
                     <div class="single-catagory-post d-flex flex-wrap">
 
+                        <div class="post-thumbnail border border-dark" style="width: unset;flex: unset;">
+                            <a href="{{ route('documents.show', $document->slug) }}">
+                                <img src="{{ Voyager::image($document->thumbnail) }}"
+                                    alt="{{ $document->title }}" style="height:250px">
+                            </a>
+                        </div>
+
                         <!-- Post Contetnt -->
-                        <div class="post-content" style="flex: unset;width: 100%;max-width: 100%;">
+                        <div class="post-content">
                             <a href="{{ route('documents.show', $document->slug) }}"
                                 class="post-title">{{ $document->title }}</a>
 
