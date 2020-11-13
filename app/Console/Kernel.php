@@ -14,6 +14,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         Commands\HappyBirthday::class,
+        Commands\GenThumbDoc::class,
     ];
 
     /**
@@ -26,6 +27,9 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command('sendmail:birthday')
                  ->dailyAt('08:30')
+                 ->withoutOverlapping();
+        $schedule->command('document:gen')
+                 ->daily()
                  ->withoutOverlapping();
     }
 

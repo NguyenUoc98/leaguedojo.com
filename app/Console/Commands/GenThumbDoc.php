@@ -13,7 +13,7 @@ class GenThumbDoc extends Command
      *
      * @var string
      */
-    protected $signature = 'document:generate';
+    protected $signature = 'document:gen';
 
     /**
      * The console command description.
@@ -44,15 +44,11 @@ class GenThumbDoc extends Command
 
         foreach ($documents as $doc) {
             echo "Generating $doc->title....\n";
-            for ($i = 0; $i < $doc->num_pages; $i++) {
-                $imagePath = public_path('storage/' . json_decode($doc->file)[0]) . "[$i]";
-                $image->readImage($imagePath);
-                $image->setImageCompressionQuality(70);
-                $image->setImageFormat("jpeg");
-                $output = 'thumbnail/' . substr(json_decode($doc->file)[0], 0, strpos(json_decode($doc->file)[0], '.'));
-                Storage::disk('local')->put('public/' . $output . "/[$i].jpeg", $image->getImageBlob());
-                echo "generated [$i]\n";
-            }
+            $imagePath = public_path('storage/' . json_decode($doc->file)[0]) . '[0]';
+            $image->readImage($imagePath);
+            $image->setImageFormat("jpeg");
+            $output = 'thumbnail/' . substr(json_decode($doc->file)[0], 0, strpos(json_decode($doc->file)[0], '.')) . '.jpeg';
+            Storage::disk('local')->put('public/' . $output, $image->getImageBlob());
             echo "success!$doc->title\n";
             $doc->update(['thumbnail' => $output]);
         }
