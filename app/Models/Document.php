@@ -13,7 +13,9 @@ class Document extends Model implements ViewableContract
     use FormLayoutTrait,
         Viewable,
         Commentable;
+
     protected $perPage = 10;
+    protected $fillable = ['title', 'slug', 'description', 'file', 'source', 'keywords', 'thumbnail'];
     
     /**
      * Set Formfield for Document view
@@ -22,7 +24,7 @@ class Document extends Model implements ViewableContract
     {
         return $this->field('file', 12)
             ->field('title', 6)->field('slug', 6)
-            ->field('source', 6)->field('meta_keywords', 6)
+            ->field('meta_keywords', 6)->field('source', 4)->field('num_pages', 2)
             ->field('description', 12)->get();
     }
 }

@@ -189,7 +189,10 @@
                                                     @include('voyager::multilingual.input-hidden-bread-browse')
                                                     @if($row->field == 'keywords')
                                                     @php
-                                                        $keywords = json_decode($data->keywords);
+                                                        $keywords = [];
+                                                        if(!is_null($data->keywords)) {
+                                                            $keywords = json_decode($data->keywords);
+                                                        }
                                                     @endphp
                                                     @foreach($keywords as $keyword)
                                                     <span style="line-height: 1.5;">
