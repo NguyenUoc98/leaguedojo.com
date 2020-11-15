@@ -15,7 +15,7 @@ class Document extends Model implements ViewableContract
         Commentable;
 
     protected $perPage = 10;
-    protected $fillable = ['title', 'slug', 'description', 'file', 'source', 'keywords', 'thumbnail'];
+    protected $fillable = ['title', 'slug', 'description', 'file', 'source', 'keywords', 'thumbnail', 'num_pages'];
     
     /**
      * Set Formfield for Document view
