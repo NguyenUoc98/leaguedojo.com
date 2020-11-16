@@ -48,7 +48,7 @@ class UserController extends Controller
             $data = $request->avatar;
 
             if ($user->avatar != 'users/default.png') {
-                File::delete(public_path('\\storage\\' . $user->avatar));
+                File::delete(public_path('/storage/' . $user->avatar));
             }
 
             list($type, $data) = explode(';', $data);
@@ -57,12 +57,12 @@ class UserController extends Controller
             $data = base64_decode($data);
 
             $imageName = time() . '.png';
-            $path = public_path() . '\\storage\\users\\' . Carbon::now('Asia/Ho_Chi_Minh')->format('FY');
+            $path = public_path() . '/storage/users/' . Carbon::now('Asia/Ho_Chi_Minh')->format('FY');
             File::isDirectory($path) or File::makeDirectory($path);
-            file_put_contents($path . '\\' . $imageName, $data);
+            file_put_contents($path . '/' . $imageName, $data);
 
             $user->update([
-                'avatar' => 'users\\' . Carbon::now('Asia/Ho_Chi_Minh')->format('FY') . '\\' . $imageName,
+                'avatar' => 'users/' . Carbon::now('Asia/Ho_Chi_Minh')->format('FY') . '/' . $imageName,
             ]);
             $student = $user->student;
             return view('pages.profile._show', compact('user', 'student'));

@@ -311,7 +311,7 @@
         </form>
 
         <!-- ad_ngang -->
-        <ins class="adsbygoogle"
+        <ins class="adsbygoogle mt-4"
             style="display:inline-block;width:100%;height:200px"
             data-ad-client="ca-pub-1747924550904432"
             data-ad-slot="9889684921"></ins>

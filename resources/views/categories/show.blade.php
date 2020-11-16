@@ -72,12 +72,12 @@
 
                             <div class="post-meta-2">
                                 <span>●
-                                    @if ($post->updated_at->isToday())
-                                    {{ $post->updated_at->diffForHumans() }}
-                                    @elseif ($post->updated_at->isYesterday())
-                                    Hôm qua lúc {{ $post->updated_at->format('H:i') }}
+                                    @if ($post->created_at->isToday())
+                                    {{ $post->created_at->diffForHumans() }}
+                                    @elseif ($post->created_at->isYesterday())
+                                    Hôm qua lúc {{ $post->created_at->format('H:i') }}
                                     @else
-                                    {{ $post->updated_at->format('d \\t\\h\\g m \\l\\ú\\c H:i') }}
+                                    {{ $post->created_at->format('d \\t\\h\\g m \\l\\ú\\c H:i') }}
                                     @endif
                                 </span>
                                 <span href="#"><i class="fa fa-eye" aria-hidden="true"></i>
@@ -92,7 +92,9 @@
                             </div>
                         </div>
                     </div>
-                    <ins class="adsbygoogle"
+
+                    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                    <ins class="adsbygoogle mt-3"
                         style="display:block"
                         data-ad-format="fluid"
                         data-ad-layout-key="-fb+5w+4e-db+86"

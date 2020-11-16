@@ -39,7 +39,7 @@ class GenThumbDoc extends Command
      */
     public function handle()
     {
-        $documents = Document::whereThumbnail('thumbnail/documents/default.jpeg')->get();
+        $documents = Document::all();
         $image = new \Imagick();
 
         foreach ($documents as $doc) {

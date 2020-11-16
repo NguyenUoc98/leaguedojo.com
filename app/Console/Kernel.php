@@ -29,7 +29,7 @@ class Kernel extends ConsoleKernel
                  ->dailyAt('08:30')
                  ->withoutOverlapping();
         $schedule->command('document:gen')
-                 ->daily()
+                 ->dailyAt('15:10')
                  ->withoutOverlapping();
     }
 

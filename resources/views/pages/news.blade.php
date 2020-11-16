@@ -55,12 +55,12 @@ Carbon::setlocale('vi');
                                     class="post-title">{{ $latestPost[0]->title }}</a>
                                 <div class="post-meta">
                                     <span style="color: #ed3939;">
-                                        @if ($latestPost[0]->updated_at->isToday())
-                                        {{ $latestPost[0]->updated_at->diffForHumans() }}
-                                        @elseif ($latestPost[0]->updated_at->isYesterday())
-                                        Hôm qua lúc {{ $latestPost[0]->updated_at->format('H:i') }}
+                                        @if ($latestPost[0]->created_at->isToday())
+                                        {{ $latestPost[0]->created_at->diffForHumans() }}
+                                        @elseif ($latestPost[0]->created_at->isYesterday())
+                                        Hôm qua lúc {{ $latestPost[0]->created_at->format('H:i') }}
                                         @else
-                                        {{ $latestPost[0]->updated_at->format('d \\t\\h\\g m \\l\\ú\\c H:i') }}
+                                        {{ $latestPost[0]->created_at->format('d \\t\\h\\g m \\l\\ú\\c H:i') }}
                                         @endif
                                     </span>
                                 </div>
@@ -118,12 +118,12 @@ Carbon::setlocale('vi');
                                                 class="post-title">{{ $latestPost[$i]->title }}</a>
                                             <div class="post-meta d-flex" style="font-size: 10px; margin-bottom: 8px;">
                                                 <span><i aria-hidden="true"></i> ●
-                                                    @if ($latestPost[$i]->updated_at->isToday())
-                                                    {{ $latestPost[$i]->updated_at->diffForHumans() }}
-                                                    @elseif ($latestPost[$i]->updated_at->isYesterday())
-                                                    Hôm qua lúc {{ $latestPost[$i]->updated_at->format('H:i') }}
+                                                    @if ($latestPost[$i]->created_at->isToday())
+                                                    {{ $latestPost[$i]->created_at->diffForHumans() }}
+                                                    @elseif ($latestPost[$i]->created_at->isYesterday())
+                                                    Hôm qua lúc {{ $latestPost[$i]->created_at->format('H:i') }}
                                                     @else
-                                                    {{ $latestPost[$i]->updated_at->format('d \\t\\h\\g m \\l\\ú\\c H:i') }}
+                                                    {{ $latestPost[$i]->created_at->format('d \\t\\h\\g m \\l\\ú\\c H:i') }}
                                                     @endif
                                                     </sapn>
                                             </div>
@@ -152,12 +152,12 @@ Carbon::setlocale('vi');
                                                 class="post-title">{{ $latestPost[$i]->title }}</a>
                                             <div class="post-meta d-flex" style="font-size: 10px; margin-bottom: 8px;">
                                                 <span><i aria-hidden="true"></i> ●
-                                                    @if ($latestPost[$i]->updated_at->isToday())
-                                                    {{ $latestPost[$i]->updated_at->diffForHumans() }}
-                                                    @elseif ($latestPost[$i]->updated_at->isYesterday())
-                                                    Hôm qua lúc {{ $latestPost[$i]->updated_at->format('H:i') }}
+                                                    @if ($latestPost[$i]->created_at->isToday())
+                                                    {{ $latestPost[$i]->created_at->diffForHumans() }}
+                                                    @elseif ($latestPost[$i]->created_at->isYesterday())
+                                                    Hôm qua lúc {{ $latestPost[$i]->created_at->format('H:i') }}
                                                     @else
-                                                    {{ $latestPost[$i]->updated_at->format('d \\t\\h\\g m \\l\\ú\\c H:i') }}
+                                                    {{ $latestPost[$i]->created_at->format('d \\t\\h\\g m \\l\\ú\\c H:i') }}
                                                     @endif
                                                     </sapn>
                                             </div>
@@ -186,12 +186,12 @@ Carbon::setlocale('vi');
                                                 class="post-title">{{ $latestPost[$i]->title }}</a>
                                             <div class="post-meta d-flex" style="font-size: 10px; margin-bottom: 8px;">
                                                 <span><i aria-hidden="true"></i> ●
-                                                    @if ($latestPost[$i]->updated_at->isToday())
-                                                    {{ $latestPost[$i]->updated_at->diffForHumans() }}
-                                                    @elseif ($latestPost[$i]->updated_at->isYesterday())
-                                                    Hôm qua lúc {{ $latestPost[$i]->updated_at->format('H:i') }}
+                                                    @if ($latestPost[$i]->created_at->isToday())
+                                                    {{ $latestPost[$i]->created_at->diffForHumans() }}
+                                                    @elseif ($latestPost[$i]->created_at->isYesterday())
+                                                    Hôm qua lúc {{ $latestPost[$i]->created_at->format('H:i') }}
                                                     @else
-                                                    {{ $latestPost[$i]->updated_at->format('d \\t\\h\\g m \\l\\ú\\c H:i') }}
+                                                    {{ $latestPost[$i]->created_at->format('d \\t\\h\\g m \\l\\ú\\c H:i') }}
                                                     @endif
                                                     </sapn>
                                             </div>
@@ -214,6 +214,15 @@ Carbon::setlocale('vi');
                 </div>
             </div>
         </div>
+
+        <!-- ad_ngang -->
+        <ins class="adsbygoogle mb-3"
+            style="display:inline-block;width:100%;height:90px"
+            data-ad-client="ca-pub-1747924550904432"
+            data-ad-slot="9889684921"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
 
         <!-- Most Viewed -->
         <div class="most-viewed-videos">
@@ -262,12 +271,12 @@ Carbon::setlocale('vi');
                             <a href="{{ route('posts.show', $post->slug) }}" class="post-title">{{ $post->title }}</a>
                             <div class="post-meta d-flex" style="font-size: 10px; margin-bottom: 8px;">
                                 <span><i aria-hidden="true"></i> ●
-                                    @if ($post->updated_at->isToday())
-                                    {{ $post->updated_at->diffForHumans() }}
-                                    @elseif ($post->updated_at->isYesterday())
-                                    Hôm qua lúc {{ $post->updated_at->format('H:i') }}
+                                    @if ($post->created_at->isToday())
+                                    {{ $post->created_at->diffForHumans() }}
+                                    @elseif ($post->created_at->isYesterday())
+                                    Hôm qua lúc {{ $post->created_at->format('H:i') }}
                                     @else
-                                    {{ $post->updated_at->format('d \\t\\h\\g m \\l\\ú\\c H:i') }}
+                                    {{ $post->created_at->format('d \\t\\h\\g m \\l\\ú\\c H:i') }}
                                     @endif
                                     </sapn>
                             </div>
@@ -346,12 +355,12 @@ Carbon::setlocale('vi');
                         style="margin-bottom: 0;">{{ $post->title }}</a>
                     <div class="post-meta d-flex" style="font-size: 10px; margin-bottom: 8px;">
                         <span><i aria-hidden="true"></i> ●
-                            @if ($post->updated_at->isToday())
-                            {{ $post->updated_at->diffForHumans() }}
-                            @elseif ($post->updated_at->isYesterday())
-                            Hôm qua lúc {{ $post->updated_at->format('H:i') }}
+                            @if ($post->created_at->isToday())
+                            {{ $post->created_at->diffForHumans() }}
+                            @elseif ($post->created_at->isYesterday())
+                            Hôm qua lúc {{ $post->created_at->format('H:i') }}
                             @else
-                            {{ $post->updated_at->format('d \\t\\h\\g m \\l\\ú\\c H:i') }}
+                            {{ $post->created_at->format('d \\t\\h\\g m \\l\\ú\\c H:i') }}
                             @endif
                             </sapn>
                     </div>
