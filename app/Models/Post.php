@@ -99,7 +99,7 @@ class Post extends Model implements ViewableContract
         return $this->where([
             ['status', 'PUBLISHED'],
             ['featured', 0],
-        ])->orderBy('updated_at', 'desc')->limit(setting('app.latest_post'))->get();
+        ])->orderBy('created_at', 'desc')->limit(setting('app.latest_post'))->get();
     }
 
     /**
@@ -112,7 +112,7 @@ class Post extends Model implements ViewableContract
         return $this->where([
             ['status', 'PUBLISHED'],
             ['featured', 1],
-        ])->orderByViews()->orderBy('updated_at', 'desc')->limit(setting('app.most_featured'))->get();
+        ])->orderByViews()->orderBy('created_at', 'desc')->limit(setting('app.most_featured'))->get();
     }
 
     /**

@@ -14,7 +14,7 @@ class AddThumbnailToDocumentsTable extends Migration
     public function up()
     {
         Schema::table('documents', function (Blueprint $table) {
-            $table->string('thumbnail')->default('documents/thumb/default.jpeg');
+            $table->string('thumbnail')->default('thumbnail/documents/default.jpeg');
         });
     }
 

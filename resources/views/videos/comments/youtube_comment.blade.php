@@ -19,7 +19,7 @@
                         <b style="font-size: 14px">{{ $commentThread->snippet->topLevelComment->snippet->authorDisplayName }}</b>
                         <span class="text-muted"> ● {{ $time->diffForHumans() }}</span>
                         <h6 class="text-muted">{{ $time->isoFormat('D \\t\\h\\g M, YYYY') }}</h6>
-                        <div style="white-space: pre-wrap;">{{ $commentThread->snippet->topLevelComment->snippet->textDisplay }}</div>
+                        <div style="white-space: pre-wrap;">{!! $commentThread->snippet->topLevelComment->snippet->textDisplay !!}</div>
                     </div>
                     <br>
 
@@ -41,7 +41,7 @@
                                         <b style="font-size: 14px">{{ $reply->snippet->authorDisplayName }}</b>
                                         <span class="text-muted"> ● {{ $time->diffForHumans() }}</span>
                                         <h6 class="text-muted">{{ $time->isoFormat('D \\t\\h\\g M, YYYY') }}</h6>
-                                        <div style="white-space: pre-wrap;">{{ $reply->snippet->textDisplay }}</div>
+                                        <div style="white-space: pre-wrap;">{!! $reply->snippet->textDisplay !!}</div>
                                     </div>
                                 </div>
                             </div>

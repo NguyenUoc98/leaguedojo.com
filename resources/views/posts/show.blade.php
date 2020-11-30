@@ -144,7 +144,7 @@ $images = json_decode($post->image);
                         <!-- Post Author -->
                         <div class="post-author d-flex justify-content-between mt-1">
                             <a href="#" class="author-name">Nguồn: {{ $post->source }}</a>
-                            <div class="fb-like" data-href="{{ env('APP_URL').'/posts/'.$post->slug }}"
+                            <div class="fb-like" data-href="{{ config('app.url').'/posts/'.$post->slug }}"
                                 data-width="" data-layout="button_count" data-action="like" data-size="small"
                                 data-share="true"></div>
                         </div>

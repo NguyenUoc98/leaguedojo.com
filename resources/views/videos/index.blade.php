@@ -136,7 +136,7 @@
     </div>
 </div>
 
-<script src="http://www.youtube.com/player_api"></script>
+<script src="https://www.youtube.com/player_api"></script>
 <script>
     // create youtube player
     function onYouTubePlayerAPIReady() {

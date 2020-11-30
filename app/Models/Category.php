@@ -12,7 +12,7 @@ class Category extends Model
      */
     public function post()
     {
-        return $this->hasMany(Post::class, 'category_id', 'id')->orderBy('updated_at', 'desc');
+        return $this->hasMany(Post::class, 'category_id', 'id')->orderBy('created_at', 'desc');
     }
 
     /**

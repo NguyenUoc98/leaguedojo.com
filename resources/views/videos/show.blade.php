@@ -170,13 +170,13 @@ Carbon::setlocale('vi');
                     <!-- Post Author -->
                     <div class="post-author d-flex justify-content-between mt-1">
                         <a href="#" class="author-name">Nguồn: KARATE LEAGUE DOJO</a>
-                        <div class="fb-like" data-href="{{ env('APP_URL').'/videos/'.$video->slug }}" data-width="" data-layout="button_count" data-action="like" data-size="small" data-share="true"></div>
+                        <div class="fb-like" data-href="{{ config('app.url').'/videos/'.$video->slug }}" data-width="" data-layout="button_count" data-action="like" data-size="small" data-share="true"></div>
                     </div>
                 </div>
             </div>
 
             <!-- ad_ngang -->
-            <ins class="adsbygoogle"
+            <ins class="adsbygoogle my-3"
                 style="display:inline-block;width:100%;height:100px"
                 data-ad-client="ca-pub-1747924550904432"
                 data-ad-slot="9889684921"></ins>
@@ -206,7 +206,7 @@ Carbon::setlocale('vi');
     </div>
 </section>
 
-<script src="http://www.youtube.com/player_api"></script>
+<script src="https://www.youtube.com/player_api"></script>
 <script>
     var player;
     var auto = true;
@@ -255,11 +255,7 @@ Carbon::setlocale('vi');
     // init Infinite Scroll
     $('.video-scroll').infiniteScroll({
         path: function() {
-            if (this.loadCount < {
-                    {
-                        $ortherInChanel - > total() / setting('app.orther_in_chanel')
-                    }
-                }) {
+            if (this.loadCount < {{$ortherInChanel->total() / setting('app.orther_in_chanel')}}) {
                 return '?page=' + (this.loadCount + 2);
             }
         },
