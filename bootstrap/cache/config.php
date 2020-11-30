@@ -139,7 +139,7 @@
         4 => 'Mpociot\\ApiDoc\\Extracting\\Strategies\\Responses\\ResponseCalls',
       ),
     ),
-    'logo' => '/var/www/html/leaguedojo.com/public/img/core-img/logoAPIDoc.png',
+    'logo' => '/var/www/leaguedojo.com/public/img/core-img/logoAPIDoc.png',
     'default_group' => 'Khác',
     'example_languages' => 
     array (
@@ -156,9 +156,9 @@
   'app' => 
   array (
     'name' => 'LeagueDojo',
-    'env' => 'local',
+    'env' => 'production',
     'debug' => true,
-    'url' => 'http://leaguedojo.com.local',
+    'url' => 'https://leaguedojo.com',
     'asset_url' => NULL,
     'timezone' => 'Asia/Ho_Chi_Minh',
     'locale' => 'vi',
@@ -342,7 +342,7 @@
       'file' => 
       array (
         'driver' => 'file',
-        'path' => '/var/www/html/leaguedojo.com/storage/framework/cache/data',
+        'path' => '/var/www/leaguedojo.com/storage/framework/cache/data',
       ),
       'memcached' => 
       array (
@@ -420,7 +420,7 @@
         'host' => '127.0.0.1',
         'port' => '3306',
         'database' => 'leaguedojo',
-        'username' => 'root',
+        'username' => 'padmin',
         'password' => 'uocnv1998',
         'unix_socket' => '',
         'charset' => 'utf8mb4',
@@ -440,7 +440,7 @@
         'host' => '127.0.0.1',
         'port' => '3306',
         'database' => 'leaguedojo',
-        'username' => 'root',
+        'username' => 'padmin',
         'password' => 'uocnv1998',
         'charset' => 'utf8',
         'prefix' => '',
@@ -455,7 +455,7 @@
         'host' => '127.0.0.1',
         'port' => '3306',
         'database' => 'leaguedojo',
-        'username' => 'root',
+        'username' => 'padmin',
         'password' => 'uocnv1998',
         'charset' => 'utf8',
         'prefix' => '',
@@ -565,13 +565,13 @@
       'local' => 
       array (
         'driver' => 'local',
-        'root' => '/var/www/html/leaguedojo.com/storage/app',
+        'root' => '/var/www/leaguedojo.com/storage/app',
       ),
       'public' => 
       array (
         'driver' => 'local',
-        'root' => '/var/www/html/leaguedojo.com/storage/app/public',
-        'url' => 'http://leaguedojo.com.local/storage',
+        'root' => '/var/www/leaguedojo.com/storage/app/public',
+        'url' => 'https://leaguedojo.com/storage',
         'visibility' => 'public',
       ),
       's3' => 
@@ -624,13 +624,13 @@
       'single' => 
       array (
         'driver' => 'single',
-        'path' => '/var/www/html/leaguedojo.com/storage/logs/laravel.log',
+        'path' => '/var/www/leaguedojo.com/storage/logs/laravel.log',
         'level' => 'debug',
       ),
       'daily' => 
       array (
         'driver' => 'daily',
-        'path' => '/var/www/html/leaguedojo.com/storage/logs/laravel.log',
+        'path' => '/var/www/leaguedojo.com/storage/logs/laravel.log',
         'level' => 'debug',
         'days' => 14,
       ),
@@ -699,7 +699,7 @@
       'theme' => 'default',
       'paths' => 
       array (
-        0 => '/var/www/html/leaguedojo.com/resources/views/vendor/mail',
+        0 => '/var/www/leaguedojo.com/resources/views/vendor/mail',
       ),
     ),
     'log_channel' => NULL,
@@ -784,7 +784,7 @@
     'lifetime' => '120',
     'expire_on_close' => false,
     'encrypt' => false,
-    'files' => '/var/www/html/leaguedojo.com/storage/framework/sessions',
+    'files' => '/var/www/leaguedojo.com/storage/framework/sessions',
     'connection' => NULL,
     'table' => 'sessions',
     'store' => NULL,
@@ -804,9 +804,9 @@
   array (
     'paths' => 
     array (
-      0 => '/var/www/html/leaguedojo.com/resources/views',
+      0 => '/var/www/leaguedojo.com/resources/views',
     ),
-    'compiled' => '/var/www/html/leaguedojo.com/storage/framework/views',
+    'compiled' => '/var/www/leaguedojo.com/storage/framework/views',
   ),
   'voyager' => 
   array (
