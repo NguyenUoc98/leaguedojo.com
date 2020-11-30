@@ -28,7 +28,6 @@ class WorkoutRegistrationController extends Controller
     public function __construct(WorkoutRegistration $workoutRegistration)
     {
         $this->workoutRegistration = $workoutRegistration;
-        $this->middleware('auth');
     }
 
     /**
@@ -44,7 +43,7 @@ class WorkoutRegistrationController extends Controller
         $meta_desc = 'Trang đăng ký tập luyện cho người mới muốn tham gia tập luyện karate';
         $meta_keywords = 'đăng ký tập luyện, karate, hà nội';
         $url_canonical = route('workout-registrations.create');
-        $image_og = config('app')['url'] . '/img/home/introduce/i8.jpg';
+        $image_og = config('app')['url'] . '/img/core-img/banner-tuyensinh.png';
         $meta_title = 'Đăng ký tập luyện';
         // SEO
 
