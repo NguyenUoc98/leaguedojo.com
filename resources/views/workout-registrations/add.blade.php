@@ -9,30 +9,27 @@
         border-right: 1px solid #e9ecef !important;
     }
 }
-</style>
-<div class="loader">
-    <img src="/img/core-img/loading.gif">
-</div>
+@media (max-width: 799px) {
+    #backdrop-left {
+        display: none !important;
+    }
 
-<!-- ##### Breadcrumb Area Start ##### -->
-<!-- <section class="breadcrumb-area bg-img bg-overlay" style="background-image: url(/img/core-img/banner-tuyensinh.png);">
-    <div class="container h-100">
-        <div class="row h-100 align-items-center">
-            <div class="col-12">
-                <div class="breadcrumb-content">
-                    <h2>Đăng ký tập luyện</h2>
-                </div>
-            </div>
-        </div>
-    </div>
-</section> -->
-<!-- ##### Breadcrumb Area End ##### -->
+    .row, .col-md-2, .col-md-8 {
+        margin: 0;
+        padding: 0;
+    }
+
+    .row.bg-white {
+        margin-left: -15px!important;
+    }
+}
+</style>
 
 <img src="/img/core-img/banner-tuyensinh.png" alt="tuyensinh.png" style="width:100%; height:auto;">
 
 <!-- ##### Breadcrumb Area Start ##### -->
-<div class="py-3">
-    <div class="container-fluid m-0">
+<div class="py-md-3">
+    <div class="container-fluid m-0 md-p-0">
         <div class="col-12 px-0">
             <div class="pt-breadcrumb">
                 <div class="breadcrumb mb-0">
@@ -51,9 +48,9 @@
 
 <!-- ##### Archive Post Area Start ##### -->
 <div class="archive-post-area">
-    <div class="container-fluid">
+    <div class="container-fluid md-p-0">
         <div class="row">
-            <div class="col-md-2">
+            <div class="col-md-2" id="backdrop-left">
                 <img src="/img/core-img/backdrop2.png" alt="tuyensinh.png" style="width:100%; height:auto;">
             </div>
 
@@ -67,7 +64,7 @@
                             <!-- Basic Info -->
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="form-control-label" for="input-name">Họ và tên</label>
+                                    <label class="form-control-label" for="input-name">Họ và tên(*)</label>
                                     <div class="input-group input-group-alternative">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text text-white bg-red border-success"><i
@@ -110,7 +107,7 @@
 
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="form-control-label" for="input-phone">Điện thoại</label>
+                                    <label class="form-control-label" for="input-phone">Điện thoại(*)</label>
                                     <div class="input-group input-group-alternative">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text text-white bg-red border-success"><i
@@ -123,14 +120,14 @@
                             </div>
 
                             <div class="form-group col-md-6">
-                                <label class="form-control-label" for="input-birthday">Ngày sinh</label>
+                                <label class="form-control-label" for="input-birthday">Ngày sinh(*)</label>
                                 <div class="input-group input-group-alternative">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text text-white bg-red border-success"><i
                                                 class="fa fa-calendar" aria-hidden="true"></i></span>
                                     </div>
                                     <input type="text" name="birthday" id="input-birthday"
-                                        class="form-control datepicker pl-2" placeholder="Ngày sinh"
+                                        class="form-control datepicker pl-2" placeholder="20-10-2005"
                                         value="{{ old('birthday') }}" required>
                                 </div>
                             </div>
@@ -157,7 +154,7 @@
                         <div class="row">
                             <div class="col-md-6 col-6">
                                 <div class="form-group">
-                                    <label class="form-control-label" for="input-height">Chiều cao (cm)</label>
+                                    <label class="form-control-label" for="input-height">Chiều cao (cm)(*)</label>
                                     <div class="input-group input-group-alternative">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text text-white bg-red border-success"><i
@@ -171,7 +168,7 @@
                             </div>
                             <div class="col-md-6 col-6">
                                 <div class="form-group">
-                                    <label class="form-control-label" for="input-weight">Cân nặng (kg)</label>
+                                    <label class="form-control-label" for="input-weight">Cân nặng (kg)(*)</label>
                                     <div class="input-group input-group-alternative">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text text-white bg-red border-success"><i
@@ -190,7 +187,7 @@
                     <div class="col-lg-6">
                         <h6 class="heading mb-4">Thông tin bổ sung</h6>
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-dojo">Cơ sở tập luyện</label>
                                     <div class="input-group input-group-alternative">
@@ -208,9 +205,23 @@
                                 </div>
                             </div>
 
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="input-address">Email(*)</label>
+                                    <div class="input-group input-group-alternative">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text text-white bg-red border-success"><i
+                                                    class="fa fa-envelope" aria-hidden="true"></i></span>
+                                        </div>
+                                        <input id="input-email" name="email" class="form-control pl-2"
+                                            placeholder="Email" value="{{ old('email')}}" type="email" required>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label class="form-control-label" for="input-address">Địa chỉ</label>
+                                    <label class="form-control-label" for="input-address">Địa chỉ(*)</label>
                                     <div class="input-group input-group-alternative">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text text-white bg-red border-success"><i
@@ -315,7 +326,7 @@
 
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label class="form-control-label" for="input-fb">Link Facebook</label>
+                                    <label class="form-control-label" for="input-fb">Link Facebook(*)</label>
                                     <div class="input-group input-group-alternative">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text text-white bg-red border-success"><i
@@ -331,14 +342,15 @@
                     </div>
 
                     <div class="col-12 mt-15">
-                        <p>* Để đăng ký tập luyện, bạn hãy điền các thông tin bên trên và nhấn nút đăng ký.<br>
-                            * Đội ngũ Admin của chúng tớ sẽ liên hệ với bạn sớm nhất để xác nhận lại thông tin nhé!<br>
-                            * Các thông tin này sẽ được sử dụng làm hồ sơ, các chứng chỉ và giấy tờ liên quan nên hãy điền
+                        <p>* Các thông tin có dấu (*) là các thông tin bắt buộc.<br>
+                           * Để đăng ký tập luyện, bạn hãy điền các thông tin bên trên và nhấn nút đăng ký.<br>
+                           * Đội ngũ Admin của chúng tớ sẽ liên hệ với bạn sớm nhất để xác nhận lại thông tin nhé!<br>
+                           * Các thông tin này sẽ được sử dụng làm hồ sơ, các chứng chỉ và giấy tờ liên quan nên hãy điền
                             thật chính xác.</p>
                     </div>
 
                     <div class="text-right col-12">
-                        <button type="submit" class="btn btn-success btn-long" style="border-radius: 6px;">Đăng ký</button>
+                        <button type="submit" class="btn btn-success btn-long btn-register" style="border-radius: 6px;">Đăng ký</button>
                     </div>
                 </div>
             </form>

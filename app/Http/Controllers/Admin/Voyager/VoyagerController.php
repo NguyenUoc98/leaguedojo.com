@@ -72,7 +72,7 @@ class VoyagerController extends BaseVoyagerController
 
 
         // News Chart
-        $posts = Post::where(DB::raw("(DATE_FORMAT(updated_at,'%Y'))"), date('Y'))
+        $posts = Post::where(DB::raw("(DATE_FORMAT(created_at,'%Y'))"), date('Y'))
             ->get();
         $postCounted = $posts->countBy(function ($post) {
             return date_create($post->updated_at)->format('m');
@@ -81,7 +81,7 @@ class VoyagerController extends BaseVoyagerController
         foreach ($postCounted->all() as $index => $value) {
             $postArray[$index - 1] = $value;
         }
-        $videos = Video::where(DB::raw("(DATE_FORMAT(updated_at,'%Y'))"), date('Y'))
+        $videos = Video::where(DB::raw("(DATE_FORMAT(created_at,'%Y'))"), date('Y'))
             ->get();
         $videoCounted = $videos->countBy(function ($video) {
             return date_create($video->updated_at)->format('m');
@@ -90,7 +90,7 @@ class VoyagerController extends BaseVoyagerController
         foreach ($videoCounted->all() as $index => $value) {
             $videoArray[$index - 1] = $value;
         }
-        $documents = Document::where(DB::raw("(DATE_FORMAT(updated_at,'%Y'))"), date('Y'))
+        $documents = Document::where(DB::raw("(DATE_FORMAT(created_at,'%Y'))"), date('Y'))
             ->get();
         $documentCounted = $documents->countBy(function ($document) {
             return date_create($document->updated_at)->format('m');

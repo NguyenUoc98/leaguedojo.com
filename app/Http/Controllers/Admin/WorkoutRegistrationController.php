@@ -38,7 +38,6 @@ class WorkoutRegistrationController extends Controller
     public function confirm(Request $request)
     {
         $workoutRegistration = WorkoutRegistration::find($request->id);
-        $user = User::find($workoutRegistration->id);
 
         // Tạo đối tượng võ sinh và cập nhật MSVS
         $student = new Student();
@@ -71,6 +70,11 @@ class WorkoutRegistrationController extends Controller
             'id' => $student_id,
         ]);
 
+        $user = User::whereEmail($workoutRegistration->email)->firstOrCreate(
+            ['email' => $workoutRegistration->email],
+            ['name' => $workoutRegistration->name, 'password' => bcrypt($workoutRegistration->phone)]
+        );
+        
         $user->update([
             'student_id' => $student_id,
         ]);

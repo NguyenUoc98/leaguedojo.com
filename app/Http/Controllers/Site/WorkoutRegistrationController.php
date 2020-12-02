@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
+use App\Models\Student;
 use App\Models\WorkoutRegistration;
 use App\Notifications\Notify;
 use App\Notifications\WorkoutRegistration as NotificationsWorkoutRegistration;
@@ -58,7 +59,7 @@ class WorkoutRegistrationController extends Controller
      */
     public function store(Request $request)
     {
-        if (Auth::user()->isStudent()) {
+        if (Auth::check() && Auth::user()->isStudent()) {
             return redirect()->back()->with([
                 'status' => 'Thông báo',
                 'message' => 'Đang tập luyện rồi mà. Hãy đăng ký chuyển cơ sở nhé!',
@@ -66,10 +67,17 @@ class WorkoutRegistrationController extends Controller
                 'color' => '#00bcd4',
             ]);
         } else {
+            $user = User::whereEmail($request->email)->first();
+            if ((!is_null($user) && $user->isStudent()) || !is_null(Student::wherePhone($request->phone)->first())){
+                return redirect()->back()->with([
+                    'status' => 'Lỗi',
+                    'message' => 'Email hoặc số điện thoại đăng ký đã tồn tại trên hệ thống',
+                    'type' => 'error',
+                    'color' => '#ed3939',
+                ]);
+            }
             $workoutRegistration = $request->all();
-
             $workoutRegistration['birthday'] = Carbon::createFromFormat('d-m-Y', $workoutRegistration['birthday'])->format('Y-m-d');
-            $workoutRegistration['id'] = Auth::user()->id;
             try {
                 $workoutRegistration = WorkoutRegistration::create($workoutRegistration);
                 $data = [

@@ -15,7 +15,7 @@ class WorkoutRegistration extends Model
      * @var array
      */
     protected $fillable = [
-        'id', 'name', 'phone', 'cmnd', 'birthday', 'address', 'homeland', 'work_unit', 'type', 'weight', 'height', 'sex',
+        'id', 'name', 'phone', 'email', 'cmnd', 'birthday', 'address', 'homeland', 'work_unit', 'type', 'weight', 'height', 'sex',
         'link_fb', 'dojo_id', 'confirmed', 'reason_reject',
     ];
 
@@ -26,6 +26,7 @@ class WorkoutRegistration extends Model
             ->beginDiv('col-md-6')
                 ->field('name', 6)->field('sex', 6)
                 ->field('cmnd', 6)->field('phone', 6)
+                ->field('email', 12)
                 ->field('birthday', 6)->field('type', 6)
                 ->field('height', 6)->field('weight', 6)
                 ->field('reason_reject', 12)
