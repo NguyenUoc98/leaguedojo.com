@@ -3,14 +3,15 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Mail\RejectWorkout as MailRejectWorkout;
 use App\Models\Student;
 use App\Models\WorkoutRegistration;
 use App\Notifications\ConfirmWorkout;
 use App\Notifications\Notify;
-use App\Notifications\RejectWorkout;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Notification;
 
 class WorkoutRegistrationController extends Controller
@@ -104,18 +105,8 @@ class WorkoutRegistrationController extends Controller
     public function reject(Request $request)
     {
         $workoutRegistration = WorkoutRegistration::find($request->id);
-        $user = User::find($workoutRegistration->id);
 
-        $data = [
-            "text" => 'Đăng ký tập luyện của bạn đã không được chấp nhận.',
-            "img" => '/img/core-img/notification.png',
-            "icon" => '/img/core-img/icon-notify.png',
-            "href" => '#',
-            "time" => Carbon::now(),
-        ];
-
-        Notification::send($user, new Notify($data, 'workout-registration'));
-        Notification::send($user, new RejectWorkout($workoutRegistration, $request->reason));
+        Mail::to($workoutRegistration->email)->send(new MailRejectWorkout($workoutRegistration, $request->reason));
 
         $workoutRegistration->update([
             'confirmed' => 'REJECTED',
