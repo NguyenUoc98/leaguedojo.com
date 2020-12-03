@@ -109,12 +109,12 @@ class AttendController extends Controller
 
                 foreach ($datas as $index => $data) {
                     $imageName = time() . $index . '.png';
-                    $path = 'attends\\' . Carbon::now('Asia/Ho_Chi_Minh')->format('FY');
-                    $realPath = public_path() . '\\storage\\' . $path;
+                    $path = 'attends/' . Carbon::now('Asia/Ho_Chi_Minh')->format('FY');
+                    $realPath = public_path() . '/storage/' . $path;
                     File::isDirectory($realPath) or File::makeDirectory($realPath);
                     $img = Image::make($data->getRealPath());
-                    $img = $img->resize(700, $img->height() * 700 / $img->width())->save($realPath . '\\' . $imageName);
-                    array_push($image, $path . '\\' . $imageName);
+                    $img = $img->resize(700, $img->height() * 700 / $img->width())->save($realPath . '/' . $imageName);
+                    array_push($image, $path . '/' . $imageName);
                 }
             }
 
@@ -138,7 +138,7 @@ class AttendController extends Controller
                 $role = Role::whereIn('name', ['admin', 'manager', 'monitor'])->select('id')->get();
                 $user = User::whereIn('role_id', $role)->get();
                 Notification::send($user, new Notify($data, 'transfer-dojo'));
-                Notification::send($user, new EventRegistration($attend));
+                // Notification::send($user, new EventRegistration($attend));
 
                 return redirect()->back()->with([
                     'status' => 'Thành công',
@@ -149,7 +149,7 @@ class AttendController extends Controller
             } catch (Exception $e) {
                 // Xóa ảnh đã lưu 
                 foreach ($image as $img) {
-                    File::delete(public_path('\\storage\\' . $img));
+                    File::delete(public_path('/storage/' . $img));
                 }
 
                 $message = $e->getMessage();
