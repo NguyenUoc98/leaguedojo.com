@@ -20,7 +20,7 @@ class User extends Model implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'avatar', 'student_id',
+        'name', 'email', 'password', 'avatar', 'student_id', 'facebook_id', 'google_id'
     ];
 
     /**

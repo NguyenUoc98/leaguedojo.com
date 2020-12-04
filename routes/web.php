@@ -65,7 +65,11 @@ Route::group(['middleware' => ['operation-log']], function () {
 
     // Notification
     Route::post('/notification/read', 'Front\NotificationController@read');    
-    Route::get('/notification/readAll', 'Front\NotificationController@readAll');    
+    Route::get('/notification/readAll', 'Front\NotificationController@readAll'); 
+    
+    // Route social login
+    Route::get('/auth/redirect/{provider}', 'Site\SocialController@redirect')->name('auth.social-login');
+    Route::get('/callback/{provider}', 'Site\SocialController@callback');
 });
 
 Route::group(['prefix' => 'admin', 'middleware' => ['operation-log']], function () {

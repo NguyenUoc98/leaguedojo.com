@@ -43,11 +43,11 @@
                             <button id="submit" type="submit" class="ibtn">Đăng nhập</button>
                         </div>
                     </form>
-                    <!-- <div class="other-links">
+                    <div class="other-links">
                         <span>Hoặc đăng nhập bằng</span><a
-                            href="http://brandio.io/envato/iofrm/html/login8.html#">Facebook</a><a
-                            href="http://brandio.io/envato/iofrm/html/login8.html#">Google</a>
-                    </div> -->
+                            href="{{ route('auth.social-login', 'facebook') }}">Facebook</a><a
+                            href="{{ route('auth.social-login', 'google') }}">Google</a>
+                    </div>
                 </div>
             </div>
         </div>

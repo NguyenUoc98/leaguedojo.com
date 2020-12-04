@@ -52,7 +52,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-12 col-xs-8 col-lg-8">
-                <div class="archive-posts-area bg-white p-30 mb-30 box-shadow">
+                <div class="archive-posts-area bg-white p-30 box-shadow">
                     @forelse($documents as $document)
 
                     <!-- Single Catagory Post -->
@@ -94,7 +94,7 @@
                     </div>
 
                     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                    <ins class="adsbygoogle mt-3"
+                    <ins class="adsbygoogle mb-30"
                         style="display:block"
                         data-ad-format="fluid"
                         data-ad-layout-key="-fb+5w+4e-db+86"
