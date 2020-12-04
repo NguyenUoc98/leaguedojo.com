@@ -36,6 +36,7 @@ class RejectWorkout extends Mailable
         return $this->subject('Thông báo xác nhận đăng ký tập luyện.')
                 ->html(
                     (new MailMessage)
+                        ->error()
                         ->greeting('Xin chào ' . $this->workoutRegistration->name . '!')
                         ->line('Chúng tôi đã nhận được đăng ký tập luyện tại cơ sở ' . Dojo::find($this->workoutRegistration->dojo_id)->name . ' của bạn.')
                         ->line('Chúng tôi rất tiếc khi phải thông báo rằng đơn đăng ký của bạn đã không được chấp nhận!')

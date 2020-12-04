@@ -122,8 +122,6 @@ img {
 
 .body {
     background-color: #ffffff;
-    border-bottom: 1px solid #edeff2;
-    border-top: 1px solid #edeff2;
     margin: 0;
     padding: 0;
     width: 100%;
@@ -136,10 +134,10 @@ img {
     background-color: #ffffff;
     margin: 0 auto;
     padding: 0;
-    width: 600px;
+    width: 100%;
     -premailer-cellpadding: 0;
     -premailer-cellspacing: 0;
-    -premailer-width: 600px;
+    -premailer-width: 100%;
 }
 
 /* Subcopy */
@@ -160,10 +158,10 @@ img {
     margin: 0 auto;
     padding: 0;
     text-align: center;
-    width: 600px;
+    width: 100%;
     -premailer-cellpadding: 0;
     -premailer-cellspacing: 0;
-    -premailer-width: 600px;
+    -premailer-width: 100%;
 }
 
 .footer p {

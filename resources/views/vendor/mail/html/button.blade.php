@@ -1,19 +1,18 @@
-<table class="action" align="center" width="100%" cellpadding="0" cellspacing="0" role="presentation">
-    <tr>
-        <td align="center">
-            <table width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation">
+<tr>
+    <td align="center" vertical-align="middle" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+        <table border="0" cellpadding="0" cellspacing="0" role="presentation"
+            style="border-collapse:separate;line-height:100%;">
+            <tbody>
                 <tr>
-                    <td align="center">
-                        <table border="0" cellpadding="0" cellspacing="0" role="presentation">
-                            <tr>
-                                <td>
-                                    <a href="{{ $url }}" class="button button-{{ $color ?? 'primary' }}" target="_blank">{{ $slot }}</a>
-                                </td>
-                            </tr>
-                        </table>
+                    <td align="center" role="presentation"
+                        style="border:none;border-radius:3px;cursor:auto;mso-padding-alt:10px 25px;"
+                        valign="middle">
+                        <a href="{{ $url }}" class = "button-{{ $color ?? 'primary' }}"
+                            style="display: inline-block; color: #ffffff; font-size: 14px; font-weight: bold;margin: 0; text-decoration: none; padding: 10px 25px; mso-padding-alt: 0px; border-radius: 3px;"
+                            target="_blank">{{ $slot }}</a>
                     </td>
                 </tr>
-            </table>
-        </td>
-    </tr>
-</table>
+            </tbody>
+        </table>
+    </td>
+</tr>
