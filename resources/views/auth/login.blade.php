@@ -43,10 +43,13 @@
                             <button id="submit" type="submit" class="ibtn">Đăng nhập</button>
                         </div>
                     </form>
-                    <div class="other-links">
-                        <span>Hoặc đăng nhập bằng</span><a
-                            href="{{ route('auth.social-login', 'facebook') }}">Facebook</a><a
-                            href="{{ route('auth.social-login', 'google') }}">Google</a>
+
+                    <div class="other-links" style="margin-top: -25px;">
+                        <span style="font-size:13px; margin:0 0 5px 0;">Hoặc đăng nhập bằng</span><br>
+                        <div style="padding-top: 8px;">
+                            <a style="background-color: #3b5998;padding: 10px 20px 10px 10px;border-radius: 50px;" href="{{ route('auth.social-login', 'facebook') }}"><i class="fa fa-facebook-f"></i>Facebook</a>
+                            <a style="background-color: #dd4b39;padding: 10px 20px 10px 10px;border-radius: 50px;" href="{{ route('auth.social-login', 'google') }}"><i class="fa fa-google"></i>Google</a>
+                        </div>
                     </div>
                 </div>
             </div>
