@@ -24,7 +24,7 @@
             <form action="{{ route('logout') }}" method="post">
                 {{ csrf_field() }}
                 <button type="submit" class="btn" style="background:none; padding:0; text-transform: uppercase;">
-                    <a>Đăng xuất</a>
+                    <a style="font-size: 13px;">Đăng xuất</a>
                 </button>
             </form>
         </li>

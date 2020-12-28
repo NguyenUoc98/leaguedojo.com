@@ -26,15 +26,8 @@ return [
          * or specific method to path like: get:admin/logs.
          */
         'except' => [
-            'admin/operation-logs*',
-            'admin/logs*',
-            'admin/bread*',
-            'admin/menu*',
-            'admin/database*',
-            'admin/compass*',
-            'admin/settings*',
             'broadcasting*',
-            'admin/voyager-assets*',
+            'admin/*',
         ],
     ],
 ];

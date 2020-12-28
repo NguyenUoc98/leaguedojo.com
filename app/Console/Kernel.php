@@ -26,10 +26,10 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('sendmail:birthday')
-                 ->dailyAt('08:30')
+                 ->dailyAt('9:00')
                  ->withoutOverlapping();
         $schedule->command('document:gen')
-                 ->dailyAt('15:10')
+                 ->dailyAt('16:00')
                  ->withoutOverlapping();
     }
 
