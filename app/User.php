@@ -13,6 +13,7 @@ use App\Notifications\VerifyEmail;
 class User extends Model implements MustVerifyEmail
 {
     use Notifiable, Commenter;
+    use \HighIdeas\UsersOnline\Traits\UsersOnlineTrait;
 
     /**
      * The attributes that are mass assignable.
