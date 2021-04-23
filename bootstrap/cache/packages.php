@@ -47,6 +47,13 @@
       0 => 'Fideloper\\Proxy\\TrustedProxyServiceProvider',
     ),
   ),
+  'highideas/laravel-users-online' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'HighIdeas\\UsersOnline\\Providers\\UsersOnlineEventServiceProvider',
+    ),
+  ),
   'intervention/image' => 
   array (
     'providers' => 
@@ -70,6 +77,17 @@
     'providers' => 
     array (
       0 => 'Larapack\\VoyagerHooks\\VoyagerHooksServiceProvider',
+    ),
+  ),
+  'laravel/socialite' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Laravel\\Socialite\\SocialiteServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'Socialite' => 'Laravel\\Socialite\\Facades\\Socialite',
     ),
   ),
   'laravel/tinker' => 

@@ -41,7 +41,7 @@ class VoyagerController extends BaseVoyagerController
         $userChart['title'] = 'Số lượng tài khoản đăng ký mới năm ' . date('Y');
         $userChart['userArray'] = $userArray;
 
-
+	/*
         // Số lượng người truy cập
         $operations = OperationLog::where(DB::raw("(DATE_FORMAT(created_at,'%Y'))"), date('Y'))->select(DB::raw('*,MONTH(created_at) as month'))
             ->get()->groupBy(['month', 'user_id']);
@@ -61,6 +61,7 @@ class VoyagerController extends BaseVoyagerController
                 return date_create($workout->created_at)->format('m');
             })->all()];
         });
+	$workoutChart['data'] = [];
         $workoutChart['title'] = 'Số lượng võ sinh đăng ký mới năm ' . date('Y');
         foreach ($workoutCounted as $dojo_id => $workouts) {
             $workoutData = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
@@ -171,8 +172,8 @@ class VoyagerController extends BaseVoyagerController
             }
             $tuitionsChart['data'][$dojo] = $tuitionArray;
         }
-
-
-        return Voyager::view('voyager::index', compact('userChart', 'workoutChart', 'voucherChart', 'voucher1Chart', 'tuitionsChart', 'tuitionInfo', 'operationChart', 'newsChart'));
+*/
+	return Voyager::view('voyager::index');
+       //  return Voyager::view('voyager::index', compact('userChart', 'workoutChart', 'voucherChart', 'voucher1Chart', 'tuitionsChart', 'tuitionInfo', 'operationChart', 'newsChart'));
     }
 }

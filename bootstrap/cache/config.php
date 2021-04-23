@@ -18,15 +18,8 @@
       ),
       'except' => 
       array (
-        0 => 'admin/operation-logs*',
-        1 => 'admin/logs*',
-        2 => 'admin/bread*',
-        3 => 'admin/menu*',
-        4 => 'admin/database*',
-        5 => 'admin/compass*',
-        6 => 'admin/settings*',
-        7 => 'broadcasting*',
-        8 => 'admin/voyager-assets*',
+        0 => 'broadcasting*',
+        1 => 'admin/*',
       ),
     ),
   ),
@@ -155,9 +148,9 @@
   ),
   'app' => 
   array (
-    'name' => 'LeagueDojo',
+    'name' => 'League Dojo',
     'env' => 'production',
-    'debug' => true,
+    'debug' => false,
     'url' => 'https://leaguedojo.com',
     'asset_url' => NULL,
     'timezone' => 'Asia/Ho_Chi_Minh',
@@ -381,7 +374,7 @@
         'endpoint' => NULL,
       ),
     ),
-    'prefix' => 'leaguedojo_cache',
+    'prefix' => 'league_dojo_cache',
   ),
   'comments' => 
   array (
@@ -469,7 +462,7 @@
       'options' => 
       array (
         'cluster' => 'redis',
-        'prefix' => 'leaguedojo_database_',
+        'prefix' => 'league_dojo_database_',
       ),
       'default' => 
       array (
@@ -777,6 +770,18 @@
       'secret' => '',
       'region' => 'us-east-1',
     ),
+    'google' => 
+    array (
+      'client_id' => '52867832915-i15etnnakillg5ni2e0g05j5iva9bs74.apps.googleusercontent.com',
+      'client_secret' => 'XDvMqVkOKqjtSK175USpeiin',
+      'redirect' => 'https://leaguedojo.com/callback/google',
+    ),
+    'facebook' => 
+    array (
+      'client_id' => '470070003944545',
+      'client_secret' => '3722e16534d4b1549446b76a719652e7',
+      'redirect' => 'https://leaguedojo.com/callback/facebook',
+    ),
   ),
   'session' => 
   array (
@@ -793,7 +798,7 @@
       0 => 2,
       1 => 100,
     ),
-    'cookie' => 'leaguedojo_session',
+    'cookie' => 'league_dojo_session',
     'path' => '/',
     'domain' => NULL,
     'secure' => false,

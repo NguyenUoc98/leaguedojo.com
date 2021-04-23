@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7783e91f4f999ef321f3b9829b55cfc9",
+    "content-hash": "624ac69804a6c4de723236d6d2acde6c",
     "packages": [
         {
             "name": "aalaap/faker-youtube",
@@ -3886,6 +3886,58 @@
                 "phra"
             ],
             "time": "2015-10-13T18:44:15+00:00"
+        },
+        {
+            "name": "shvetsgroup/laravel-email-database-log",
+            "version": "8.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/shvetsgroup/laravel-email-database-log.git",
+                "reference": "ac5f7a14165c55d4e65cf79860b95b6cc410886a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/shvetsgroup/laravel-email-database-log/zipball/ac5f7a14165c55d4e65cf79860b95b6cc410886a",
+                "reference": "ac5f7a14165c55d4e65cf79860b95b6cc410886a",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/dbal": "*",
+                "illuminate/support": "~5.0|~6.0|~7.0|~8.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "ShvetsGroup\\LaravelEmailDatabaseLog\\LaravelEmailDatabaseLogServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "ShvetsGroup\\LaravelEmailDatabaseLog\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Alexander Shvets",
+                    "email": "neochief@shvetsgroup.com"
+                }
+            ],
+            "description": "A simple database logger for all outgoing emails sent by Laravel website.",
+            "keywords": [
+                "laravel",
+                "markdown"
+            ],
+            "support": {
+                "issues": "https://github.com/shvetsgroup/laravel-email-database-log/issues",
+                "source": "https://github.com/shvetsgroup/laravel-email-database-log/tree/8.0.0"
+            },
+            "time": "2020-11-12T14:15:39+00:00"
         },
         {
             "name": "spatie/laravel-honeypot",
