@@ -64,7 +64,7 @@
         <div class="container">
             <a href="#" class="nav-brand" style="font-size:15px; color: white; font-size:16px">
                 <img src="/img/core-img/favicon.ico" height="40px" width="40px">
-                Karate League Dojo
+                {{ setting('site.web_name') }}
             </a>
 
             <div class="nav-item position-relative d-flex">
@@ -93,7 +93,7 @@
                 </div>
                 <div class="col-lg-6 bnr-txt-w3pvt  d-flex justify-content-center align-items-center">
                     <div class="bnr-w3pvt-txt">
-                        <h2>Karate League Dojo</h2>
+                        <h2>{{ setting('site.web_name') }}</h2>
                         <h3>{{ setting('site.description') }}</h3>
                         <p class="text-white mt-sm-4 mt-2"> {{ setting('site.site_details') }}</p>
                     </div>
@@ -111,12 +111,12 @@
                         <div class="title-sec-w3layouts_pvt">
                             <span class="title-icon-wthree fa fa-hashtag" aria-hidden="true"></span>
                             <h4 class="w3layouts_pvt-head">HLV: Trần Mạnh Dũng</h4>
-                            <p class="title-text text-capitalize">Chủ nhiệm võ đường Karate League Dojo</p>
+                            <p class="title-text text-capitalize">Chủ nhiệm võ đường {{ setting('site.web_name') }}</p>
                         </div>
                         <div class="ab-pvtw3 my-4">
                             <p class="my-3">
                                 HLV Trần Mạnh Dũng hiện đang là huyền đai đệ tam đẳng Karatedo, cựu VĐV đội
-                                tuyển Quốc gia, kiện tướng Karatedo Quốc gia, giáo viên giảng dạy Karatedo
+                                tuyển Quốc gia, kiện tướng Karatedo Quốc gia, kiện tướng Jujitshu Quốc gia, giáo viên giảng dạy Karatedo
                                 Cảnh sát phòng cháy chữa cháy....
                             </p>
                             <p>

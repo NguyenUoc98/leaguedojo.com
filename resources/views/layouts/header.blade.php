@@ -19,7 +19,7 @@
             <nav class="classy-navbar justify-content-between" id="magNav">
                 <a href="#" class="nav-brand logo-desktop" style="font-size:16px; color:black">
                     <img src="/img/core-img/favicon.ico" alt="" height="40px" width="40px">
-                    Karate League Dojo
+                    {{ setting('site.web_name') }}
                 </a>
 
                 <!-- Navbar Toggler -->
@@ -35,7 +35,7 @@
                         <div style="background-color: #ed3939;">
                             <a href="#" class="nav-brand logo-mobile mt-2" style="font-size:15px; color:#fff;">
                                 <img src="/img/core-img/favicon.ico" alt="" height="40px" width="40px">
-                                Karate League Dojo
+                                {{ setting('site.web_name') }}
                             </a>
                             <div class="classycloseIcon">
                                 <div class="cross-wrap">
