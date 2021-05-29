@@ -41,7 +41,7 @@ class PostController extends Controller
             $meta_keywords .= ', ' . $key;
         }
         $url_canonical = route('posts.show', $slug);
-        $image_og = Voyager::image(json_decode($post->image)[0]);
+        $image_og = Voyager::image(json_decode($post->image)[0] ?? '');
         $meta_title = $post->seo_title;
         // SEO
 

@@ -1,8 +1,8 @@
 @extends('voyager::master')
 
 @section('content')
-<script src="/js/Chart.min.js"></script>
-<script src="/js/utils.js"></script>
+<!-- <script src="/js/Chart.min.js"></script>
+<script src="/js/utils.js"></script> -->
 <style>
     canvas {
         -moz-user-select: none;
@@ -491,3 +491,4 @@
     @endif
 
 @stop
+

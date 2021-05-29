@@ -44,8 +44,13 @@ Carbon::setlocale('vi');
                             <!-- Thumbnail -->
                             <div class="post-thumbnail thumbnail mb-3">
                                 <a href="{{ route('posts.show', $latestPost[0]->slug) }}">
-                                    <img src="{{ Voyager::image(str_replace('.','-cropped.',json_decode($latestPost[0]->image)[0] ?? $latestPost[0]->category->image)) }}"
-                                        alt="{{ $latestPost[0]->title }}">
+                                    @if($latestPost[0]->is_crawl)
+                                        <img src="{{ Voyager::image(json_decode($latestPost[0]->image)[0] ?? $latestPost[0]->category->image) }}"
+                                             alt="{{ $latestPost[0]->title }}">
+                                    @else
+                                        <img src="{{ Voyager::image(str_replace('.','-cropped.',json_decode($latestPost[0]->image)[0] ?? $latestPost[0]->category->image)) }}"
+                                            alt="{{ $latestPost[0]->title }}">
+                                    @endif
                                 </a>
                             </div>
 
@@ -109,8 +114,13 @@ Carbon::setlocale('vi');
                                     <div class="single-blog-post d-flex style-3">
                                         <div class="post-thumbnail">
                                             <a href="{{ route('posts.show', $latestPost[$i]->slug) }}">
-                                                <img src="{{ Voyager::image(str_replace('.','-cropped.',json_decode($latestPost[$i]->image)[0] ?? $latestPost[$i]->category->image)) }}"
-                                                    alt="{{ $latestPost[$i]->title }}">
+                                                @if($latestPost[$i]->is_crawl)
+                                                    <img src="{{ Voyager::image(json_decode($latestPost[$i]->image)[0] ?? $latestPost[$i]->category->image) }}"
+                                                         alt="{{ $latestPost[0]->title }}">
+                                                @else
+                                                    <img src="{{ Voyager::image(str_replace('.','-cropped.',json_decode($latestPost[$i]->image)[0] ?? $latestPost[$i]->category->image)) }}"
+                                                        alt="{{ $latestPost[$i]->title }}">
+                                                @endif
                                             </a>
                                         </div>
                                         <div class="post-content">
@@ -143,8 +153,13 @@ Carbon::setlocale('vi');
                                     <div class="single-blog-post d-flex style-3">
                                         <div class="post-thumbnail">
                                             <a href="{{ route('posts.show', $latestPost[$i]->slug) }}">
-                                                <img src="{{ Voyager::image(str_replace('.','-cropped.',json_decode($latestPost[$i]->image)[0] ?? $latestPost[$i]->category->image)) }}"
-                                                    alt="{{ $latestPost[$i]->title }}">
+                                                @if($latestPost[$i]->is_crawl)
+                                                    <img src="{{ Voyager::image(json_decode($latestPost[$i]->image)[0] ?? $latestPost[$i]->category->image) }}"
+                                                         alt="{{ $latestPost[0]->title }}">
+                                                @else
+                                                    <img src="{{ Voyager::image(str_replace('.','-cropped.',json_decode($latestPost[$i]->image)[0] ?? $latestPost[$i]->category->image)) }}"
+                                                        alt="{{ $latestPost[$i]->title }}">
+                                                @endif
                                             </a>
                                         </div>
                                         <div class="post-content">
@@ -177,8 +192,13 @@ Carbon::setlocale('vi');
                                     <div class="single-blog-post d-flex style-3">
                                         <div class="post-thumbnail">
                                             <a href="{{ route('posts.show', $latestPost[$i]->slug) }}">
-                                                <img src="{{ Voyager::image(str_replace('.','-cropped.',json_decode($latestPost[$i]->image)[0] ?? $latestPost[$i]->category->image)) }}"
-                                                    alt="{{ $latestPost[$i]->title }}">
+                                                @if($latestPost[$i]->is_crawl)
+                                                    <img src="{{ Voyager::image(json_decode($latestPost[$i]->image)[0] ?? $latestPost[$i]->category->image) }}"
+                                                         alt="{{ $latestPost[0]->title }}">
+                                                @else
+                                                    <img src="{{ Voyager::image(str_replace('.','-cropped.',json_decode($latestPost[$i]->image)[0] ?? $latestPost[$i]->category->image)) }}"
+                                                        alt="{{ $latestPost[$i]->title }}">
+                                                @endif
                                             </a>
                                         </div>
                                         <div class="post-content">
@@ -263,8 +283,13 @@ Carbon::setlocale('vi');
                     <div class="single-blog-post d-flex style-3 mb-30">
                         <div class="post-thumbnail">
                             <a href="{{ route('posts.show', $post->slug) }}">
-                                <img src="{{ Voyager::image(str_replace('.','-cropped.',json_decode($post->image)[0] ?? $post->category->image)) }}"
-                                    alt="{{ $post->title }}">
+                                @if($post->is_crawl)
+                                    <img src="{{ Voyager::image(json_decode($latestPost[0]->image)[0] ?? $latestPost[0]->category->image) }}"
+                                         alt="{{ $latestPost[0]->title }}">
+                                @else
+                                    <img src="{{ Voyager::image(str_replace('.','-cropped.',json_decode($post->image)[0] ?? $post->category->image)) }}"
+                                        alt="{{ $post->title }}">
+                                @endif
                             </a>
                         </div>
                         <div class="post-content">
@@ -346,8 +371,13 @@ Carbon::setlocale('vi');
             <div class="single-blog-post d-flex">
                 <div class="post-thumbnail">
                     <a href="{{ route('posts.show', $post->slug) }}">
-                        <img src="{{ Voyager::image(str_replace('.','-cropped.',json_decode($post->image)[0] ?? $post->category->image)) }}"
-                            alt="{{ $post->title }}">
+                        @if($post->is_crawl)
+                            <img src="{{ Voyager::image(json_decode($latestPost[0]->image)[0] ?? $latestPost[0]->category->image) }}"
+                                 alt="{{ $latestPost[0]->title }}">
+                        @else
+                            <img src="{{ Voyager::image(str_replace('.','-cropped.',json_decode($post->image)[0] ?? $post->category->image)) }}"
+                                alt="{{ $post->title }}">
+                        @endif
                         <a>
                 </div>
                 <div class="post-content">

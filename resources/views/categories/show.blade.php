@@ -61,8 +61,13 @@
                     <div class="single-catagory-post d-flex flex-wrap">
                         <div class="post-thumbnail">
                             <a href="{{ route('posts.show',$post->slug) }}">
-                                <img src="{{ Voyager::image(str_replace('.','-cropped.',json_decode($post->image)[0] ?? $category->image)) }}"
-                                    alt="{{ $post->title }}">
+                                @if($post->is_crawl)
+                                    <img src="{{ Voyager::image(json_decode($post->image)[0] ?? $category->image) }}"
+                                         alt="{{ $post->title }}">
+                                @else
+                                    <img src="{{ Voyager::image(str_replace('.','-cropped.',json_decode($post->image)[0] ?? $category->image)) }}"
+                                         alt="{{ $post->title }}">
+                                @endif
                             </a>
                         </div>
 

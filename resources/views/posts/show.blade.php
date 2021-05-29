@@ -15,7 +15,23 @@ $images = json_decode($post->image);
         display: none !important;
     }
 }
+figure , iframe {
+    max-width: 100%;
+}
+
+figcaption {
+    text-align: center;
+    margin-top: 10px;
+}
 </style>
+
+@if($post->is_crawl)
+    <style>
+        .post-detail-area img {
+            width: 100%;
+        }
+    </style>
+@endif
 
 <!-- Image Header -->
 <section class="breadcrumb-area bg-img bg-overlay"
@@ -140,7 +156,7 @@ $images = json_decode($post->image);
                             <span class="label label-dark">{{ $keyword }}</span>
                         </span>
                         @endforeach
-                        
+
                         <!-- Post Author -->
                         <div class="post-author d-flex justify-content-between mt-1">
                             <a href="#" class="author-name">Nguồn: {{ $post->source }}</a>

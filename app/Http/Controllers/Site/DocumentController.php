@@ -4,11 +4,16 @@ namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
 use App\Models\Document;
-use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\LinkCrawl;
+use App\Models\Post;
+use Carbon\Carbon;
+use Goutte\Client;
 use Illuminate\Http\Request;
-use TCG\Voyager\Events\BreadDataAdded;
-use TCG\Voyager\Events\BreadDataUpdated;
-use TCG\Voyager\Facades\Voyager;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
+use Intervention\Image\Facades\Image;
+use Symfony\Component\DomCrawler\Crawler;
 
 class DocumentController extends Controller
 {
@@ -68,5 +73,10 @@ class DocumentController extends Controller
         // SEO
 
         return view('documents.show', compact('document', 'meta_desc', 'meta_keywords', 'url_canonical', 'image_og', 'meta_title'));
+    }
+
+    public function test()
+    {
+        $link = LinkCrawl::find(1)->update(['status' => LinkCrawl::STATUS['CRAWLED']]);
     }
 }

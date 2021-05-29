@@ -31,6 +31,11 @@ class Post extends Model implements ViewableContract
 
     const PUBLISHED = 'PUBLISHED';
 
+    const IS_CRAWL = [
+        'YES' => 1,
+        'NO'  => 0
+    ];
+
     protected $guarded = [];
 
     public function save(array $options = [])
@@ -81,7 +86,7 @@ class Post extends Model implements ViewableContract
 
     /**
      * Get 4 most viewed posts(PUBLISHED)
-     * 
+     *
      * @return array
      */
     public function mostViewed()
@@ -91,7 +96,7 @@ class Post extends Model implements ViewableContract
 
     /**
      * Get 4 latest posts(PUBLISHED)
-     * 
+     *
      * @return array
      */
     public function latestPost()
@@ -103,8 +108,8 @@ class Post extends Model implements ViewableContract
     }
 
     /**
-     * Get 11 most featured post(PUBLISHED) 
-     * 
+     * Get 11 most featured post(PUBLISHED)
+     *
      * @return array
      */
     public function mostFeatured()
@@ -117,7 +122,7 @@ class Post extends Model implements ViewableContract
 
     /**
      * Get more post in the same category
-     * 
+     *
      * @param bigint $id
      * @param int $category_id
      * @return Collection
@@ -136,19 +141,21 @@ class Post extends Model implements ViewableContract
 
     /**
      * Get post by Slug
-     * 
+     *
      * @param string $slug
      */
     public function getBySlug($slug)
     {
         $post = $this::whereSlug($slug)->firstOrFail();
-        $start = strpos($post->body, 'https://www.youtube.com/');
-        while ($start) {
-            $end = strpos($post->body, '">https://www.youtube.com/');
-            $link = substr($post->body, $start,  $end - $start);
-            $post->body = str_replace('<a href="' . $link . '">' . $link . '</a>', '<div class="single-video-area">' . Youtube::getVideoInfo(Youtube::parseVidFromURL($link))->player->embedHtml, $post->body . '</div>');
+        if (!$post->is_crawl) {
             $start = strpos($post->body, 'https://www.youtube.com/');
-        };
+            while ($start) {
+                $end = strpos($post->body, '">https://www.youtube.com/');
+                $link = substr($post->body, $start,  $end - $start);
+                $post->body = str_replace('<a href="' . $link . '">' . $link . '</a>', '<div class="single-video-area">' . Youtube::getVideoInfo(Youtube::parseVidFromURL($link))->player->embedHtml, $post->body . '</div>');
+                $start = strpos($post->body, 'https://www.youtube.com/');
+            };
+        }
         return $post;
     }
 }
