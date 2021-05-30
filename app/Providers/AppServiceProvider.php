@@ -12,6 +12,8 @@ use App\Actions\Restore;
 use App\Facades\TimeYoutube;
 use App\FormFields\MonthFormField;
 use App\FormFields\TextBadgeFormField;
+use App\Models\Post;
+use App\Models\Video;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 use App\Models\Category;
@@ -46,7 +48,17 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         $categories = Category::all();
-        View::share('categories', $categories);
+        $post = new Post();
+        $video = new Video();
+        $mostFeatured = $post->mostFeatured();
+        $latestPost = $post->latestPost();
+        $latestVideos = $video->latestVideos();
+        View::share([
+            'categories'   => $categories,
+            'mostFeatured' => $mostFeatured,
+            'latestPost'   => $latestPost,
+            'latestVideos' => $latestVideos,
+        ]);
         Schema::defaultStringLength(191);
         Voyager::replaceAction(RestoreAction::class, Restore::class);
         Voyager::replaceAction(DeleteAction::class, ActionsDeleteAction::class);

@@ -39,9 +39,6 @@ class PageController extends Controller
         $slides = Slide::all();
         $dojos = Dojo::all();
         $mostViewed = $this->post->mostViewed();
-        $latestPost = $this->post->latestPost();
-        $mostFeatured = $this->post->mostFeatured();
-        $latestVideos = $this->video->latestVideos();
         $orderVideos = $this->video->orderByView(true);
 
         // SEO
@@ -52,7 +49,7 @@ class PageController extends Controller
         $meta_title = 'Tin tức';
         // SEO
 
-        return view('pages.news', compact('slides', 'dojos', 'mostViewed', 'latestPost', 'mostFeatured', 'latestVideos', 'orderVideos', 'meta_desc', 'meta_keywords', 'url_canonical', 'image_og', 'meta_title'));
+        return view('pages.news', compact('slides', 'dojos', 'mostViewed', 'orderVideos', 'meta_desc', 'meta_keywords', 'url_canonical', 'image_og', 'meta_title'));
     }
 
     /**

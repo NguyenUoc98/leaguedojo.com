@@ -188,10 +188,16 @@ figcaption {
                             @foreach($morePosts as $morePost)
                             <div class="single-blog-post style-4" style="padding-bottom:30px">
                                 <div class="post-thumbnail thumbnail">
+                                    @if($morePost->is_crawl)
+                                        <img
+                                            src="{{ Voyager::image(json_decode($morePost->image)[0] ?? $morePost->category->image) }}"
+                                            alt="{{ $post->title }}">
+                                    @else
                                     <a href="{{ route('posts.show',$morePost->slug) }}">
                                         <img src="{{ Voyager::image(str_replace('.','-cropped.',json_decode($morePost->image)[0] ?? $morePost->category->image)) }}"
                                             alt="{{ $morePost->slug }}">
                                     </a>
+                                    @endif
                                 </div>
                                 <div class="post-content">
                                     <a href="{{ route('posts.show',$morePost->slug) }}"
