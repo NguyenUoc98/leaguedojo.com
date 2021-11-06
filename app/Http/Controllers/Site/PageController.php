@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Front;
+namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
 use App\Models\Dojo;
+use App\Models\Event;
 use App\Models\Post;
 use App\Models\Slide;
 use App\Models\Video;
@@ -93,5 +94,32 @@ class PageController extends Controller
         // SEO
 
         return view('pages.profile.index', compact('user', 'student', 'rank', 'total', 'totalMedals', 'achievements', 'testScores', 'event_confirmed', 'pointTraining', 'meta_desc', 'meta_keywords', 'url_canonical', 'image_og', 'meta_title'));
+    }
+
+    /**
+     * Return view home.
+     *
+     */
+    public function home()
+    {
+        $students = $this->student->rankResults();
+        $topStudents = $students->take(10);
+        $events = Event::query()
+            ->where('view_home_page', true)
+            ->orderByDesc('date')
+            ->get()
+            ->groupBy(function($value) {
+                return $value->date->year;
+            })->sortKeysDesc();
+
+        // SEO
+        $meta_desc = 'Hệ thống đào tạo và phát triển Karate chất lượng Hà Nội';
+        $meta_keywords = 'karate, học võ hà nội, hà nội, karate league dojo, học võ tốt nhất hà nội';
+        $url_canonical = route('home');
+        $image_og = config('app')['url'] . '/img/home/introduce/i8.jpg';
+        $meta_title = setting('site.title');
+        // SEO
+
+        return view('pages.home', compact('topStudents', 'events', 'meta_desc', 'meta_keywords', 'url_canonical', 'image_og', 'meta_title'));
     }
 }

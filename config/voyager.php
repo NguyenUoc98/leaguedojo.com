@@ -27,7 +27,7 @@ return [
     */
 
     'controllers' => [
-        'namespace' => 'App\\Http\\Controllers\\Admin\\Voyager',
+        'namespace' => 'TCG\\Voyager\\Http\\Controllers',
     ],
 
     /*
@@ -42,7 +42,7 @@ return [
     */
 
     'models' => [
-        //'namespace' => 'App\\',
+        'namespace' => 'App\\Models\\',
     ],
 
     /*
@@ -191,12 +191,12 @@ return [
 
     'primary_color' => '#4caf50',
 
-    'show_dev_tips' => true, // Show development tip "How To Use:" in Menu and Settings
+    'show_dev_tips' => false, // Show development tip "How To Use:" in Menu and Settings
 
     // Here you can specify additional assets you would like to be included in the master.blade
     'additional_css' => [
-        'css/custom.css',
-        'css/custom-control.css',
+        'css/admin/custom.css',
+        'css/admin/custom-control.css',
         'css/home/font-awesome.min.css',
     ],
 

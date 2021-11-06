@@ -21,3 +21,5 @@ mix.sass('./resources/sass/app.scss', './public/css')
         processCssUrls: false,
         postCss: [tailwindcss('tailwind.config.js')],
     });
+
+mix.sass('./resources/sass/themes/default.scss', './public/css/themes');

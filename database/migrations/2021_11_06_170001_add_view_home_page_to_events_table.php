@@ -14,7 +14,7 @@ class AddViewHomePageToEventsTable extends Migration
     public function up()
     {
         Schema::table('events', function (Blueprint $table) {
-            //
+            $table->boolean('view_home_page')->after('note')->default(false);
         });
     }
 
@@ -26,7 +26,7 @@ class AddViewHomePageToEventsTable extends Migration
     public function down()
     {
         Schema::table('events', function (Blueprint $table) {
-            //
+            $table->dropColumn('view_home_page');
         });
     }
 }

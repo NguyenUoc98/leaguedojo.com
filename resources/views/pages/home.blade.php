@@ -24,7 +24,6 @@
     <link href="{{ asset('css/home/style.home.css') }}" type="text/css" rel="stylesheet" media="all">
     <link href="{{ asset('css/home/timeline.min.css') }}" type="text/css" rel="stylesheet" media="all">
 
-
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-180755787-1"></script>
     <script>
@@ -33,10 +32,10 @@
         function gtag() {
             dataLayer.push(arguments);
         }
+
         gtag('js', new Date());
         gtag('config', 'UA-180755787-1');
     </script>
-
 </head>
 
 <body>
@@ -72,7 +71,7 @@
     <div class="container">
         <div class="row">
             <div class="offset-lg-6">
-                <img src="/img/home/IMG_20.png" alt="" class="img-fluid"/>
+                <img src="{{ asset('img/home/IMG_20.png') }}" alt="banner" class="img-fluid"/>
             </div>
             <div class="col-lg-6 bnr-txt-w3pvt  d-flex justify-content-center align-items-center">
                 <div class="bnr-w3pvt-txt">
@@ -112,7 +111,7 @@
                 </div>
             </div>
             <div class="col-lg-6 col-md-6">
-                <img src="/img/home/IMG30.png" alt="" class="img-fluid"/>
+                <img src="{{ asset('img/home/IMG30.png') }}" alt="coach" class="img-fluid"/>
             </div>
         </div>
         <div class="sec-space" style="text-align: center;">
@@ -210,7 +209,7 @@
     </div>
 </section>
 
-<!-- Carousel -->
+<!-- Rank -->
 <div class="cliptop-blog-wthree" id="news">
     <div class="container">
         <div class="title-sec-w3layouts_pvt">
@@ -285,291 +284,66 @@
     <div class="container">
         <div class="row">
             <div id="timeline">
-                <div class="row timeline-movement timeline-movement-top">
-                    <div class="timeline-badge timeline-future-movement">
-                        <p>2019</p>
+                @php
+                    $key = 0;
+                @endphp
+                @foreach($events as $year=>$groupEvts)
+                    <div class="row timeline-movement timeline-movement-top">
+                        <div class="timeline-badge timeline-future-movement">
+                            <p>{{ $year }}</p>
+                        </div>
                     </div>
-                </div>
-                <div class="row timeline-movement">
-                    <div class="timeline-badge center-right">
-                    </div>
-                    <div class="offset-lg-6 col-lg-6 timeline-item">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="timeline-panel debits  anim animate  fadeInRight">
-                                    <div class="timeline-panel-ul clearfix">
-                                        <div class="lefting-wrap">
-                                            <ul>
-                                                <li class="img-wraping">
-                                                    <a href="#">
-                                                        <img src="/img/home/timeline/6.jpg" class="img-fluid"/>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div class="righting-wrap">
-                                            <ul>
-                                                <li>
-                                                    <a href="#" class="importo">
-                                                        Giải Đại học Công đoàn mở rộng lần thứ 2
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <p>
-                                                        <small class="text-muted">
-                                                            <span class="fa fa-clock-o"></span>
-                                                            07/04/2019 - 08/04/2019
-                                                        </small>
-                                                    </p>
-                                                </li>
-                                                <li>
+                    @foreach($groupEvts as $evt)
+                        @php
+                          $key++;
+                        @endphp
+                        <div class="row timeline-movement">
+                            <div class="timeline-badge @if($key % 2 == 0) center-right @else center-left @endif">
+                            </div>
+                            <div class="@if($key % 2 == 0) offset-lg-6 @endif col-lg-6 timeline-item">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="timeline-panel debits anim animate @if($key % 2 == 0) fadeInRight @else fadeInLeft @endif">
+                                            <div class="timeline-panel-ul clearfix">
+                                                <div class="lefting-wrap">
+                                                    <ul>
+                                                        <li class="img-wraping">
+                                                            <a href="#">
+                                                                <img src="{{ Voyager::image($evt->image) }}" alt="{{ $evt->name }}" class="img-fluid"/>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="righting-wrap">
+                                                    <ul>
+                                                        <li>
+                                                            <a href="#" class="importo">
+                                                                {{ $evt->name }}
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <p>
+                                                                <small class="text-muted">
+                                                                    <span class="fa fa-clock-o"></span>
+                                                                    {{ $evt->date->format('d/m/Y') }}
+                                                                </small>
+                                                            </p>
+                                                        </li>
+                                                        <li>
                                                         <span class="causale">
-                                                            Võ đường tham gia giải với tinh thần quyết thắng
-                                                            và đã mang về nhiều huy chương và thứ hạng cao
+                                                            {{ $evt->note }}
                                                         </span>
-                                                </li>
-                                            </ul>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="row timeline-movement">
-                    <div class="timeline-badge center-left">
-                    </div>
-                    <div class="col-lg-6 timeline-item">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="timeline-panel credits  anim animate  fadeInLeft">
-                                    <div class="timeline-panel-ul clearfix">
-                                        <div class="lefting-wrap">
-                                            <ul>
-                                                <li class="img-wraping">
-                                                    <a href="#">
-                                                        <img src="/img/home/timeline/5.jpg" class="img-fluid"/>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div class="righting-wrap">
-                                            <ul>
-                                                <li>
-                                                    <a href="#" class="importo">
-                                                        Du lịch Tây Thiên dịp Tết Nguyên Đán
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <p>
-                                                        <small class="text-muted">
-                                                            <span class="fa fa-clock-o"></span>
-                                                            20/02/2019
-                                                        </small>
-                                                    </p>
-                                                </li>
-                                                <li>
-                                                    <span class="causale">
-                                                        Võ đường tổ chức buổi dã ngoại leo núi ở Tây Thiên
-                                                        cho các võ sinh với nhiều kỷ niệm đẹp
-                                                    </span>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row timeline-movement">
-                    <div class="timeline-badge center-right">
-                    </div>
-                    <div class="offset-lg-6 col-lg-6  timeline-item">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="timeline-panel debits  anim animate  fadeInRight">
-                                    <div class="timeline-panel-ul clearfix">
-                                        <div class="lefting-wrap">
-                                            <ul>
-                                                <li class="img-wraping">
-                                                    <a href="#">
-                                                        <img src="/img/home/timeline/4.jpg" class="img-fluid"/>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div class="righting-wrap">
-                                            <ul>
-                                                <li>
-                                                    <a href="#" class="importo">Sinh nhật 1 tuổi võ đường</a>
-                                                </li>
-                                                <li>
-                                                    <p>
-                                                        <small class="text-muted">
-                                                            <span class="fa fa-clock-o"></span>
-                                                            28/01/2019
-                                                        </small>
-                                                    </p>
-                                                </li>
-                                                <li>
-                                                        <span class="causale">
-                                                            Võ đường kỷ niệm sinh nhật tròn 1 tuổi và tổ chức kỳ thi
-                                                            thăng đai lần thứ 3
-                                                        </span>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row timeline-movement timeline-movement-top">
-                    <div class="timeline-badge timeline-future-movement">
-                        <p>2018</p>
-                    </div>
-                </div>
-                <div class="row timeline-movement">
-                    <div class="timeline-badge center-left">
-                    </div>
-                    <div class="col-lg-6  timeline-item">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="timeline-panel credits  anim animate  fadeInLeft">
-                                    <div class="timeline-panel-ul clearfix">
-                                        <div class="lefting-wrap">
-                                            <ul>
-                                                <li class="img-wraping">
-                                                    <a href="#">
-                                                        <img src="/img/home/timeline/3.jpg" class="img-fluid"/>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div class="righting-wrap">
-                                            <ul>
-                                                <li>
-                                                    <a href="#" class="importo">
-                                                        Giải vô địch sozucho karatedo mở rộng lần thứ 5
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <p>
-                                                        <small class="text-muted">
-                                                            <span class="fa fa-clock-o"></span>
-                                                            11/11/2018
-                                                        </small>
-                                                    </p>
-                                                </li>
-                                                <li>
-                                                        <span class="causale">
-                                                            Võ đường tham dự giải vô địch sozucho
-                                                            karatedo mở rộng lần thứ 5 với nhiều thành tích
-                                                        </span>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row timeline-movement">
-                    <div class="timeline-badge center-right">
-                    </div>
-                    <div class="offset-lg-6 col-lg-6  timeline-item">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="timeline-panel debits  anim animate  fadeInRight">
-                                    <div class="timeline-panel-ul clearfix">
-                                        <div class="lefting-wrap">
-                                            <ul>
-                                                <li class="img-wraping">
-                                                    <a href="#">
-                                                        <img src="/img/home/timeline/2.jpg" class="img-fluid"/>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div class="righting-wrap">
-                                            <ul>
-                                                <li>
-                                                    <a href="#" class="importo">
-                                                        Võ sinh được cấp nhất đẳng quốc gia
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <p>
-                                                        <small class="text-muted">
-                                                            <span class="fa fa-clock-o"></span>
-                                                            05/08/2018
-                                                        </small>
-                                                    </p>
-                                                </li>
-                                                <li>
-                                                        <span class="causale">
-                                                            Võ sinh của võ đường lần đầu tham dự kỳ
-                                                            thi đai đen và thăng đẳng quốc gia và được cấp chứng chỉ
-                                                            nhất đẳng huyền đai quốc gia
-                                                        </span>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row timeline-movement">
-                    <div class="timeline-badge center-left">
-                    </div>
-                    <div class="col-lg-6  timeline-item">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="timeline-panel credits  anim animate  fadeInLeft">
-                                    <div class="timeline-panel-ul clearfix">
-                                        <div class="lefting-wrap">
-                                            <ul>
-                                                <li class="img-wraping">
-                                                    <a href="#">
-                                                        <img src="/img/home/timeline/1.jpg" class="img-fluid"/>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div class="righting-wrap">
-                                            <ul>
-                                                <li>
-                                                    <a href="#" class="importo">
-                                                        Thành lập võ đường
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <p>
-                                                        <small class="text-muted">
-                                                            <span class="fa fa-clock-o"></span>
-                                                            28/01/2018
-                                                        </small>
-                                                    </p>
-                                                </li>
-                                                <li>
-                                                        <span class="causale">
-                                                            Các công tác chuẩn bị thiết bị tập luyện cho võ đường
-                                                            được gấp rút hoàn thiện theo đúng dự kiến
-                                                        </span>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                    @endforeach
+                @endforeach
             </div>
         </div>
     </div>

@@ -25,7 +25,7 @@ class Event extends Model
                     ->field('name', 12)
                     ->field('address', 12)
                     ->field('date', 6)->field('point', 6)
-                    ->field('start_at', 6)->field('end_at', 6)
+                    ->field('start_at', 4)->field('end_at', 4)->field('view_home_page', 4)
                     ->field('image', 12)
                 ->endDiv()
 
@@ -34,5 +34,10 @@ class Event extends Model
                 ->endDiv()
             ->endDiv()
             ->get();
+    }
+
+    public function getDates()
+    {
+        return array('created_at', 'updated_at', 'date');
     }
 }

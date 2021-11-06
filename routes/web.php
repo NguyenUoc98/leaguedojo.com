@@ -1,26 +1,12 @@
 <?php
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
- */
-
 Route::group(['middleware' => ['operation-log']], function () {
-    Route::get('/', 'Front\HomeController@index')->name('home');
+    Route::get('/', 'Site\PageController@home')->name('home');
 
-    Route::get('/home', 'Front\HomeController@index')->name('home');
+    Route::get('/home', 'Site\PageController@home')->name('home');
 
-    Route::get('fetch-data', 'Front\HomeController@fetchData');
+    Route::get('news', 'Site\PageController@news')->name('news');
 
-    Route::get('news', 'Front\PageController@news')->name('news');
-
-    Route::get('profile', 'Front\PageController@profile')->name('profile')->middleware('auth')->middleware('verified');
+    Route::get('profile', 'Site\PageController@profile')->name('profile')->middleware('auth')->middleware('verified');
 
     Route::post('vouchers/getVoucher', 'Site\VoucherController@getVoucher')->name('vouchers.getVoucher')->middleware('auth')->middleware('verified');
 
@@ -31,19 +17,19 @@ Route::group(['middleware' => ['operation-log']], function () {
     Route::delete('rooms/cancel-book/{id}', 'Site\RoomController@cancelBook')->name('rooms.cancel-book')->middleware('auth')->middleware('verified');
 
     Route::resources([
-        'dojos' => 'Site\DojoController',    
-        'posts' => 'Site\PostController',
-        'categories' => 'Site\CategoryController',
-        'videos' => 'Site\VideoController',
-        'users' => 'Site\UserController',
-        'students' => 'Site\StudentController',
-        'documents' => 'Site\DocumentController',
-        'vouchers' => 'Site\VoucherController',
-        'tuitions' => 'Site\TuitionController',
+        'dojos'          => 'Site\DojoController',
+        'posts'          => 'Site\PostController',
+        'categories'     => 'Site\CategoryController',
+        'videos'         => 'Site\VideoController',
+        'users'          => 'Site\UserController',
+        'students'       => 'Site\StudentController',
+        'documents'      => 'Site\DocumentController',
+        'vouchers'       => 'Site\VoucherController',
+        'tuitions'       => 'Site\TuitionController',
         'transfer-dojos' => 'Site\TransferDojoController',
-        'events' => 'Site\EventController',
-        'attends' => 'Site\AttendController',
-        'rooms' => 'Site\RoomController',
+        'events'         => 'Site\EventController',
+        'attends'        => 'Site\AttendController',
+        'rooms'          => 'Site\RoomController',
     ]);
 
     // Workout Registration
@@ -53,20 +39,20 @@ Route::group(['middleware' => ['operation-log']], function () {
     // Pay AIO Momo
     Route::post('tuitions/ipn-momo', 'Site\TuitionController@ipn')->name('tuitions.ipn');
     Route::get('paymomo/result', 'Site\TuitionController@result')->name('tuitions.result');
-    
+
     // Like and Unlike Comment
     Route::post('comments/like/{comment}', 'Site\CommentController@like');
     Route::post('comments/unlike/{comment}', 'Site\CommentController@unLike');
     Route::post('/comments/get-liker/{comment}', 'Site\CommentController@getLiker');
-    
+
     // Authentication...
     Auth::routes();
     Auth::routes(['verify' => true]);
 
     // Notification
-    Route::post('/notification/read', 'Front\NotificationController@read');    
-    Route::get('/notification/readAll', 'Front\NotificationController@readAll'); 
-    
+    Route::post('/notification/read', 'Front\NotificationController@read');
+    Route::get('/notification/readAll', 'Front\NotificationController@readAll');
+
     // Route social login
     Route::get('/auth/redirect/{provider}', 'Site\SocialController@redirect')->name('auth.social-login');
     Route::get('/callback/{provider}', 'Site\SocialController@callback');
@@ -116,7 +102,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['operation-log']], function 
     Route::post('reports/tuition-fields', 'Admin\ReportController@getTuitionFields')->name('reports.tuition-fields');
 
     // Route for logs
-    Route::get('logs', 'Admin\LogController@index')->name('logs.index'); 
+    Route::get('logs', 'Admin\LogController@index')->name('logs.index');
 
     // Route for reports
     Route::get('reports/competition', 'Admin\ReportController@getCompetition')->name('reports.competition');
