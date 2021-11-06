@@ -29,7 +29,7 @@ class HomeController extends Controller
     public function index()
     {
         $students = $this->student->rankResults();
-        $topStudents = $students->take(3);
+        $topStudents = $students->take(10);
 
         // SEO
         $meta_desc = 'Hệ thống đào tạo và phát triển Karate chất lượng Hà Nội';
@@ -39,12 +39,12 @@ class HomeController extends Controller
         $meta_title = setting('site.title');
         // SEO
 
-        return view('pages.home', compact('topStudents', 'students', 'meta_desc', 'meta_keywords', 'url_canonical', 'image_og', 'meta_title'));
+        return view('pages.home', compact('topStudents', 'meta_desc', 'meta_keywords', 'url_canonical', 'image_og', 'meta_title'));
     }
 
     /**
      * Paginate for students
-     * 
+     *
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function fetchData(Request $request)

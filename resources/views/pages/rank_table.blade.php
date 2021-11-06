@@ -16,7 +16,7 @@
             </tr>
         </thead>
         <tbody class="list">
-            @foreach ($students as $key=>$student)
+            @foreach ($topStudents as $key=>$student)
             <tr>
                 <td>
                     @if ($key == 0)
@@ -65,5 +65,4 @@
             @endforeach
         </tbody>
     </table>
-    {{ $students->onEachSide(2)->links() }}
 </div>
