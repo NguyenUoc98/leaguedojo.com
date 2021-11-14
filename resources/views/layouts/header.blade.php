@@ -194,18 +194,20 @@
     </div>
 </div>
 
-<script type="application/javascript">
-    $(document).ready(function () {
-        $('#mobile-menu-button').click(function () {
-            $('#mobile-menu').removeClass('-translate-x-full');
+@push('script')
+    <script type="application/javascript">
+        $(document).ready(function () {
+            $('#mobile-menu-button').click(function () {
+                $('#mobile-menu').removeClass('-translate-x-full');
+            });
+            $('#mobile-menu-button-close').click(function () {
+                $('#mobile-menu').addClass('-translate-x-full');
+            });
+            $('#user-menu-button').click(function () {
+                $('#user-menu-pannel').toggleClass('hidden');
+            });
         });
-        $('#mobile-menu-button-close').click(function () {
-            $('#mobile-menu').addClass('-translate-x-full');
-        });
-        $('#user-menu-button').click(function () {
-            $('#user-menu-pannel').toggleClass('hidden');
-        });
-    });
-</script>
+    </script>
+@endpush
 
 <!-- ##### Header Area End ##### -->

@@ -1,4 +1,4 @@
-<div class="sliderAx h-96 bg-gray-300 overflow-hidden">
+<div class="sliderAx h-96 bg-gray-300 overflow-hidden mt-14">
     @foreach($slides as $key=>$slide)
         <div id="slider-{{ $key }}" class="container mx-auto max-w-7xl" @if ($key > 0) style="display:none" @endif>
             <div class="bg-cover bg-center h-96 text-white object-fill"
