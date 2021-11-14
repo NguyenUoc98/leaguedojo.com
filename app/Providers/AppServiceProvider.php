@@ -47,18 +47,18 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $categories = Category::all();
-        $post = new Post();
-        $video = new Video();
-        $mostFeatured = $post->mostFeatured();
-        $latestPost = $post->latestPost();
-        $latestVideos = $video->latestVideos();
-        View::share([
-            'categories'   => $categories,
-            'mostFeatured' => $mostFeatured,
-            'latestPost'   => $latestPost,
-            'latestVideos' => $latestVideos,
-        ]);
+//        $categories = Category::all();
+//        $post = new Post();
+//        $video = new Video();
+//        $mostFeatured = $post->mostFeatured();
+//        $latestPost = $post->latestPost();
+//        $latestVideos = $video->latestVideos();
+//        View::share([
+//            'categories'   => $categories,
+//            'mostFeatured' => $mostFeatured,
+//            'latestPost'   => $latestPost,
+//            'latestVideos' => $latestVideos,
+//        ]);
         Schema::defaultStringLength(191);
         Voyager::replaceAction(RestoreAction::class, Restore::class);
         Voyager::replaceAction(DeleteAction::class, ActionsDeleteAction::class);

@@ -13,3 +13,36 @@
   --color-default: #F5F5F5;
   --color-cancel: #111111;
 }
+
+.pagination {
+  display: flex;
+  justify-content: center;
+}
+
+.pagination .page-item .page-link {
+  background-color: #ffffff;
+  min-width: 30px;
+  height: 30px;
+  line-height: 30px;
+  font-size: 14px;
+  color: #1a1a1a;
+  text-transform: uppercase;
+  text-align: center;
+  display: inline-block;
+  border-radius: 3px;
+  padding: 0 10px;
+  margin-right: 5px;
+  border: 1px solid #ebebeb;
+}
+
+.pagination .page-item .page-link:hover, .pagination .page-item .page-link:focus {
+  background-color: #ed3939;
+  color: #ffffff;
+  border-color: #ed3939;
+}
+
+.pagination .page-item.active .page-link {
+  background-color: #ed3939;
+  color: #ffffff;
+  border-color: #ed3939;
+}

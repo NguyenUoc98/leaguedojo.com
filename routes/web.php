@@ -1,10 +1,12 @@
 <?php
 Route::group(['middleware' => ['operation-log']], function () {
-    Route::get('/', 'Site\PageController@home')->name('home');
+    Route::get('/', function () {
+        return redirect()->route('home');
+    });
 
-    Route::get('/home', 'Site\PageController@home')->name('home');
+    Route::get('trang-chu', 'Site\PageController@home')->name('home');
 
-    Route::get('news', 'Site\PageController@news')->name('news');
+    Route::get('tin-tuc', 'Site\PageController@news')->name('news');
 
     Route::get('profile', 'Site\PageController@profile')->name('profile')->middleware('auth')->middleware('verified');
 
@@ -16,9 +18,10 @@ Route::group(['middleware' => ['operation-log']], function () {
 
     Route::delete('rooms/cancel-book/{id}', 'Site\RoomController@cancelBook')->name('rooms.cancel-book')->middleware('auth')->middleware('verified');
 
+    // Resource routes
+    Route::resource('bai-viet', 'Site\PostController', ['names' => 'posts']);
+    Route::resource('co-so-tap-luyen', 'Site\DojoController', ['names' => 'dojos']);
     Route::resources([
-        'dojos'          => 'Site\DojoController',
-        'posts'          => 'Site\PostController',
         'categories'     => 'Site\CategoryController',
         'videos'         => 'Site\VideoController',
         'users'          => 'Site\UserController',

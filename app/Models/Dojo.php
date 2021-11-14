@@ -6,14 +6,16 @@ use App\Models\Student;
 use App\Traits\FormLayoutTrait;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use TCG\Voyager\Traits\Resizable;
 
 class Dojo extends Model
 {
     use FormLayoutTrait;
+    use Resizable;
 
     public function formFields()
     {
-        return $this->field('image', 12)
+        return $this->field('logo', 6)->field('image', 6)
             ->field('name', 4)->field('start_at', 3)->field('finish_at', 3)
             ->field('slug', 4)->field('price', 3)->field('address', 5)
             ->field('coach', 6)->field('schedule', 6)
@@ -47,7 +49,7 @@ class Dojo extends Model
 
     /**
      * Update tuition when the price of dojo change
-     * 
+     *
      * @param $student_id, $priceOld, $priceNew
      */
     public function updatePrice($student_id, $monthApply, $priceOld, $priceNew)
@@ -94,7 +96,7 @@ class Dojo extends Model
 
     /**
      * Update tuition when the price when change dojo
-     * 
+     *
      * @param $student_id, $priceOld, $currentDojo, $newDojo
      */
     public function updatePriceWhenChangDojo($student_id, $monthApply, $currentDojo, $newDojo)

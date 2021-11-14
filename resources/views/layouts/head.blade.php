@@ -18,28 +18,29 @@
     <meta property="og:url" content="{{ $url_canonical }}" />
     <meta property="og:type" content="website" />
 
-
     <!-- CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/slide.css">
-    <link rel="stylesheet" href="/css/nucleo.css">
-    <link rel="stylesheet" href="/css/sweetalert2.min.css">
-    <link rel="stylesheet" href="/css/emojionearea.min.css">
-    <link rel="stylesheet" href="/css/croppie.css">
-    <link rel="stylesheet" href="/css/mycss.css">
-    <link rel="stylesheet" href="/css/images-grid.css">
+    <style>{{ \Illuminate\Support\Facades\File::get(public_path('css/themes/default.css')) }}</style>
+    <link rel="stylesheet" href="/css/app.css">
+{{--    <style>{{ \Illuminate\Support\Facades\File::get(public_path('css/app.css')) }}</style>--}}
+{{--    <link rel="stylesheet" href="/css/style.css">--}}
+{{--    <link rel="stylesheet" href="/css/slide.css">--}}
+{{--    <link rel="stylesheet" href="/css/nucleo.css">--}}
+{{--    <link rel="stylesheet" href="/css/sweetalert2.min.css">--}}
+{{--    <link rel="stylesheet" href="/css/emojionearea.min.css">--}}
+{{--    <link rel="stylesheet" href="/css/croppie.css">--}}
+{{--    <link rel="stylesheet" href="/css/mycss.css">--}}
+{{--    <link rel="stylesheet" href="/css/images-grid.css">--}}
 
     <!-- ##### All Javascript Script ##### -->
     <script type="text/javascript" src="{{ asset('js/app.js') }}" defer></script>
     <script type="text/javascript" src="/js/jquery-3.4.1.min.js"></script>
     <script type="text/javascript" src="/js/jquery-migrate-1.4.1.min.js"></script>
-    <script type="text/javascript" src="/js/emojionearea.min.js" defer></script>
-    <script type="text/javascript" src="/js/croppie.js"></script>
-    <script type="text/javascript" src="/js/readMoreJS.min.js"></script>
-    <script type="text/javascript" src="/js/infinite-scroll.pkgd.min.js"></script>
-    <script type="text/javascript" src="/js/jquery.PrintArea.js" defer></script>
-    <script type="text/javascript" src="/js/dom-to-image.min.js" defer></script>
+{{--    <script type="text/javascript" src="/js/emojionearea.min.js" defer></script>--}}
+{{--    <script type="text/javascript" src="/js/croppie.js"></script>--}}
+{{--    <script type="text/javascript" src="/js/readMoreJS.min.js"></script>--}}
+{{--    <script type="text/javascript" src="/js/infinite-scroll.pkgd.min.js"></script>--}}
+{{--    <script type="text/javascript" src="/js/jquery.PrintArea.js" defer></script>--}}
+{{--    <script type="text/javascript" src="/js/dom-to-image.min.js" defer></script>--}}
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-180755787-1"></script>
