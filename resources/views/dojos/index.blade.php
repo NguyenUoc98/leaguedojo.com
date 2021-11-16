@@ -2,61 +2,40 @@
 @section('page_title', 'Cơ sở tập luyện')
 
 @section('content')
-<div class="pt-3">
-    <div class="container">
-
-        <!-- Route of post -->
-        <div class="row">
-            <div class="col-12">
-                <div class="pt-breadcrumb">
-                    <div class="breadcrumb box-shadow mb-0">
-                        <a href="{{ route('home') }}" class="mr-2"><i class="fa fa-home mr-1" aria-hidden="true"></i>Trang chủ</a>
-                        <span> / </span>
-                        <a href="{{ route('news') }}" class="mr-2 ml-2"></i>Các cơ sở</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="row justify-content-center mb-15">
-            @foreach($dojos as $dojo)
-            <div class="col-md-3 bg-white box-shadow p-3 m-3 mb-15">
-                <div class="single-blog-post style-4">
-                    @php
+    {{ Breadcrumbs::render('co-so-tap-luyen') }}
+    <h1 class="font-bold text-2xl my-4">Các cơ sở tập luyện</h1>
+    <div class="grid md:grid-cols-3 grid-cols-1 gap-8">
+        @foreach($dojos as $dojo)
+            <a class="relative rounded-lg overflow-hidden"
+               href="{{ route('dojos.show', $dojo->slug) }}"
+               title="{{ $dojo->name }}">
+                @php
                     $images = json_decode($dojo->image);
-                    @endphp
-                    <div class="post-thumbnail thumbnail">
-                        <img src="{{ Voyager::image($images[0]) }}" alt="{{ $dojo->slug }}">
+                @endphp
+                <img class="w-full h-96 object-cover rounded-lg"
+                     src="{{ Voyager::image($images[0]) }}" alt="{{ $dojo->name }}">
+                <div class="absolute backdrop-blur-md backdrop-filter bg-opacity-50 bg-white bottom-0 p-4 rounded-bl-lg rounded-tr-lg shadow-top space-y-3 w-4/5
+                                transition transform duration-300 ease-in-out lg:hover:bg-white lg:hover:shadow-full">
+                    <div class="flex items-center">
+                        @if($dojo->logo)
+                            <img class="w-10 h-10 mr-2 inline rounded-full" alt="{{ $dojo->name }}"
+                                 src="{{ Voyager::image($dojo->thumbnail('cropped', 'logo')) }}">
+                        @endif
+                        <span
+                            class="font-semibold md:leading-6 leading-5 md:text-lg text-black">{{ $dojo->name }}</span>
                     </div>
-                    <div class="post-content text-center">
-                        <h5>{{ $dojo->name }}</h5>
-                        <div class="post-meta">
-                            <span>{{ number_format($dojo->tuitionPolicys()->where('date_apply', '<=', \Carbon\Carbon::now()->format('Y-m') . '-01')->first()->price, 0, '', '.') . ' VNĐ/tháng' }}</span>
-                        </div>
-                    </div>
-
-                    <div class="col-12 text-center mt-15">
-                        <a class="btn btn-info mr-2" style="font-size: 13px" href="{{ route('dojos.show', $dojo->slug) }}">
-                            Chi tiết
-                        </a>
-                        <a class="btn btn-danger" style="font-size: 13px" href="{{ route('workout-registrations.create', ['dojo_id' => $dojo->id]) }}">
-                            Đăng ký tập
-                        </a>
-                    </div>
+                    <p class="text-black text-sm">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline" fill="none"
+                             viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                        </svg>
+                        {{ $dojo->address }}
+                    </p>
                 </div>
-            </div>
-            @endforeach
-        </div>
-
-        <!-- ad_ngang -->
-        <ins class="adsbygoogle my-3"
-            style="display:inline-block;width:100%;height:150px"
-            data-ad-client="ca-pub-1747924550904432"
-            data-ad-slot="9889684921"></ins>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
+            </a>
+        @endforeach
     </div>
-</div>
-
 @endsection

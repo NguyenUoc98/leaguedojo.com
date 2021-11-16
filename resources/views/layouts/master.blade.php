@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="{{ config('app.locale') }}" dir="{{ __('voyager::generic.is_rtl') == 'true' ? 'rtl' : 'ltr' }}">
 @include('layouts.head')
-@yield('css')
+@stack('css')
 
 <body class="bg-gray-200">
     <div id="fb-root"></div>
@@ -10,7 +10,7 @@
     </div>
 
     @include('layouts.header')
-    <div class="container mx-auto mt-14 max-w-7xl lg:px-0 px-4 mb-10">
+    <div class="container mx-auto mt-14 max-w-7xl lg:px-0 px-4 mb-10 pt-4">
         @yield('content')
     </div>
 
