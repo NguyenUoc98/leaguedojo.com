@@ -1,11 +1,5 @@
 @inject('markdown', 'Parsedown')
 @php($markdown->setSafeMode(true))
-@push('css')
-    <link rel="stylesheet" href="{{ asset('css/emojionearea.min.css') }}">
-@endpush
-@push('head-script')
-    <script type="text/javascript" src="{{ asset('js/emojionearea.min.js') }}" defer></script>
-@endpush
 <br/>
 @if(isset($reply) && $reply === true)
     @if(get_class($comment)::find($comment->child_id)->child_id == '')
@@ -111,14 +105,3 @@
 @else
     </li>
 @endif
-
-@push('script')
-    <script>
-        function toggleEditFrom(obj) {
-            var close = $(obj).attr("data-close");
-            var formId = $(obj).attr("data-form");
-            $(close).not(formId).slideUp(500);
-            $(formId).slideToggle(500);
-        }
-    </script>
-@endpush

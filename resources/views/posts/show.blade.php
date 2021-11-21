@@ -32,6 +32,12 @@
         p {
             margin: 1rem 0;
         }
+
+        @if($post->is_crawl)
+        img {
+            width: 100%;
+        }
+        @endif
     </style>
 @endpush
 
@@ -41,8 +47,10 @@
     <div class="grid grid-cols-12 gap-8">
         <div class="col-span-12 lg:col-span-8">
             <div class="mt-5">
-                <img class="lg:h-lg object-cover w-full"
-                     src="{{ Voyager::image($images[0]) }}" alt="{{ $post->title }}"/>
+                @if(count($images))
+                    <img class="lg:h-lg object-cover w-full"
+                         src="{{ Voyager::image($images[0]) }}" alt="{{ $post->title }}"/>
+                @endif
                 <h1 class="font-bold text-2xl my-4">{{ $post->title }}</h1>
                 <p class="text-gray-500">
                     <span>
@@ -76,12 +84,13 @@
                     </span>
                 </p>
 
-                <div>{!! $post->body !!}</div>
+                <div class="text-lg">{!! $post->body !!}</div>
 
                 <div class="border-t py-3">
                     <span><i class="fa fa-tags" aria-hidden="true"></i> Từ khóa: </span>
                     @foreach($keywords as $keyword)
-                        <span class="bg-gray-300 cursor-pointer hover:bg-gray-400 mx-1 px-3 py-1 rounded-full">#{{ $keyword }}</span>
+                        <span
+                            class="bg-gray-300 cursor-pointer hover:bg-gray-400 mx-1 px-3 py-1 rounded-full">#{{ $keyword }}</span>
                     @endforeach
                     <div class="flex justify-between mt-1">
                         <a href="#" class="author-name">Nguồn: {{ $post->source }}</a>
@@ -110,8 +119,8 @@
                          alt="{{ $post->title }}">
                 @else
                     <img class="w-full h-64 object-cover rounded-md mb-3"
-                        src="{{ Voyager::image(str_replace('.','-cropped.',json_decode($post->image)[0] ?? $post->category->image)) }}"
-                        alt="{{ $post->slug }}">
+                         src="{{ Voyager::image(str_replace('.','-cropped.',json_decode($post->image)[0] ?? $post->category->image)) }}"
+                         alt="{{ $post->slug }}">
                 @endif
                 <span
                     class="font-semibold md:px-4 px-2 md:py-2 py-1 rounded md:text-sm text-xs uppercase"

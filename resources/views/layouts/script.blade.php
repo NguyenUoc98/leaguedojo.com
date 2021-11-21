@@ -43,15 +43,6 @@
 {{--function replyToggle(id) {--}}
 {{--    $(".contact-form-area" + id).slideToggle();--}}
 {{--}--}}
-{{--$(document).ready(function() {--}}
-{{--    $readMoreJS.init({--}}
-{{--        target: '.excerpt p',--}}
-{{--        numOfWords: 50,--}}
-{{--        toggle: true,--}}
-{{--        moreLink: 'Xem thêm',--}}
-{{--        lessLink: 'Hiển thị ít hơn'--}}
-{{--    });--}}
-{{--});--}}
 {{--</script>--}}
 
 @livewireScripts

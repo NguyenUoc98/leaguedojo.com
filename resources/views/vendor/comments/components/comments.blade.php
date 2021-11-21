@@ -12,11 +12,7 @@
         @include('comments::_cmt')
     @endauth
     <div class="list-comment">
-        @if($comments->count() < 1)
-            <div class="not-comment mt-2">
-                <div class="alert alert-warning">Chưa có bình luận nào.</div>
-            </div>
-        @else
+        @if($comments->count() > 0)
             @php
                 $grouped_comments = $comments->sortBy('created_at', 0,true)->groupBy('child_id');
             @endphp
@@ -71,10 +67,22 @@
     </div>
 </ul>
 
+@push('css')
+    <link rel="stylesheet" href="{{ asset('css/emojionearea.min.css') }}">
+@endpush
+@push('head-script')
+    <script type="text/javascript" src="{{ asset('js/emojionearea.min.js') }}" defer></script>
+@endpush
 @push('script')
     <script>
         function closeModal() {
             $('#like_modal').addClass('hidden');
+        }
+        function toggleEditFrom(obj) {
+            var close = $(obj).attr("data-close");
+            var formId = $(obj).attr("data-form");
+            $(close).not(formId).slideUp(500);
+            $(formId).slideToggle(500);
         }
     </script>
 @endpush

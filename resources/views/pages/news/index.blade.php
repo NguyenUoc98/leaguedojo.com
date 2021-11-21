@@ -59,7 +59,7 @@
                             @if($post->is_crawl)
                                 <img class="md:w-32 md:h-32 w-28 h-28 object-cover rounded-lg"
                                      src="{{ Voyager::image(json_decode($post->image)[0] ?? $post->category->image) }}"
-                                     alt="{{ $latestPost[0]->title }}">
+                                     alt="{{ $post->title }}">
                             @else
                                 <img class="md:w-32 md:h-32 w-28 h-28 object-cover rounded-lg"
                                      src="{{ Voyager::image(str_replace('.','-cropped.',json_decode($post->image)[0] ?? $post->category->image)) }}"
@@ -119,13 +119,13 @@
                 <a class="relative rounded-lg overflow-hidden"
                    href="{{ route('posts.show', $post->slug) }}"
                    title="{{ $post->title }}">
-                    @if($latestPost[0]->is_crawl)
+                    @if($post->is_crawl)
                         <img class="w-full h-96 lg:h-lg object-cover rounded-lg"
                              src="{{ Voyager::image(json_decode($post->image)[0] ?? $post->category->image) }}"
                              alt="{{ $post->title }}">
                     @else
                         <img class="w-full h-96 lg:h-lg object-cover rounded-lg"
-                             src="{{ Voyager::image(str_replace('.', '-cropped.', json_decode($post->image)[0] ?? $post->category->image)) }}"
+                             src="{{ Voyager::image(json_decode($post->image)[0] ?? $post->category->image) }}"
                              alt="{{ $post->title }}">
                     @endif
                     <div class="absolute backdrop-blur-md backdrop-filter bg-opacity-50 bg-white rounded-lg m-4 p-4 bottom-0 space-y-3 transition transform duration-300 ease-in-out

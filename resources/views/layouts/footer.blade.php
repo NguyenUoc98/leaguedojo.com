@@ -6,8 +6,8 @@
                 {{ setting('site.title') }}
             </h1>
             <div class="mb-5">
-                <img class="h-16 inline" src="{{ asset('img/core-img/logo1.png') }}" alt="logo1.png">
-                <img class="h-16 inline" src="{{ asset('img/core-img/logo.png') }}" alt="logo2.png">
+                <img class="h-16 w-auto inline" src="{{ asset('img/core-img/logo1.png') }}" alt="logo1.png">
+                <img class="h-16 w-auto inline" src="{{ asset('img/core-img/logo.png') }}" alt="logo2.png">
             </div>
             <p class="leading-relaxed text-base text-gray-300">{{ setting('site.site_details') }}</p>
             <div class="items-center mt-2 hidden md:flex">
