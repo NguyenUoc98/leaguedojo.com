@@ -18,6 +18,16 @@ Breadcrumbs::for('tin-tuc', function ($trail) {
     $trail->push('Tin tức', route('news'));
 });
 
+Breadcrumbs::for('the-loai', function ($trail, $category) {
+    $trail->parent('tin-tuc');
+    $trail->push($category->name, route('categories.show', $category));
+});
+
+Breadcrumbs::for('bai-viet', function ($trail, $post) {
+    $trail->parent('the-loai', $post->category);
+    $trail->push($post->title, route('posts.show', $post));
+});
+
 // Trang chủ > Cơ sở tập luyện
 Breadcrumbs::for('co-so-tap-luyen', function ($trail) {
     $trail->parent('trang-chu');

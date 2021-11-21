@@ -602,6 +602,7 @@
         }
     });
 </script>
+@stack('script')
 
 <!-- Alert Notification -->
 @if (session('registered'))

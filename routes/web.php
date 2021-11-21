@@ -19,10 +19,11 @@ Route::group(['middleware' => ['operation-log']], function () {
     Route::delete('rooms/cancel-book/{id}', 'Site\RoomController@cancelBook')->name('rooms.cancel-book')->middleware('auth')->middleware('verified');
 
     // Resource routes
+    Route::resource('the-loai', 'Site\CategoryController', ['names' => 'categories']);
     Route::resource('bai-viet', 'Site\PostController', ['names' => 'posts']);
     Route::resource('co-so-tap-luyen', 'Site\DojoController', ['names' => 'dojos']);
+    Route::resource('tai-lieu', 'Site\DocumentController', ['names' => 'documents']);
     Route::resources([
-        'categories'     => 'Site\CategoryController',
         'videos'         => 'Site\VideoController',
         'users'          => 'Site\UserController',
         'students'       => 'Site\StudentController',

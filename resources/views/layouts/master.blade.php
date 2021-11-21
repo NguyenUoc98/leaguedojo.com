@@ -1,16 +1,15 @@
 <!DOCTYPE html>
 <html lang="{{ config('app.locale') }}" dir="{{ __('voyager::generic.is_rtl') == 'true' ? 'rtl' : 'ltr' }}">
 @include('layouts.head')
-@stack('css')
 
-<body class="bg-gray-200">
+<body class="bg-white">
     <div id="fb-root"></div>
     <div class="bg-black bg-opacity-50 fixed h-screen loader w-full z-50 hidden">
         <img class="inset-1/2 absolute h-auto w-44" src="{{ asset('img/core-img/loading.gif') }}">
     </div>
 
     @include('layouts.header')
-    <div class="container mx-auto mt-14 max-w-7xl lg:px-0 px-4 mb-10 pt-4">
+    <div class="container mx-auto mt-14 max-w-7xl px-2 mb-10 pt-4">
         @yield('content')
     </div>
 
@@ -30,7 +29,6 @@
 
     @include('layouts.footer')
     @include('layouts.script')
-    @stack('script')
 </body>
 
 </html>

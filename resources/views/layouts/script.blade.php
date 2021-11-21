@@ -1,16 +1,10 @@
 {{--<!-- JS Alert -->--}}
-{{--<script src="/js/sweetalert2.min.js"></script>--}}
 {{--<script type="text/javascript" src="/js/plugins/plugins.js"></script>--}}
-{{--<script type="text/javascript" src="/js/active.js"></script>--}}
 {{--<script type="text/javascript" src="/js/infinite-scroll.pkgd.min.js"></script>--}}
 {{--<script type="text/javascript" src="/js/images-grid.js" defer></script>--}}
 
 
-{{--<!-- Date Picker -->--}}
-{{--<script type="text/javascript" src="/js/argon/bootstrap-datepicker.min.js"></script>--}}
-{{--<script type="text/javascript" src="/js/argon/bootstrap-datepicker.vi.min.js"></script>--}}
 {{--<script type="text/javascript" src="/js/argon/dropzone.min.js"></script>--}}
-{{--<script type="text/javascript" src="/js/argon/argon.js"></script>--}}
 
 {{--<!-- Script Facebook -->--}}
 {{--<script async defer crossorigin="anonymous"--}}
@@ -61,3 +55,4 @@
 {{--</script>--}}
 
 @livewireScripts
+@stack('script')

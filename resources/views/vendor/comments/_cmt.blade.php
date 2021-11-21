@@ -9,46 +9,39 @@
     </div>
 @endif
 
-<!-- <comments-form commentable_type="{{ explode('\\', get_class($model))[2] }}" v-bind:commentable_id="{{ $model->id }}"></comments-form> -->
 <!-- Comment Form -->
-<div class="contact-form-area">
-    <div class="row">
-        <div class="col-12">
-            <label for="message">Nhập bình luận của bạn ở đây:</label>
-            <textarea id="cmt-form" placeholder="Viết bình luận..."></textarea>
-        </div>
-        <div class="col-12 d-flex justify-content-between">
-            <small class="form-text text-muted"><a target="_blank" href="/img/core-img/comments-tips.png">Mẹo bình luận</a> cheatsheet.</small>
-            <button class="btn mag-btn-cmt" id="btn-cmt">
-                <i class="fa fa-send mr-1"></i>Bình luận
-            </button>
-        </div>
+<div class="space-y-1">
+    <textarea id="cmt-form" placeholder="Viết bình luận..." class="border-2 w-full rounded-lg p-2"></textarea>
+    <div class="w-full text-right">
+        <button class="bg-primary px-4 py-1 rounded-md text-white outline-none hover:bg-primary-darker" id="btn-cmt">
+            Bình luận
+        </button>
     </div>
 </div>
-<br />
-
+@push('script')
 <script>
-    $(document).ready(function(){
-        $('#btn-cmt').click(function() {
+    $(document).ready(function () {
+        $('#btn-cmt').click(function () {
             axios.post('/comments', {
                 message: $('#cmt-form')[0].emojioneArea.getText(),
                 commentable_type: 'App\\Models\\{{ explode('\\', get_class($model))[2] }}',
                 commentable_id: '{{ $model->id }}',
             })
-            .then(response => {
-                $('#cmt-form')[0].emojioneArea.setText('');
-                $('.list-comment').prepend(response.data);
-                $('.not-comment').hide();
-            })
-            .catch(e => {
-                console.log(e)
-            })
+                .then(response => {
+                    $('#cmt-form')[0].emojioneArea.setText('');
+                    $('.list-comment').prepend(response.data);
+                    $('.not-comment').hide();
+                })
+                .catch(e => {
+                    console.log(e)
+                })
         });
 
         $("#cmt-form").emojioneArea({
             search: false,
             buttonTitle: "Sử dụng TAB để thêm emoji",
             filtersPosition: "bottom",
+            useInternalCDN: true,
             events: {
                 click: function (editor, event) {
                     $("#cmt-form")[0].emojioneArea.hidePicker();
@@ -57,3 +50,4 @@
         });
     });
 </script>
+@endpush

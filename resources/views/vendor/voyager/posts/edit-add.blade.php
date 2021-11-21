@@ -1,6 +1,7 @@
 @php
     $edit = !is_null($dataTypeContent->getKey());
     $add  = is_null($dataTypeContent->getKey());
+    $categories = \App\Models\Category::all();
 @endphp
 
 @extends('voyager::master')
@@ -66,7 +67,7 @@
 @section('content')
     <div class="page-content container-fluid">
         <form class="form-edit-add" role="form" action="@if(isset($dataTypeContent->id)){{ route('voyager.posts.update', $dataTypeContent->id) }}@else{{ route('voyager.posts.store') }}@endif" method="POST" enctype="multipart/form-data">
-            
+
             <!-- PUT Method if we are editing -->
             @if(isset($dataTypeContent->id))
                 {{ method_field("PUT") }}
@@ -74,7 +75,7 @@
             {{ csrf_field() }}
             <div class="row">
                 <div class="col-md-8">
-                
+
                     <!-- ### TITLE ### -->
                     <div class="panel panel-bordered panel-info">
                         @if (count($errors) > 0)
@@ -174,7 +175,7 @@
                                         continue;
                                     }
                                 @endphp
-                                
+
                                 @php
                                     $display_options = $row->details->display ?? NULL;
                                     if ($dataTypeContent->{$row->field.'_'.($edit ? 'edit' : 'add')}) {
@@ -268,7 +269,7 @@
                                     @if(!is_null($keywords) && count($keywords) > 1)
                                     @foreach($keywords as $index=>$keyword)
                                     @if($index > 0)
-                                    @include('voyager::posts.keyword-fields', 
+                                    @include('voyager::posts.keyword-fields',
                                         [
                                             'id' => $index + 1,
                                             'varId' => 'keyword_' . ($index + 1),

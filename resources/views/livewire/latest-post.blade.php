@@ -1,7 +1,7 @@
 <div>
     <div class="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5 mt-4">
         @foreach($latestPosts as $post)
-            <a class="bg-white rounded-md p-4 space-y-3" title="{{ $post->title }}"
+            <a class="bg-white rounded-md p-4 space-y-3 border" title="{{ $post->title }}"
                href="{{ route('posts.show',$post->slug) }}">
                 @if($post->is_crawl)
                     <img class="w-full md:h-40 h-52 object-cover rounded-md mb-3"

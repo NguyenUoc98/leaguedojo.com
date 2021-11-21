@@ -53,7 +53,7 @@
                     </div>
 
                     <div id="user-menu-pannel" role="menu"
-                        class="origin-top-right absolute right-0 mt-2 w-64 rounded-md shadow-lg py-1 pb-3 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none transition ease-out duration-200 hidden">
+                        class="origin-top-right absolute right-0 mt-2 w-64 rounded-md shadow-lg py-1 pb-3 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none transition ease-in-out duration-200 transform hidden">
                         @if (Auth::check())
                             <div class="flex items-center px-3 mt-2">
                                 <img src="{{ Voyager::image(Auth::user()->avatar) }}" class="rounded-full w-10 h-10">

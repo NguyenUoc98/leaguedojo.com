@@ -204,6 +204,7 @@ return [
         'js/axios.min.js',
         '/js/jquery.PrintArea.js',
         '/js/dom-to-image.min.js',
+        '/js/admin/tiny_init.js'
     ],
 
     'googlemaps' => [

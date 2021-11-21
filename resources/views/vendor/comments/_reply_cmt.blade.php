@@ -1,15 +1,11 @@
 <!-- Reply Form -->
-<div class="contact-form-area panel-collapse collapse mt-2" id="reply-modal-{{ $comment->id }}">
-    <div class="row">
-        <div class="col-12">
-            <textarea id="message-{{ $comment->id }}" placeholder="Viết bình luận..."></textarea>
-        </div>
-        <div class="col-12 d-flex justify-content-between">
-            <small class="form-text text-muted"><a target="_blank" href="/img/core-img/comments-tips.png">Mẹo bình luận</a> cheatsheet.</small>
-            <button class="btn mag-btn-cmt btn-reply">
-                <i class="fa fa-send mr-1"></i>Phản hồi
-            </button>
-        </div>
+<div class="contact-form-area mt-2 space-y-1 reply-modal" id="reply-modal-{{ $comment->id }}" style="display: none">
+    <textarea id="message-{{ $comment->id }}" class="border-2 w-full rounded-lg p-2" placeholder="Viết bình luận..."></textarea>
+
+    <div class="w-full text-right">
+        <button class="bg-white px-4 py-1 rounded-md outline-none hover:bg-cancel hover:text-white border border-cancel">
+            Phản hồi
+        </button>
     </div>
 </div>
 
@@ -21,7 +17,7 @@
             })
             .then(response => {
                 $('.meta-{{ $comment->id }}').append(response.data);
-                $('#reply-modal-{{ $comment->id }}').collapse('hide');
+                $('#reply-modal-{{ $comment->id }}').slideUp(500);
             })
             .catch(e => {
                 console.log(e)

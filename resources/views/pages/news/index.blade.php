@@ -16,7 +16,7 @@
                              alt="{{ $latestPost[0]->title }}">
                     @else
                         <img class="w-full h-96 lg:h-lg object-cover rounded-lg"
-                             src="{{ Voyager::image(str_replace('.', '-cropped.', json_decode($latestPost[0]->image)[0] ?? $latestPost[0]->category->image)) }}"
+                             src="{{ Voyager::image(json_decode($latestPost[0]->image)[0] ?? $latestPost[0]->category->image) }}"
                              alt="{{ $latestPost[0]->title }}">
                     @endif
 
@@ -51,7 +51,7 @@
             </div>
             <div class="lg:col-span-4 col-span-12">
                 <h1 class="font-bold text-2xl my-4 border-l-4 border-primary pl-2">Tin nổi bật</h1>
-                <div class="mt-4 bg-white p-4 rounded-lg">
+                <div class="mt-4 bg-white p-4 rounded-lg border">
                     @foreach($mostFeatured as $post)
                         <a class="flex pb-4 mb-4 border-b"
                            title="{{ $post->title }}"
@@ -175,9 +175,9 @@
         </div>
 
         {{--      CÁC CƠ SỞ      --}}
-        <div class="grid grid-cols-12 gap-8">
+        <div class="grid grid-cols-12 gap-8 mt-10">
             <div class="lg:col-span-8 col-span-12">
-                <h1 class="font-bold text-2xl my-4 mt-10 border-l-4 border-primary pl-2">Cơ sở tập luyện</h1>
+                <h1 class="font-bold text-2xl my-4 border-l-4 border-primary pl-2">Cơ sở tập luyện</h1>
                 <div class="grid md:grid-cols-2 grid-cols-1 gap-8">
                     @foreach($dojos as $dojo)
                         <a class="relative rounded-lg overflow-hidden"

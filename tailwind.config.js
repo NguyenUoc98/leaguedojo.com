@@ -34,6 +34,54 @@ module.exports = {
                 inner: 'inset 0 2px 4px 0 rgba(0, 0, 0, 0.06)',
                 top: '6px 4px 6px -1px rgba(0, 0, 0, 0.1), 4px 2px 4px -1px rgba(0, 0, 0, 0.06)',
                 none: 'none',
+            },
+            keyframes: {
+                'fade-in-down': {
+                    '0%': {
+                        opacity: '0',
+                        transform: 'translateY(-10px)'
+                    },
+                    '100%': {
+                        opacity: '1',
+                        transform: 'translateY(0)'
+                    },
+                },
+                'fade-out-down': {
+                    'from': {
+                        opacity: '1',
+                        transform: 'translateY(0px)'
+                    },
+                    'to': {
+                        opacity: '0',
+                        transform: 'translateY(10px)'
+                    },
+                },
+                'fade-in-up': {
+                    '0%': {
+                        opacity: '0',
+                        transform: 'translateY(10px)'
+                    },
+                    '100%': {
+                        opacity: '1',
+                        transform: 'translateY(0)'
+                    },
+                },
+                'fade-out-up': {
+                    'from': {
+                        opacity: '1',
+                        transform: 'translateY(0px)'
+                    },
+                    'to': {
+                        opacity: '0',
+                        transform: 'translateY(10px)'
+                    },
+                }
+            },
+            animation: {
+                'fade-in-down': 'fade-in-down 0.25s ease-out',
+                'fade-out-down': 'fade-out-down 0.25s ease-out',
+                'fade-in-up': 'fade-in-up 0.25s ease-out',
+                'fade-out-up': 'fade-out-up 0.25s ease-out'
             }
         }
     },

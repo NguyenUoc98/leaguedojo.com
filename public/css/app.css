@@ -10948,6 +10948,102 @@ video {
   }
 }
 
+@-webkit-keyframes fade-in-down{
+  0%{
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  100%{
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in-down{
+  0%{
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  100%{
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@-webkit-keyframes fade-out-down{
+  from{
+    opacity: 1;
+    transform: translateY(0px);
+  }
+
+  to{
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+@keyframes fade-out-down{
+  from{
+    opacity: 1;
+    transform: translateY(0px);
+  }
+
+  to{
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+@-webkit-keyframes fade-in-up{
+  0%{
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  100%{
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in-up{
+  0%{
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  100%{
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@-webkit-keyframes fade-out-up{
+  from{
+    opacity: 1;
+    transform: translateY(0px);
+  }
+
+  to{
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+@keyframes fade-out-up{
+  from{
+    opacity: 1;
+    transform: translateY(0px);
+  }
+
+  to{
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
 .animate-none{
   -webkit-animation: none !important;
           animation: none !important;
@@ -10971,6 +11067,26 @@ video {
 .animate-bounce{
   -webkit-animation: bounce 1s infinite !important;
           animation: bounce 1s infinite !important;
+}
+
+.animate-fade-in-down{
+  -webkit-animation: fade-in-down 0.25s ease-out !important;
+          animation: fade-in-down 0.25s ease-out !important;
+}
+
+.animate-fade-out-down{
+  -webkit-animation: fade-out-down 0.25s ease-out !important;
+          animation: fade-out-down 0.25s ease-out !important;
+}
+
+.animate-fade-in-up{
+  -webkit-animation: fade-in-up 0.25s ease-out !important;
+          animation: fade-in-up 0.25s ease-out !important;
+}
+
+.animate-fade-out-up{
+  -webkit-animation: fade-out-up 0.25s ease-out !important;
+          animation: fade-out-up 0.25s ease-out !important;
 }
 
 .cursor-auto{
@@ -46156,6 +46272,26 @@ video {
             animation: bounce 1s infinite !important;
   }
 
+  .sm\:animate-fade-in-down{
+    -webkit-animation: fade-in-down 0.25s ease-out !important;
+            animation: fade-in-down 0.25s ease-out !important;
+  }
+
+  .sm\:animate-fade-out-down{
+    -webkit-animation: fade-out-down 0.25s ease-out !important;
+            animation: fade-out-down 0.25s ease-out !important;
+  }
+
+  .sm\:animate-fade-in-up{
+    -webkit-animation: fade-in-up 0.25s ease-out !important;
+            animation: fade-in-up 0.25s ease-out !important;
+  }
+
+  .sm\:animate-fade-out-up{
+    -webkit-animation: fade-out-up 0.25s ease-out !important;
+            animation: fade-out-up 0.25s ease-out !important;
+  }
+
   .sm\:cursor-auto{
     cursor: auto !important;
   }
@@ -81325,6 +81461,26 @@ video {
   .md\:animate-bounce{
     -webkit-animation: bounce 1s infinite !important;
             animation: bounce 1s infinite !important;
+  }
+
+  .md\:animate-fade-in-down{
+    -webkit-animation: fade-in-down 0.25s ease-out !important;
+            animation: fade-in-down 0.25s ease-out !important;
+  }
+
+  .md\:animate-fade-out-down{
+    -webkit-animation: fade-out-down 0.25s ease-out !important;
+            animation: fade-out-down 0.25s ease-out !important;
+  }
+
+  .md\:animate-fade-in-up{
+    -webkit-animation: fade-in-up 0.25s ease-out !important;
+            animation: fade-in-up 0.25s ease-out !important;
+  }
+
+  .md\:animate-fade-out-up{
+    -webkit-animation: fade-out-up 0.25s ease-out !important;
+            animation: fade-out-up 0.25s ease-out !important;
   }
 
   .md\:cursor-auto{
@@ -116498,6 +116654,26 @@ video {
             animation: bounce 1s infinite !important;
   }
 
+  .lg\:animate-fade-in-down{
+    -webkit-animation: fade-in-down 0.25s ease-out !important;
+            animation: fade-in-down 0.25s ease-out !important;
+  }
+
+  .lg\:animate-fade-out-down{
+    -webkit-animation: fade-out-down 0.25s ease-out !important;
+            animation: fade-out-down 0.25s ease-out !important;
+  }
+
+  .lg\:animate-fade-in-up{
+    -webkit-animation: fade-in-up 0.25s ease-out !important;
+            animation: fade-in-up 0.25s ease-out !important;
+  }
+
+  .lg\:animate-fade-out-up{
+    -webkit-animation: fade-out-up 0.25s ease-out !important;
+            animation: fade-out-up 0.25s ease-out !important;
+  }
+
   .lg\:cursor-auto{
     cursor: auto !important;
   }
@@ -151669,6 +151845,26 @@ video {
             animation: bounce 1s infinite !important;
   }
 
+  .xl\:animate-fade-in-down{
+    -webkit-animation: fade-in-down 0.25s ease-out !important;
+            animation: fade-in-down 0.25s ease-out !important;
+  }
+
+  .xl\:animate-fade-out-down{
+    -webkit-animation: fade-out-down 0.25s ease-out !important;
+            animation: fade-out-down 0.25s ease-out !important;
+  }
+
+  .xl\:animate-fade-in-up{
+    -webkit-animation: fade-in-up 0.25s ease-out !important;
+            animation: fade-in-up 0.25s ease-out !important;
+  }
+
+  .xl\:animate-fade-out-up{
+    -webkit-animation: fade-out-up 0.25s ease-out !important;
+            animation: fade-out-up 0.25s ease-out !important;
+  }
+
   .xl\:cursor-auto{
     cursor: auto !important;
   }
@@ -186838,6 +187034,26 @@ video {
   .\32xl\:animate-bounce{
     -webkit-animation: bounce 1s infinite !important;
             animation: bounce 1s infinite !important;
+  }
+
+  .\32xl\:animate-fade-in-down{
+    -webkit-animation: fade-in-down 0.25s ease-out !important;
+            animation: fade-in-down 0.25s ease-out !important;
+  }
+
+  .\32xl\:animate-fade-out-down{
+    -webkit-animation: fade-out-down 0.25s ease-out !important;
+            animation: fade-out-down 0.25s ease-out !important;
+  }
+
+  .\32xl\:animate-fade-in-up{
+    -webkit-animation: fade-in-up 0.25s ease-out !important;
+            animation: fade-in-up 0.25s ease-out !important;
+  }
+
+  .\32xl\:animate-fade-out-up{
+    -webkit-animation: fade-out-up 0.25s ease-out !important;
+            animation: fade-out-up 0.25s ease-out !important;
   }
 
   .\32xl\:cursor-auto{

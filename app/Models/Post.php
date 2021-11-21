@@ -129,14 +129,15 @@ class Post extends Model implements ViewableContract
      */
     public function morePost($id, int $category_id, array $keywords)
     {
-        $query = $this::where('category_id', $category_id);
+        $query = $this::query()
+            ->withCount('comments')
+            ->where('category_id', $category_id)
+            ->where('id', '<>', $id);
 
         foreach ($keywords as $keyword) {
             $query = $query->orWhere('keywords', 'LIKE', '%' . $keyword . '%');
         }
-        return $query->get()->reject(function ($post, $index) use ($id) {
-            return $post->id == $id;
-        });
+        return $query->inRandomOrder()->limit(6)->get();
     }
 
     /**
@@ -146,7 +147,11 @@ class Post extends Model implements ViewableContract
      */
     public function getBySlug($slug)
     {
-        $post = $this::whereSlug($slug)->firstOrFail();
+        $post = $this::query()
+            ->with('comments')
+            ->whereSlug($slug)
+            ->firstOrFail();
+
         if (!$post->is_crawl) {
             $start = strpos($post->body, 'https://www.youtube.com/');
             while ($start) {
