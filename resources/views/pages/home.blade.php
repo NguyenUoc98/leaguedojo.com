@@ -46,20 +46,16 @@
 @include('layouts.header')
 
 <!-- Banner -->
-<div id="home" class="banner-w3pvt  d-flex justify-content-center align-items-center clip-wthree">
-    <div class="container">
-        <div class="row">
-            <div class="offset-lg-6">
-                <img src="{{ asset('img/home/IMG_20.png') }}" alt="banner" class="img-fluid"/>
-            </div>
-            <div class="col-lg-6 bnr-txt-w3pvt  d-flex justify-content-center align-items-center">
-                <div class="bnr-w3pvt-txt">
-                    <h2 class="font-weight-bold">{{ setting('site.web_name') }}</h2>
-                    <h3>{{ setting('site.description') }}</h3>
-                    <p class="text-white mt-sm-4 mt-2"> {{ setting('site.site_details') }}</p>
-                </div>
+<div id="home" class="banner-w3pvt d-flex justify-content-center items-center lg:items-end clip-wthree @if($agent->isDesktop()) h-screen @endif">
+    <div class="md:flex md:flex-row-reverse relative">
+        <div class="lg:w-1/2 w-full pl-3 bnr-txt-w3pvt flex justify-center items-center lg:items-start">
+            <div class="bnr-w3pvt-txt m-0">
+                <h2 class="font-weight-bold">{{ setting('site.web_name') }}</h2>
+                <h3>{{ setting('site.description') }}</h3>
+                <p class="text-white mt-sm-4 mt-2"> {{ setting('site.site_details') }}</p>
             </div>
         </div>
+        <img src="{{ asset('img/home/IMG_20.png') }}" alt="banner" class="lg:w-1/2 w-full relative top-0 left-0"/>
     </div>
 </div>
 
@@ -266,18 +262,16 @@
         </div>
     </div>
     <div class="blog pt-5 pb-5">
-        <div class="col">
-            <div class="card">
+        <div class="card container p-0">
 
-                <!-- Card header -->
-                <div class="card-header border-0">
-                    <h4 class="font-bold mb-3 text-2xl text-white">Bảng xếp hạng</h4>
-                </div>
+            <!-- Card header -->
+            <div class="card-header border-0">
+                <h4 class="font-bold mb-3 text-2xl text-white">Bảng xếp hạng</h4>
+            </div>
 
-                <!-- Rank table -->
-                <div id="rank-table">
-                    @include('pages.rank_table')
-                </div>
+            <!-- Rank table -->
+            <div id="rank-table">
+                @include('pages.rank_table')
             </div>
         </div>
     </div>

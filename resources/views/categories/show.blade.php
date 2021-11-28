@@ -51,7 +51,7 @@
                                     @elseif ($post->created_at->isYesterday())
                                         Hôm qua lúc {{ $post->created_at->format('H:i') }}
                                     @else
-                                        {{ $post->created_at->format('d \\t\\h\\g m') }}
+                                        {{ $post->created_at->format('d \\t\\h\\g m, Y') }}
                                     @endif
                                 </span>
                                 <span class="text-black text-sm">
@@ -87,7 +87,7 @@
 @endsection
 
 @push('script')
-    <script type="text/javascript" src="{{ asset('js/readMoreJS.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/site/readMoreJS.min.js') }}"></script>
     <script>
         $(document).ready(function() {
             $readMoreJS.init({

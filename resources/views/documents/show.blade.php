@@ -1,166 +1,82 @@
 @extends('layouts.master')
 @section('page_title', $document->title)
-
 @section('content')
+    {{ Breadcrumbs::render('chi-tiet-tai-lieu', $document) }}
+    <div class="grid grid-cols-12 gap-8">
+        <div class="col-span-12 lg:col-span-8">
+            <h1 class="font-bold text-2xl my-4 md:mb-0 text-center lg:text-left">{{ $document->title }}</h1>
 
-@php
-use Carbon\Carbon;
-Carbon::setlocale('vi');
-$images = json_decode($document->image);
-@endphp
+            <div class="items-end justify-between md:flex">
+                <p class="text-gray-500">
+                    <span>
+                        @if ($document->updated_at->isToday())
+                            {{ $document->updated_at->diffForHumans() }}
+                        @elseif ($document->updated_at->isYesterday())
+                            Hôm qua lúc {{ $document->updated_at->format('H:i') }}
+                        @else
+                            {{ $document->updated_at->format('d \\t\\h\\g m, Y') }}
+                        @endif
+                    </span>
+                    |
+                    <span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline" fill="none" viewBox="0 0 24 24"
+                             stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                        </svg>
+                        {{ views($document)->count() }} lượt xem
+                    </span>
+                    |
+                    <span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline" fill="none" viewBox="0 0 24 24"
+                             stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
+                        </svg>
+                        {{ $document->comments->count() }} bình luận
+                    </span>
+                </p>
 
-<style>
-    @media (max-width: 799px) {
-        .single-sidebar-widget {
-            display: none !important;
-        }
-    }
-</style>
-
-<!-- Image Header -->
-<section class="breadcrumb-area bg-img bg-overlay" style="background-image: url(/img/news.jpg);">
-    <div class="container h-100">
-        <div class="row h-100 align-items-center">
-            <div class="col-12">
-                <div class="breadcrumb-content">
-                    <h2>TÀI LIỆU</h2>
-                </div>
+                <a href="{{ route('documents.show', $document->slug).'?download' }}"
+                   class="bg-primary px-10 py-2 rounded-md text-white hover:bg-primary-darker hidden md:block">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline" viewBox="0 0 20 20"
+                         fill="currentColor">
+                        <path fill-rule="evenodd"
+                              d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
+                              clip-rule="evenodd"/>
+                    </svg>
+                    Tải xuống
+                </a>
             </div>
+
+            <hr class="my-2">
+            <div class="flex justify-between mt-1">
+                <span class="font-bold">Nguồn: {{ $document->source }}</span>
+                <div class="fb-like" data-href="{{ config('app.url') . '/documents/'.$document->slug }}" data-width=""
+                     data-layout="button_count" data-action="like" data-size="small" data-share="true"></div>
+            </div>
+            <iframe class="border md:h-45 h-lg mt-4 rounded-lg shadow w-full"
+                    src="{{ route('documents.preview', $document->slug) }}"></iframe>
+            <div class="text-center md:text-right mt-4 md:hidden">
+                <a href="{{ route('documents.show', $document->slug).'?download' }}"
+                   class="bg-primary px-10 py-2 rounded-md text-white hover:bg-primary-darker">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline" viewBox="0 0 20 20"
+                         fill="currentColor">
+                        <path fill-rule="evenodd"
+                              d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
+                              clip-rule="evenodd"/>
+                    </svg>
+                    Tải xuống
+                </a>
+            </div>
+            <p class="font-bold text-2xl my-4 border-l-4 border-primary pl-2 mt-10 mb-4">Thông tin tài liệu</p>
+            <p>{!! str_replace("\n", '<br>', $document->description) !!}</p>
+            @comments(['model' => $document])
+        </div>
+        <div class="col-span-12 lg:col-span-4">
+            @include('layouts.sidebar_widget')
         </div>
     </div>
-</section>
-
-<section class="post-detail-area">
-    <div class="container md-p-0">
-        <!-- Route of post -->
-        <div class="mt-md-4">
-            <div class="col-12 p-0">
-                <div class="pt-breadcrumb">
-                    <div class="breadcrumb box-shadow mb-0">
-                        <a href="{{ route('home') }}" class="mr-2"><i class="fa fa-home mr-1" aria-hidden="true"></i>Trang chủ</a>
-                        <span> / </span>
-                        <a href="{{ route('news') }}" class="mr-2 ml-2"></i>Tài liệu</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Post Detail -->
-        <div class="col-12 p-0">
-            <div class="row justify-content-center pt-md-4">
-
-                <!-- Content -->
-                <div class="col-12 col-lg-8 col-xl-8">
-                    <div class="post-detail-content bg-white mb-30 p-4 box-shadow">
-                        <div class="blog-content">
-                            <h4 class="post-title">{{ $document->title }}</h4>
-
-                            <!-- Post Meta -->
-                            <div class="post-meta-2 mb-3" style="color: #ed3939">
-                                <span> ●
-                                    @if ($document->created_at->isToday())
-                                    {{ $document->created_at->diffForHumans() }}
-                                    @elseif ($document->created_at->isYesterday())
-                                    Hôm qua lúc {{ $document->created_at->format('H:i') }}
-                                    @else
-                                    {{ $document->created_at->format('d \\t\\h\\g m \\l\\ú\\c H:i') }}
-                                    @endif
-                                </span>
-                                <span><i class="fa fa-eye ml-2" aria-hidden="true"></i>
-                                    {{ views($document)->count() }} lượt xem
-                                </span>
-                                <span><i class="fa fa-comments-o ml-2" aria-hidden="true"></i>
-                                    0 bình luận
-                                </span>
-
-                                <!-- Post Author -->
-                                <div class="post-author d-flex justify-content-between mt-4">
-                                    <a href="#" class="author-name">Nguồn: {{ $document->source }}</a>
-                                    <div class="fb-like" data-href="{{ config('app.url') . '/documents/'.$document->slug }}" data-width="" data-layout="button_count" data-action="like" data-size="small" data-share="true"></div>
-                                </div>
-                            </div>
-
-                            <div class="document-content">
-                                <iframe src="/ViewerJS/?title={{ $document->title }}#..{{ '/storage/' . json_decode($document->file)[0] }}" width='100%' height='100%' allowfullscreen webkitallowfullscreen></iframe>
-                            </div>
-                            <div class="text-right my-2">
-                                <!-- <a href="{{ route('documents.show', $document->slug).'?download' }}"
-                                    class="btn btn-success"><i class="fa fa-download" aria-hidden="true"></i> Tải xuống</a> -->
-
-                                <span class="btn btn-success" id="btn-download"><i class="fa fa-download" aria-hidden="true"></i> Tải xuống</span>
-                            </div>
-                            <p>{!! str_replace("\n", '<br>', $document->description) !!}</p>
-                        </div>
-                    </div>
-
-                    <!-- ad_ngang -->
-                    <ins class="adsbygoogle"
-                        style="display:inline-block;width:100%;height:200px"
-                        data-ad-client="ca-pub-1747924550904432"
-                        data-ad-slot="9889684921"></ins>
-                    <script>
-                        (adsbygoogle = window.adsbygoogle || []).push({});
-                    </script>
-
-                    <!-- Comments -->
-                    <div class="related-post-area bg-white p-30 mb-30 mt-30 box-shadow">
-                        @comments(['model' => $document])
-                    </div>
-
-                </div>
-
-                <!-- Sidebar Widget -->
-                <div class="col-12 col-lg-4 col-xl-4">
-                    <div class="right-sidebar bg-white mb-md-4 box-shadow" style="overflow: hidden;">
-                        @include('layouts.sidebar_widget')
-                    </div>
-
-                    <!-- qc dọc -->
-                    <ins class="adsbygoogle"
-                        style="display:block"
-                        data-ad-client="ca-pub-1747924550904432"
-                        data-ad-slot="1452436482"
-                        data-ad-format="auto"
-                        data-full-width-responsive="true"></ins>
-                    <script>
-                        (adsbygoogle = window.adsbygoogle || []).push({});
-                    </script>
-                </div>
-            </div>
-        </div>
-        
-    </div>
-</section>
-
-
-<script>
-    $('#btn-download').click(function() {
-        Swal.fire({
-            title: 'Bạn có phải Robot?',
-            text: 'Kết quả của phép tính trên là:',
-            imageUrl: '/img/robot.png',
-            imageWidth: 250,
-            input: 'text',
-            inputAttributes: {
-                autocapitalize: 'off'
-            },
-            showCancelButton: true,
-            confirmButtonText: 'Xác nhận',
-            showLoaderOnConfirm: true,
-            confirmButtonColor: '#28a745',
-            background: 'url(/img/core-img/notify-bg.png)',
-
-        }).then((result) => {
-            if (result.value) {
-                Swal({
-                    title: "Chưa chính xác rồi",
-                    background: 'url(/img/core-img/notify-bg.png)',
-                    text: "Haha, kết quả sai rồi nhé!",
-                    type: "error",
-                });
-            }
-        })
-    });
-</script>
-
 @endsection

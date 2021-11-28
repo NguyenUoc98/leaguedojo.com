@@ -71,7 +71,7 @@
     <link rel="stylesheet" href="{{ asset('css/emojionearea.min.css') }}">
 @endpush
 @push('head-script')
-    <script type="text/javascript" src="{{ asset('js/emojionearea.min.js') }}" defer></script>
+    <script type="text/javascript" src="{{ asset('js/site/emojionearea.min.js') }}" defer></script>
 @endpush
 @push('script')
     <script>

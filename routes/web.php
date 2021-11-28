@@ -23,11 +23,13 @@ Route::group(['middleware' => ['operation-log']], function () {
     Route::resource('bai-viet', 'Site\PostController', ['names' => 'posts']);
     Route::resource('co-so-tap-luyen', 'Site\DojoController', ['names' => 'dojos']);
     Route::resource('tai-lieu', 'Site\DocumentController', ['names' => 'documents']);
+
+    // Route preview pdf
+    Route::get('tai-lieu/preview/{document}', 'Site\DocumentController@preview')->name('documents.preview');
     Route::resources([
         'videos'         => 'Site\VideoController',
         'users'          => 'Site\UserController',
         'students'       => 'Site\StudentController',
-        'documents'      => 'Site\DocumentController',
         'vouchers'       => 'Site\VoucherController',
         'tuitions'       => 'Site\TuitionController',
         'transfer-dojos' => 'Site\TransferDojoController',

@@ -38,3 +38,14 @@ Breadcrumbs::for('co-so', function ($trail, $dojo) {
     $trail->parent('co-so-tap-luyen');
     $trail->push($dojo->name, route('dojos.show', $dojo));
 });
+
+// Trang chủ > Tài liệu
+Breadcrumbs::for('tai-lieu', function ($trail) {
+    $trail->parent('trang-chu');
+    $trail->push('Tài liệu', route('documents.index'));
+});
+
+Breadcrumbs::for('chi-tiet-tai-lieu', function ($trail, $document) {
+    $trail->parent('tai-lieu');
+    $trail->push($document->title, route('documents.show', $document));
+});

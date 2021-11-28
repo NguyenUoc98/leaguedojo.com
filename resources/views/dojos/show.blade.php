@@ -73,7 +73,7 @@
                     </div>
                 @endif
 
-                <p class="font-bold text-xl my-4">Thông tin cơ sở tập luyện</p>
+                <p class="font-bold text-2xl my-4 border-l-4 border-primary pl-2">Thông tin cơ sở tập luyện</p>
                 <table class="items-center w-full border-collapse">
                     <tbody>
                     <tr>
@@ -121,7 +121,12 @@
                     </tbody>
                 </table>
 
-                <p class="font-bold text-xl my-4 mt-10">Giới thiệu về cơ sở tập luyện</p>
+                <div class="mt-5 text-center">
+                    <a class="bg-primary mx-auto px-10 md:px-24 py-2 rounded-md text-center text-white"
+                       href="{{ route('workout-registrations.create', ['dojo_id' => $dojo->id]) }}">Đăng ký</a>
+                </div>
+
+                <p class="font-bold text-2xl my-4 mt-10 border-l-4 border-primary pl-2">Giới thiệu về cơ sở tập luyện</p>
                 <div>{!! $dojo->description !!}</div>
 
                 <!-- Google Map -->
@@ -129,10 +134,6 @@
                         src="https://maps.google.com/maps?&hl=vn&q={{ $dojo->address }}&ie=UTF8&z=15&output=embed"
                         height="300" frameborder="0" allowfullscreen>
                 </iframe>
-                <div class="mt-5 text-center">
-                    <a class="bg-primary mx-auto px-10 md:px-24 py-2 rounded-md text-center text-white"
-                        href="{{ route('workout-registrations.create', ['dojo_id' => $dojo->id]) }}">Đăng ký</a>
-                </div>
             </div>
         </div>
         <div class="col-span-12 lg:col-span-4">
@@ -183,8 +184,8 @@
 
     <!-- JS Slider -->
     @push('script')
-        <script type="text/javascript" src="{{ asset('js/jssor.slider-27.5.0.min.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('js/jssor-slide.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/site/jssor.slider-27.5.0.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/site/jssor-slide.js') }}"></script>
     @endpush
 
 @endsection

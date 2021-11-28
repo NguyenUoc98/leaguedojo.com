@@ -41,7 +41,7 @@
                                 @elseif ($latestPost[0]->created_at->isYesterday())
                                     Hôm qua lúc {{ $latestPost[0]->created_at->format('H:i') }}
                                 @else
-                                    {{ $latestPost[0]->created_at->format('d \\t\\h\\g m') }}
+                                    {{ $latestPost[0]->created_at->format('d \\t\\h\\g m, Y') }}
                                 @endif
                         </span>
                         </div>
@@ -84,7 +84,7 @@
                                     @elseif ($post->created_at->isYesterday())
                                         Hôm qua lúc {{ $post->created_at->format('H:i') }}
                                     @else
-                                        {{ $post->created_at->format('d \\t\\h\\g m') }}
+                                        {{ $post->created_at->format('d \\t\\h\\g m, Y') }}
                                     @endif
                                 </span>
                                     <span class="text-black text-sm">
@@ -148,7 +148,7 @@
                             @elseif ($post->created_at->isYesterday())
                                 Hôm qua lúc {{ $post->created_at->format('H:i') }}
                             @else
-                                {{ $post->created_at->format('d \\t\\h\\g m') }}
+                                {{ $post->created_at->format('d \\t\\h\\g m, Y') }}
                             @endif
                         </span>
                             <span class="text-black text-sm">
