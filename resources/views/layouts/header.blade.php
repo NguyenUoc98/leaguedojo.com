@@ -25,22 +25,11 @@
                 </div>
             </div>
             <div class="absolute inset-y-0 right-0 flex items-center pr-2 lg:static lg:inset-auto lg:ml-6 lg:pr-0">
-                <button type="button"
-                        class="bg-cancel p-1 rounded-full text-gray-400 hover:text-white focus:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
-                    <span class="sr-only">View notifications</span>
-                    <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                         stroke="currentColor" aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                              d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
-                    </svg>
-                </button>
-
-{{--                <div id="app">--}}
-{{--                    @if(Auth::check())--}}
-{{--                        <notification :userid='{{ auth()->id() }}'--}}
-{{--                                      :unreads="{{ auth()->user()->unreadNotifications }}"></notification>--}}
-{{--                    @endif--}}
-{{--                </div>--}}
+                <div id="app">
+                    @if(Auth::check())
+                        <notification :userid='{{ auth()->id() }}' :unreads="{{ auth()->user()->unreadNotifications }}"></notification>
+                    @endif
+                </div>
 
                 <!-- Profile dropdown -->
                 <div class="ml-3 relative">
@@ -52,7 +41,7 @@
                         </button>
                     </div>
 
-                    <div id="user-menu-pannel" role="menu"
+                    <div id="user-menu-panel" role="menu"
                         class="origin-top-right absolute right-0 mt-2 w-64 rounded-md shadow-lg py-1 pb-3 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none transition ease-in-out duration-200 transform hidden">
                         @if (Auth::check())
                             <div class="flex items-center px-3 mt-2">
@@ -71,20 +60,20 @@
                                     </svg>
                                     Mã giảm giá
                                 </a>
-                                <a href="{{ route('transfer-dojos.create') }}"
-                                   class="block hover:bg-gray-200 mt-1 mx-3 px-4 py-2 rounded-md text-black">
-                                    <svg class="inline" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M6.66667 5.83333L16.6667 5.83333M16.6667 5.83333L13.3333 2.5M16.6667 5.83333L13.3333 9.16667M13.3333 14.1667L3.33334 14.1667M3.33334 14.1667L6.66667 17.5M3.33334 14.1667L6.66667 10.8333" stroke="#111827" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                    Chuyển cơ sở
-                                </a>
-                                <a href="{{ route('rooms.index') }}"
-                                   class="block hover:bg-gray-200 mt-1 mx-3 px-4 py-2 rounded-md text-black">
-                                    <svg class="inline" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M6.66667 5.83333V2.5M13.3333 5.83333V2.5M5.83333 9.16667H14.1667M4.16667 17.5H15.8333C16.7538 17.5 17.5 16.7538 17.5 15.8333V5.83333C17.5 4.91286 16.7538 4.16667 15.8333 4.16667H4.16667C3.24619 4.16667 2.5 4.91286 2.5 5.83333V15.8333C2.5 16.7538 3.24619 17.5 4.16667 17.5Z" stroke="#111827" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                    Mượn phòng tập
-                                </a>
+{{--                                <a href="{{ route('transfer-dojos.create') }}"--}}
+{{--                                   class="block hover:bg-gray-200 mt-1 mx-3 px-4 py-2 rounded-md text-black">--}}
+{{--                                    <svg class="inline" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">--}}
+{{--                                        <path d="M6.66667 5.83333L16.6667 5.83333M16.6667 5.83333L13.3333 2.5M16.6667 5.83333L13.3333 9.16667M13.3333 14.1667L3.33334 14.1667M3.33334 14.1667L6.66667 17.5M3.33334 14.1667L6.66667 10.8333" stroke="#111827" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>--}}
+{{--                                    </svg>--}}
+{{--                                    Chuyển cơ sở--}}
+{{--                                </a>--}}
+{{--                                <a href="{{ route('rooms.index') }}"--}}
+{{--                                   class="block hover:bg-gray-200 mt-1 mx-3 px-4 py-2 rounded-md text-black">--}}
+{{--                                    <svg class="inline" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">--}}
+{{--                                        <path d="M6.66667 5.83333V2.5M13.3333 5.83333V2.5M5.83333 9.16667H14.1667M4.16667 17.5H15.8333C16.7538 17.5 17.5 16.7538 17.5 15.8333V5.83333C17.5 4.91286 16.7538 4.16667 15.8333 4.16667H4.16667C3.24619 4.16667 2.5 4.91286 2.5 5.83333V15.8333C2.5 16.7538 3.24619 17.5 4.16667 17.5Z" stroke="#111827" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>--}}
+{{--                                    </svg>--}}
+{{--                                    Mượn phòng tập--}}
+{{--                                </a>--}}
                                 <a href="{{ route('tuitions.index') }}"
                                    class="block hover:bg-gray-200 mt-1 mx-3 px-4 py-2 rounded-md text-black">
                                     <svg class="inline" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -125,14 +114,14 @@
                                 </button>
                             </form>
                         @else
-                            <a href="{{ route('register') }}"
+                            <a href="{{ route('dang-ky') }}"
                                class="bg-gray-200 block hover:bg-primary hover:text-white mt-2 mx-3 px-4 py-2 rounded-md text-gray-700 text-sm">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
                                 </svg>
                                 Đăng ký tài khoản
                             </a>
-                            <a href="{{ route('login') }}"
+                            <a href="{{ route('dang-nhap') }}"
                                class="bg-gray-200 block hover:bg-primary hover:text-white mt-2 mx-3 px-4 py-2 rounded-md text-gray-700 text-sm">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
@@ -204,7 +193,13 @@
                 $('#mobile-menu').addClass('-translate-x-full');
             });
             $('#user-menu-button').click(function () {
-                $('#user-menu-pannel').toggleClass('hidden');
+                $('#user-menu-panel').toggleClass('hidden');
+            });
+            $('#user-notify-button').click(function () {
+                $('#user-notify-panel').removeClass('translate-x-full');
+            });
+            $('#user-notify-button-close').click(function () {
+                $('#user-notify-panel').addClass('translate-x-full');
             });
         });
     </script>

@@ -24,7 +24,7 @@
             axios.post('/comments/get-liker/{{ $comment->id }}', {})
                 .then(response => {
                     $('#like_modal .modal-body').html(response.data);
-                    $('#like_modal').modal('show');
+                    $('#like_modal').removeClass('hidden');
                     $('.modal-backdrop').hide();
                 })
                 .catch(e => {})

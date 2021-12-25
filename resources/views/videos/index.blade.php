@@ -6,7 +6,7 @@
     <div class="container">
         <div class="bg-white border-2 border-dashed border-gray-400 lg:flex mt-5 p-4 rounded-lg shadow-md">
             <div class="single-video-area lg:w-1/2 md:w-2/3 mx-auto">
-                <div id="player" class="mx-auto w-full h-52 md:h-72 lg:h-96"></div>
+                <div id="player" class="mx-auto w-full aspect-video rounded-lg"></div>
             </div>
             <div class="space-y-3 lg:ml-5 lg:w-1/2">
                 <p class="font-bold text-2xl my-4">{{ $newestFeatured->title }}</p>
@@ -111,7 +111,7 @@
             <div class="grid lg:grid-cols-3 mg:grid-cols-2 gap-4">
                 @foreach($playlists as $playlist)
                     <div class="bg-white rounded-lg border relative">
-                        <img class="h-56 object-cover w-full rounded-t-lg"
+                        <img class="aspect-video object-cover w-full rounded-t-lg"
                              src="{{ $playlist->videos[0]->thumbnail ?? asset('img/playlist/default.png') }}"
                              alt="{{ $playlist->name }}">
                         <span class="absolute bg-primary px-4 py-1 right-2 rounded-full text-white top-2 shadow-md">{{ count($playlist->videos) }} video</span>
@@ -164,8 +164,8 @@
             // create youtube player
             function onYouTubePlayerAPIReady() {
                 player = new YT.Player('player', {
-                    width: '640',
-                    height: '390',
+                    width: '',
+                    height: '',
                     videoId: '{{ $newestFeatured->youtubeId }}',
                     playerVars: {
                         'autoplay': 1,

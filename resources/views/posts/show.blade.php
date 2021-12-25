@@ -89,7 +89,7 @@
                 <div class="border-t py-3">
                     <div class="flex justify-between">
                         <span class="font-bold">Nguồn: {{ $post->source }}</span>
-                        <div class="fb-like" data-href="{{ config('app.url').'/posts/'.$post->slug }}"
+                        <div class="fb-like" data-href="{{ route('posts.show', $post->slug) }}"
                              data-width="" data-layout="button_count" data-action="like" data-size="small"
                              data-share="true">
                         </div>
@@ -111,7 +111,9 @@
                     </div>
                 </div>
             </div>
-            @comments(['model' => $post])
+            @comments([
+                'model' => $post
+            ])
         </div>
         <div class="col-span-12 lg:col-span-4">
             @include('layouts.sidebar_widget')

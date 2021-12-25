@@ -19,13 +19,13 @@ window.Vue = require('vue');
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-Vue.component('video-comments', require('./components/youtubes/VideoComment.vue').default);
-Vue.component('comments-form', require('./components/comments/CommentForm.vue').default);
-Vue.component('like', require('./components/comments/Like.vue').default);
-Vue.component('unlike', require('./components/comments/UnLike.vue').default);
-Vue.component('edit-comment', require('./components/comments/EditCommentForm.vue').default);
-Vue.component('reply-comment', require('./components/comments/ReplyForm.vue').default);
+// Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+// Vue.component('video-comments', require('./components/youtubes/VideoComment.vue').default);
+// Vue.component('comments-form', require('./components/comments/CommentForm.vue').default);
+// Vue.component('like', require('./components/comments/Like.vue').default);
+// Vue.component('unlike', require('./components/comments/UnLike.vue').default);
+// Vue.component('edit-comment', require('./components/comments/EditCommentForm.vue').default);
+// Vue.component('reply-comment', require('./components/comments/ReplyForm.vue').default);
 Vue.component('notification', require('./components/notifications/Notification.vue').default);
 
 

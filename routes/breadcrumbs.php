@@ -20,12 +20,12 @@ Breadcrumbs::for('tin-tuc', function ($trail) {
 
 Breadcrumbs::for('the-loai', function ($trail, $category) {
     $trail->parent('tin-tuc');
-    $trail->push($category->name, route('categories.show', $category));
+    $trail->push($category->name, route('categories.show', $category->slug));
 });
 
 Breadcrumbs::for('bai-viet', function ($trail, $post) {
     $trail->parent('the-loai', $post->category);
-    $trail->push($post->title, route('posts.show', $post));
+    $trail->push($post->title, route('posts.show', $post->slug));
 });
 
 // Trang chủ > Cơ sở tập luyện
@@ -47,5 +47,23 @@ Breadcrumbs::for('tai-lieu', function ($trail) {
 
 Breadcrumbs::for('chi-tiet-tai-lieu', function ($trail, $document) {
     $trail->parent('tai-lieu');
-    $trail->push($document->title, route('documents.show', $document));
+    $trail->push($document->title, route('documents.show', $document->slug));
+});
+
+// Trang chủ > Đăng ký tập luyện
+Breadcrumbs::for('dang-ky-tap-luyen', function ($trail) {
+    $trail->parent('trang-chu');
+    $trail->push('Đăng ký tập luyện', route('workout-registrations.create'));
+});
+
+// Trang chủ > Video
+Breadcrumbs::for('videos', function ($trail) {
+    $trail->parent('trang-chu');
+    $trail->push('Video', route('videos.index'));
+});
+
+// Trang chủ > Video
+Breadcrumbs::for('video', function ($trail, $video) {
+    $trail->parent('videos');
+    $trail->push($video->title, route('videos.show', $video->slug));
 });

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Admin\Voyager\VoyagerBaseController;
 use App\Models\BookRoom;
 use App\Models\Room;
 use App\Models\Student;
@@ -12,6 +11,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Storage;
+use TCG\Voyager\Http\Controllers\VoyagerBaseController;
 
 class UptimeController extends VoyagerBaseController
 {
@@ -21,7 +21,7 @@ class UptimeController extends VoyagerBaseController
     {
         $this->room = $room;
     }
-    
+
     /**
      * Get view field
      */

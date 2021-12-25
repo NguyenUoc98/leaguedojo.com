@@ -1,6 +1,4 @@
 {{--<!-- JS Alert -->--}}
-{{--<script type="text/javascript" src="/js/plugins/plugins.js"></script>--}}
-{{--<script type="text/javascript" src="/js/infinite-scroll.pkgd.min.js"></script>--}}
 {{--<script type="text/javascript" src="/js/images-grid.js" defer></script>--}}
 
 
@@ -39,11 +37,11 @@
 {{--    });--}}
 {{--}--}}
 {{--</script>--}}
-{{--<script>--}}
-{{--function replyToggle(id) {--}}
-{{--    $(".contact-form-area" + id).slideToggle();--}}
-{{--}--}}
-{{--</script>--}}
+<script>
+function closeToast() {
+    $(".toast").addClass('hidden');
+}
+</script>
 
 @livewireScripts
 @stack('script')

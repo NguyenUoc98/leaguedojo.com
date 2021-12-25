@@ -26,6 +26,15 @@ Route::group(['middleware' => ['operation-log']], function () {
 
     // Route preview pdf
     Route::get('tai-lieu/preview/{document}', 'Site\DocumentController@preview')->name('documents.preview');
+
+    // Authentication...
+    Auth::routes();
+    Auth::routes(['verify' => true]);
+    Route::get('dang-nhap', 'Auth\LoginController@showLoginForm')->name('dang-nhap');
+    Route::get('dang-ky', 'Auth\RegisterController@showRegistrationForm')->name('dang-ky');
+    Route::get('dat-lai-mat-khau', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+    Route::get('dat-lai-mat-khau/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+
     Route::resources([
         'videos'         => 'Site\VideoController',
         'users'          => 'Site\UserController',
@@ -39,8 +48,8 @@ Route::group(['middleware' => ['operation-log']], function () {
     ]);
 
     // Workout Registration
-    Route::get('workout-registrations', 'Site\WorkoutRegistrationController@create')->name('workout-registrations.create');
-    Route::post('workout-registrations', 'Site\WorkoutRegistrationController@store')->name('workout-registrations.store');
+    Route::get('dang-ky-tap-luyen', 'Site\WorkoutRegistrationController@create')->name('workout-registrations.create');
+    Route::post('dang-ky-tap-luyen', 'Site\WorkoutRegistrationController@store')->name('workout-registrations.store');
 
     // Pay AIO Momo
     Route::post('tuitions/ipn-momo', 'Site\TuitionController@ipn')->name('tuitions.ipn');
@@ -50,10 +59,6 @@ Route::group(['middleware' => ['operation-log']], function () {
     Route::post('comments/like/{comment}', 'Site\CommentController@like');
     Route::post('comments/unlike/{comment}', 'Site\CommentController@unLike');
     Route::post('/comments/get-liker/{comment}', 'Site\CommentController@getLiker');
-
-    // Authentication...
-    Auth::routes();
-    Auth::routes(['verify' => true]);
 
     // Notification
     Route::post('/notification/read', 'Front\NotificationController@read');

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Admin\Voyager\VoyagerBaseController;
 use App\Models\Dojo;
 use App\Models\TuitionPolicy;
 use App\Notifications\UpdatePrice;
@@ -11,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Notification;
 use TCG\Voyager\Events\BreadDataAdded;
 use TCG\Voyager\Facades\Voyager;
+use TCG\Voyager\Http\Controllers\VoyagerBaseController;
 
 class TuitionPolicyController extends VoyagerBaseController
 {

@@ -1,8 +1,8 @@
-const {height} = require("tailwindcss/lib/plugins");
 module.exports = {
     important: true,
     purge: [
-        './resources/views/**/*.php'
+        './resources/views/**/*.php',
+        './resources/js/components/**/*'
     ],
     darkMode: false, // or 'media' or 'class'
     theme: {
@@ -75,13 +75,35 @@ module.exports = {
                         opacity: '0',
                         transform: 'translateY(10px)'
                     },
-                }
+                },
+                'fade-in-left': {
+                    '0%': {
+                        opacity: '0',
+                        transform: 'translateX(30px)'
+                    },
+                    '100%': {
+                        opacity: '1',
+                        transform: 'translateX(0)'
+                    },
+                },
+                'fade-out-left': {
+                    'from': {
+                        opacity: '1',
+                        transform: 'translateX(0px)'
+                    },
+                    'to': {
+                        opacity: '0',
+                        transform: 'translateX(-30px)'
+                    },
+                },
             },
             animation: {
                 'fade-in-down': 'fade-in-down 0.25s ease-out',
                 'fade-out-down': 'fade-out-down 0.25s ease-out',
                 'fade-in-up': 'fade-in-up 0.25s ease-out',
-                'fade-out-up': 'fade-out-up 0.25s ease-out'
+                'fade-out-up': 'fade-out-up 0.25s ease-out',
+                'fade-in-left': 'fade-in-left 0.25s ease-out',
+                'fade-out-left': 'fade-out-left 0.25s ease-out',
             }
         }
     },
@@ -90,7 +112,10 @@ module.exports = {
             ringColor: ['hover', 'active']
         },
         width: ["responsive", "hover", "focus"],
-        height: ["responsive", "hover", "focus"]
+        height: ["responsive", "hover", "focus"],
+        scrollbar: ['rounded']
     },
-    plugins: [],
+    plugins: [
+        require('tailwind-scrollbar')
+    ],
 }

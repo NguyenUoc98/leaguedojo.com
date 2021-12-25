@@ -1,7 +1,9 @@
 @extends('layouts.master')
 @section('page_title', 'Tin tức')
 @if($agent->isDesktop())
+    @section('carosel')
     @include('pages.news.carousel')
+    @endsection
 @endif
 @section('content')
     <div class="@if($agent->isDesktop()) -mt-14 @endif">

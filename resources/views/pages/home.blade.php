@@ -25,8 +25,11 @@
     <style>{{ \Illuminate\Support\Facades\File::get(public_path('css/themes/default.css')) }}</style>
     <link href="{{ asset('css/home/style.home.css') }}" type="text/css" rel="stylesheet" media="all">
     <link href="{{ asset('css/home/timeline.min.css') }}" type="text/css" rel="stylesheet" media="all">
-
+    <link rel="stylesheet" href="{{ asset('css/sweetalert2.min.css') }}">
+    <script type="text/javascript" src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/sweetalert2.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/jquery-3.4.1.min.js') }}"></script>
+
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-180755787-1"></script>
     <script>
@@ -52,7 +55,7 @@
             <div class="bnr-w3pvt-txt m-0">
                 <h2 class="font-weight-bold">{{ setting('site.web_name') }}</h2>
                 <h3>{{ setting('site.description') }}</h3>
-                <p class="text-white mt-sm-4 mt-2"> {{ setting('site.site_details') }}</p>
+                <p class="text-white mt-sm-4 mt-2 text-lg"> {{ setting('site.site_details') }}</p>
             </div>
         </div>
         <img src="{{ asset('img/home/IMG_20.png') }}" alt="banner" class="lg:w-1/2 w-full relative top-0 left-0"/>
@@ -604,7 +607,6 @@
         $(document).ready(function () {
             Swal({
                 title: 'Đăng ký thành công!',
-                background: 'url(/img/core-img/notify-bg.png)',
                 text: 'Kiểm tra email vừa đăng ký để xác thực tài khoản',
                 type: 'success',
                 confirmButtonColor: '#4caf50'
@@ -616,7 +618,6 @@
         $(document).ready(function () {
             Swal({
                 title: 'Tài khoản đã được xác thực!',
-                background: 'url(/img/core-img/notify-bg.png)',
                 text: 'Hãy tiếp tục khám phá những điều thú vị nào',
                 type: 'success',
                 confirmButtonColor: '#4caf50'
@@ -628,7 +629,6 @@
         $(document).ready(function () {
             Swal({
                 title: "{{ session('status') }}",
-                background: 'url(/img/core-img/notify-bg.png)',
                 text: 'Hãy tiếp tục khám phá những điều thú vị nào',
                 type: 'success',
                 confirmButtonColor: '#4caf50'

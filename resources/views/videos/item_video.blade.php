@@ -1,13 +1,13 @@
 <div class="bg-white rounded-lg border relative item-video">
     <div class="overflow-hidden relative rounded-t-lg">
-        <img class="h-44 object-cover w-full"
+        <img class="aspect-video object-cover w-full"
              src="{{ $video->thumbnail }}" alt="{{ $video->title }}">
         <span class="absolute bg-primary px-2 py-1 left-2 rounded-md text-white top-2 shadow-md text-xs">HD</span>
-        <span class="absolute bg-gray-700 px-2 py-1 right-2 rounded-md text-white bottom-2 shadow-md text-xs">
+        <span class="absolute bg-gray-700 bg-opacity-60 px-2 py-1 right-2 rounded-md text-white bottom-2 shadow-md text-xs">
             {{ TimeYoutube::duration($video->duration) }}
         </span>
         <a class="h-full w-full absolute top-0 left-0 flex justify-center items-center opacity-0 hover:opacity-100"
-           href="{{ route('videos.show', $playlist->videos[0]->slug ?? '') }}">
+           href="{{ route('videos.show', $video->slug) }}">
             <p class="bg-white hover:text-primary-darker rounded-full shadow-full text-primary">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-12 transform w-12" viewBox="0 0 20 20" fill="currentColor">
                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />

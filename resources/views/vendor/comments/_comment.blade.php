@@ -7,10 +7,8 @@
     @else
     <div id="comment-{{ $comment->id }}" class="reply-to-reply">
     @endif
-        <div class="comment-content d-flex">
-            <div class="comment-author-reply">
-                <img class="mr-3" src="{{ Voyager::image($comment->commenter->avatar) }}" alt="{{ $comment->commenter->name ?? $comment->guest_name }} Avatar">
-            </div>
+        <div class="gap-2 grid grid-cols-6 md:grid-cols-12">
+            <img class="col-span-1 h-auto rounded-full w-14" src="{{ Voyager::image($comment->commenter->avatar) }}" alt="{{ $comment->commenter->name ?? $comment->guest_name }} Avatar">
 @else
     <li id="comment-{{ $comment->id }}">
         <div class="grid md:grid-cols-12 grid-cols-6 gap-2">
@@ -89,17 +87,31 @@
 
                 {{-- Recursion for children --}}
                 @if($grouped_comments!='' && $grouped_comments->has($comment->id))
-                @foreach($grouped_comments[$comment->id]->reverse() as $child)
-                @include('comments::_comment', [
-                'comment' => $child,
-                'reply' => true,
-                'grouped_comments' => $grouped_comments,
-                'replyTo' => $comment->commenter->name
-                ])
-                @endforeach
+                    @if(!isset($reply) || $reply !== true)
+                        @foreach($grouped_comments[$comment->id]->reverse() as $child)
+                        @include('comments::_comment', [
+                            'comment' => $child,
+                            'reply' => true,
+                            'grouped_comments' => $grouped_comments,
+                            'replyTo' => $comment->commenter->name
+                        ])
+                        @endforeach
+                    @endif
                 @endif
             </div>
         </div>
+        @if($grouped_comments!='' && $grouped_comments->has($comment->id))
+            @if(isset($reply) && $reply === true)
+                @foreach($grouped_comments[$comment->id]->reverse() as $child)
+                    @include('comments::_comment', [
+                        'comment' => $child,
+                        'reply' => true,
+                        'grouped_comments' => $grouped_comments,
+                        'replyTo' => $comment->commenter->name
+                    ])
+                @endforeach
+            @endif
+        @endif
 @if(isset($reply) && $reply === true)
     </div>
 @else

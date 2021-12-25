@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Admin\Voyager\VoyagerBaseController;
 use App\Models\Voucher;
 use Illuminate\Http\Request;
 use TCG\Voyager\Events\BreadDataAdded;
 use TCG\Voyager\Facades\Voyager;
+use TCG\Voyager\Http\Controllers\VoyagerBaseController;
 
 class VoucherController extends VoyagerBaseController
 {

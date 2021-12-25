@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Admin\Voyager\VoyagerBaseController;
 use App\Models\BonusDefault;
 use App\Models\Dojo;
 use App\Models\Student;
@@ -16,6 +15,7 @@ use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Storage;
 use TCG\Voyager\Events\BreadDataAdded;
 use TCG\Voyager\Facades\Voyager;
+use TCG\Voyager\Http\Controllers\VoyagerBaseController;
 
 class TuitionController extends VoyagerBaseController
 {
@@ -218,7 +218,7 @@ class TuitionController extends VoyagerBaseController
 
     /**
      * Check history tuition and get bonus default
-     * 
+     *
      * @param  $request
      * @return \Illuminate\Http\Response
      */
@@ -326,7 +326,7 @@ class TuitionController extends VoyagerBaseController
 
     /**
      * Check vouchers and apply it
-     * 
+     *
      * @param $request
      */
     public function applyVoucher(Request $request)

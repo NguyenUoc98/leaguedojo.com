@@ -1,47 +1,46 @@
 <div class="comment_area mt-30">
-    <div class="section-heading">
-        <h5>Bình luận trên Youtube</h5>
-    </div>
+    <p class="font-bold text-2xl my-4 border-l-4 border-primary pl-2 mt-10 mb-4">Bình luận trên youtube</p>
 
     <ol>
         @foreach($commentThreads as $commentThread)
         <li class="single_comment_area">
-            <div class="comment-content d-flex">
+            <div class="gap-2 grid grid-cols-6 md:grid-cols-12">
                 <div class="comment-author">
-                    <img src="{{ $commentThread->snippet->topLevelComment->snippet->authorProfileImageUrl }}" alt="author">
+                    <img class="col-span-1 h-auto rounded-full w-14"
+                        src="{{ $commentThread->snippet->topLevelComment->snippet->authorProfileImageUrl }}" alt="author">
                 </div>
 
                 @php
                     $time = Carbon\Carbon::createFromTimeString($commentThread->snippet->topLevelComment->snippet->publishedAt);
                 @endphp
-                <div class="comment-meta">
-                    <div class="p-2 px-3" style="background-color: #f7f7f7;border-radius: 15px">
-                        <b style="font-size: 14px">{{ $commentThread->snippet->topLevelComment->snippet->authorDisplayName }}</b>
-                        <span class="text-muted"> ● {{ $time->diffForHumans() }}</span>
-                        <h6 class="text-muted">{{ $time->isoFormat('D \\t\\h\\g M, YYYY') }}</h6>
-                        <div style="white-space: pre-wrap;">{!! $commentThread->snippet->topLevelComment->snippet->textDisplay !!}</div>
+                <div class="col-span-5 md:col-span-11">
+                    <div class="p-2 px-3 bg-gray-100 rounded-xl">
+                         <span class="mt-0 mb-1">
+                            <b>{{ $commentThread->snippet->topLevelComment->snippet->authorDisplayName }}</b>
+                            <small class="text-gray-500 text-xs"> ●  {{ $time->diffForHumans() }}</small>
+                         </span>
+                        <div class="break-words">{!! $commentThread->snippet->topLevelComment->snippet->textDisplay !!}</div>
                     </div>
                     <br>
 
                     <!-- Reply Content -->
                     @if($commentThread->snippet->totalReplyCount != 0)
-                    <ol style="border-left: 2px solid #ed3939;">
+                    <ol class="border-l-2 border-primary pl-2">
                         @foreach($commentThread->replies->comments as $reply)
-                        <li class="single_comment_area">
-                            <div class="comment-content d-flex pl-2">
-                                <div class="comment-author-reply">
-                                    <img src="{{ $reply->snippet->authorProfileImageUrl }}" alt="author">
-                                </div>
-
+                        <li class="single_comment_area mb-5">
+                            <div class="gap-2 grid grid-cols-6 md:grid-cols-12">
+                                <img class="col-span-1 h-auto rounded-full w-14"
+                                    src="{{ $reply->snippet->authorProfileImageUrl }}" alt="author">
                                 @php
                                     $time = Carbon\Carbon::createFromTimeString($reply->snippet->publishedAt);
                                 @endphp
-                                <div class="comment-meta">
-                                    <div class="p-2 px-3" style="background-color: #f7f7f7;border-radius: 15px">
-                                        <b style="font-size: 14px">{{ $reply->snippet->authorDisplayName }}</b>
-                                        <span class="text-muted"> ● {{ $time->diffForHumans() }}</span>
-                                        <h6 class="text-muted">{{ $time->isoFormat('D \\t\\h\\g M, YYYY') }}</h6>
-                                        <div style="white-space: pre-wrap;">{!! $reply->snippet->textDisplay !!}</div>
+                                <div class="col-span-5 md:col-span-11">
+                                    <div class="p-2 px-3 bg-gray-100 rounded-xl">
+                                        <span class="mt-0 mb-1">
+                                            <b>{{ $reply->snippet->authorDisplayName }}</b>
+                                            <small class="text-gray-500 text-xs"> ● {{ $time->diffForHumans() }}</small>
+                                        </span>
+                                        <div class="break-words">{!! $reply->snippet->textDisplay !!}</div>
                                     </div>
                                 </div>
                             </div>

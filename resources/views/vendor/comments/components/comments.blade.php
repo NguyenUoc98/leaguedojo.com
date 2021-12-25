@@ -14,7 +14,25 @@
     <div class="list-comment">
         @if($comments->count() > 0)
             @php
-                $grouped_comments = $comments->sortBy('created_at', 0,true)->groupBy('child_id');
+                $comments = $comments->sortBy('created_at');
+                if (isset($perPage)) {
+                    $page = request()->query('page', 1) - 1;
+                    $parentComments = $comments->where('child_id', '');
+                    $slicedParentComments = $parentComments->slice($page * $perPage, $perPage);
+                    $m = Config::get('comments.model'); // This has to be done like this, otherwise it will complain.
+                    $modelKeyName = (new $m)->getKeyName(); // This defaults to 'id' if not changed.
+                    $slicedParentCommentsIds = $slicedParentComments->pluck($modelKeyName)->toArray();
+                    // Remove parent Comments from comments.
+                    $comments = $comments->where('child_id', '!=', '');
+                    $grouped_comments = new \Illuminate\Pagination\LengthAwarePaginator(
+                        $slicedParentComments->merge($comments)->groupBy('child_id'),
+                        $parentComments->count(),
+                        $perPage
+                    );
+                    $grouped_comments->withPath(request()->url());
+                } else {
+                    $grouped_comments = $comments->groupBy('child_id');
+                }
             @endphp
             @foreach($grouped_comments as $comment_id => $comments)
                 {{-- Process parent nodes --}}
@@ -23,12 +41,16 @@
                         @include('comments::_comment', [
                             'comment' => $comment,
                             'grouped_comments' => $grouped_comments
-                            ])
+                        ])
                     @endforeach
                 @endif
             @endforeach
         @endif
     </div>
+
+    @isset ($perPage)
+        {{ $grouped_comments->links() }}
+    @endisset
 
     <!-- This example requires Tailwind CSS v2.0+ -->
     <div class="fixed z-10 inset-0 overflow-y-auto animate-fade-in-down hidden" aria-labelledby="modal-title"
