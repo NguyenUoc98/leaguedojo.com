@@ -12,31 +12,29 @@
 {{--<!-- Script Youtube -->--}}
 {{--<script src="https://apis.google.com/js/platform.js"></script>--}}
 
-{{--<!-- Sweet Alert -->--}}
-{{--<script>--}}
-{{--function showError(message) {--}}
-{{--    Swal({--}}
-{{--        title: 'Ồ, có lỗi rồi nè',--}}
-{{--        background: 'url(/img/core-img/notify-bg.png)',--}}
-{{--        html: message ? message : 'Hừm, có lỗi gì đó rồi!',--}}
-{{--        imageUrl: '/img/core-img/error.png',--}}
-{{--        imageWidth: 50,--}}
-{{--        imageHeight: 50,--}}
-{{--        confirmButtonColor: '#ed3939'--}}
-{{--    });--}}
-{{--}--}}
+<!-- Sweet Alert -->
+<script>
+function showError(message) {
+    Swal({
+        title: 'Ồ, có lỗi rồi nè',
+        html: message ? message : 'Hừm, có lỗi gì đó rồi!',
+        imageUrl: '{{ asset('img/core-img/error.png') }}',
+        imageWidth: 50,
+        imageHeight: 50,
+        confirmButtonColor: '#ed3939'
+    });
+}
 
-{{--function showSuccess(message) {--}}
-{{--    Swal({--}}
-{{--        title: 'Thành công',--}}
-{{--        background: 'url(/img/core-img/notify-bg.png)',--}}
-{{--        text: message ? message : 'Dễ dàng như ăn bánh rán vậy đó !',--}}
-{{--        type: 'success',--}}
-{{--        showConfirmButton: false,--}}
-{{--        timer: 1500--}}
-{{--    });--}}
-{{--}--}}
-{{--</script>--}}
+function showSuccess(message) {
+    Swal({
+        title: 'Thành công',
+        text: message ? message : 'Dễ dàng như ăn bánh rán vậy đó !',
+        type: 'success',
+        showConfirmButton: false,
+        timer: 1500
+    });
+}
+</script>
 <script>
 function closeToast() {
     $(".toast").addClass('hidden');

@@ -22,12 +22,14 @@
     <style>{{ \Illuminate\Support\Facades\File::get(public_path('css/themes/default.css')) }}</style>
     <link rel="stylesheet" href="/css/app.css">
 {{--    <style>{{ \Illuminate\Support\Facades\File::get(public_path('css/app.css')) }}</style>--}}
+    <link rel="stylesheet" href="{{ asset('css/sweetalert2.min.css') }}">
     @stack('css')
 
     <!-- ##### All Javascript Script ##### -->
     <script type="text/javascript" src="{{ asset('js/app.js') }}" defer></script>
     <script type="text/javascript" src="/js/jquery-3.4.1.min.js"></script>
     <script type="text/javascript" src="/js/jquery-migrate-1.4.1.min.js"></script>
+    <script src="{{ asset('js/sweetalert2.min.js') }}"></script>
     @stack('head-script')
 {{--    <script type="text/javascript" src="/js/croppie.js"></script>--}}
 {{--    <script type="text/javascript" src="/js/readMoreJS.min.js"></script>--}}

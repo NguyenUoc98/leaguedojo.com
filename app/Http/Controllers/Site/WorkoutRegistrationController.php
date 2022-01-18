@@ -44,7 +44,7 @@ class WorkoutRegistrationController extends Controller
         $meta_desc     = 'Trang đăng ký tập luyện cho người mới muốn tham gia tập luyện karate';
         $meta_keywords = 'đăng ký tập luyện, karate, hà nội';
         $url_canonical = route('workout-registrations.create');
-        $image_og      = config('app')['url'] . '/img/core-img/banner-tuyensinh.png';
+        $image_og      = config('app.url') . '/img/core-img/banner-tuyensinh.png';
         $meta_title    = 'Đăng ký tập luyện';
         // SEO
 
@@ -102,10 +102,9 @@ class WorkoutRegistrationController extends Controller
                     'color'   => '#4caf50',
                 ]);
             } catch (Exception $e) {
-
                 $message = $e->getMessage();
                 if (strpos($message, 'Duplicate entry') !== false) {
-                    $message = 'Bạn đã gửi đăng ký tập rồi mà, chờ quản lý xác nhận nhé!';
+                    $message = 'Đăng ký tập đã được gửi, chờ quản lý xác nhận!';
                 } else {
                     $message = 'Đăng ký không thành công';
                 }

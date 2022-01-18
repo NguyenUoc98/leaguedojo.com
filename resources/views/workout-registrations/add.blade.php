@@ -49,7 +49,7 @@
                         <p class="font-bold">Số CMND/CCCD</p>
                         <input
                             class="block border border-gray-300 mt-1 p-3 rounded-lg w-full focus:outline-none focus:border-primary"
-                            type="text" name="cmnd" id="input-cmnd" pattern="[0-9]{10}"
+                            type="text" name="cmnd" id="input-cmnd"
                             value="{{ old('cmnd')}}" placeholder="030096***789">
                     </div>
                     <div>
@@ -254,7 +254,6 @@
             $(document).ready(function () {
                 Swal({
                     title: "{{ session('status ') }}",
-                    background: 'url(/img/core-img/notify-bg.png)',
                     text: "{{ session('message') }}",
                     type: "{{ session('type') }}",
                     confirmButtonColor: "{{ session('color') }}"
