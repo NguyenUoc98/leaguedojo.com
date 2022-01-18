@@ -68,7 +68,13 @@ Breadcrumbs::for('video', function ($trail, $video) {
 });
 
 // Trang chủ > Mã giảm giá
-Breadcrumbs::for('voucher', function ($trail) {
+Breadcrumbs::for('ma-giam-gia', function ($trail) {
     $trail->parent('trang-chu');
     $trail->push('Mã giảm giá', route('vouchers.index'));
+});
+
+// Trang chủ > Học phí
+Breadcrumbs::for('hoc-phi', function ($trail) {
+    $trail->parent('trang-chu');
+    $trail->push('Học phí', route('tuitions.index'));
 });

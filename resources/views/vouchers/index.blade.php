@@ -2,7 +2,7 @@
 @section('page_title', 'Mã giảm giá')
 
 @section('content')
-    {{ Breadcrumbs::render('tai-lieu') }}
+    {{ Breadcrumbs::render('ma-giam-gia') }}
 
     <div class="grid grid-cols-12 gap-8">
         <div class="col-span-12 lg:col-span-8">

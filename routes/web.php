@@ -17,11 +17,11 @@ Route::group(['middleware' => ['operation-log']], function () {
     Route::resource('co-so-tap-luyen', 'Site\DojoController', ['names' => 'dojos']);
     Route::resource('tai-lieu', 'Site\DocumentController', ['names' => 'documents']);
     Route::resource('ma-giam-gia', 'Site\VoucherController', ['names' => 'vouchers']);
+    Route::resource('hoc-phi', 'Site\TuitionController', ['names' => 'tuitions']);
     Route::resources([
         'videos'         => 'Site\VideoController',
         'users'          => 'Site\UserController',
         'students'       => 'Site\StudentController',
-        'tuitions'       => 'Site\TuitionController',
         'transfer-dojos' => 'Site\TransferDojoController',
         'events'         => 'Site\EventController',
         'attends'        => 'Site\AttendController',
