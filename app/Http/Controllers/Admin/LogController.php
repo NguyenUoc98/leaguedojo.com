@@ -14,7 +14,7 @@ class LogController extends Controller
     {
         $this->request = app('request');
     }
-    
+
     public function index(Request $request)
     {
         // Check permission
@@ -39,24 +39,24 @@ class LogController extends Controller
             $active_tab = 'logs';
             app('files')->delete(LogViewer::pathToLogFile(base64_decode($this->request->input('del'))));
 
-            return $this->redirect($this->request->url().'?logs=true')->with([
-                'message'    => __('voyager::compass.logs.delete_success').' '.base64_decode($this->request->input('del')),
+            return $this->redirect($this->request->url() . '?logs=true')->with([
+                'message'    => __('voyager::compass.logs.delete_success') . ' ' . base64_decode($this->request->input('del')),
                 'alert-type' => 'success',
-                ]);
+            ]);
         } elseif ($this->request->has('delall')) {
             $active_tab = 'logs';
             foreach (LogViewer::getFiles(true) as $file) {
                 app('files')->delete(LogViewer::pathToLogFile($file));
             }
 
-            return $this->redirect($this->request->url().'?logs=true')->with([
+            return $this->redirect($this->request->url() . '?logs=true')->with([
                 'message'    => __('voyager::compass.logs.delete_all_success'),
                 'alert-type' => 'success',
-                ]);
+            ]);
         }
 
-        $logs = LogViewer::all();
-        $files = LogViewer::getFiles(true);
+        $logs         = LogViewer::all();
+        $files        = LogViewer::getFiles(true);
         $current_file = LogViewer::getFileName();
 
         return view('voyager::logs.index', compact('logs', 'files', 'current_file'))->with($message);
@@ -73,10 +73,9 @@ class LogController extends Controller
 }
 
 /***
-**** Credit for the LogViewer class
-**** https://github.com/rap2hpoutre/laravel-log-viewer
-***/
-
+ **** Credit for the LogViewer class
+ **** https://github.com/rap2hpoutre/laravel-log-viewer
+ ***/
 class LogViewer
 {
     /**
@@ -142,9 +141,9 @@ class LogViewer
     /**
      * @param string $file
      *
+     * @return string
      * @throws \Exception
      *
-     * @return string
      */
     public static function pathToLogFile($file)
     {
@@ -154,7 +153,7 @@ class LogViewer
             return $file;
         }
 
-        $file = $logsPath.'/'.$file;
+        $file = $logsPath . '/' . $file;
 
         // check if requested file is really in the logs directory
         if (dirname($file) !== $logsPath) {
@@ -210,8 +209,9 @@ class LogViewer
         foreach ($headings as $h) {
             for ($i = 0, $j = count($h); $i < $j; $i++) {
                 foreach (self::$log_levels as $level) {
-                    if (strpos(strtolower($h[$i]), '.'.$level) || strpos(strtolower($h[$i]), $level.':')) {
-                        preg_match('/^\[(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})\](?:.*?(\w+)\.|.*?)'.$level.': (.*?)( in .*?:[0-9]+)?$/i', $h[$i], $current);
+                    if (strpos(strtolower($h[$i]), '.' . $level) || strpos(strtolower($h[$i]), $level . ':')) {
+                        preg_match('/^\[(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})\](?:.*?(\w+)\.|.*?)' . $level . ': (.*?)( in .*?:[0-9]+)?$/i',
+                            $h[$i], $current);
                         if (!isset($current[3])) {
                             continue;
                         }
@@ -241,7 +241,7 @@ class LogViewer
      */
     public static function getFiles($basename = false)
     {
-        $files = glob(storage_path().'/logs/*.log');
+        $files = glob(storage_path() . '/logs/*.log');
         $files = array_reverse($files);
         $files = array_filter($files, 'is_file');
         if ($basename && is_array($files)) {

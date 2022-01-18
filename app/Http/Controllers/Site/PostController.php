@@ -47,6 +47,8 @@ class PostController extends Controller
         $meta_title    = $post->seo_title;
         // SEO
 
-        return view('posts.show', compact('post', 'morePosts', 'keywords', 'categories','meta_desc', 'meta_keywords', 'url_canonical', 'image_og', 'meta_title'));
+        return view('posts.show',
+            compact('post', 'morePosts', 'keywords', 'categories', 'meta_desc', 'meta_keywords', 'url_canonical',
+                'image_og', 'meta_title'));
     }
 }

@@ -8,8 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class TransferDojo extends Model
 {
     use FormLayoutTrait;
+
     protected $fillable = [
-        'confirmed', 'reason_reject'
+        'confirmed',
+        'reason_reject'
     ];
 
 
@@ -17,16 +19,16 @@ class TransferDojo extends Model
     {
         return $this
             ->beginDiv('row')
-                ->beginDiv('col-md-6')
-                    ->field('transfer_dojo_belongsto_student_relationship', 12)
-                    ->field('transfer_dojo_belongsto_dojo_relationship', 12)
-                    ->field('transfer_dojo_belongsto_dojo_relationship_1', 12)
-                    ->field('date_transfer', 6)->field('confirmed', 6)
-                ->endDiv()
-                ->beginDiv('col-md-6')
-                    ->field('reason', 12)
-                    ->field('reason_reject', 12)
-                ->endDiv()
+            ->beginDiv('col-md-6')
+            ->field('transfer_dojo_belongsto_student_relationship', 12)
+            ->field('transfer_dojo_belongsto_dojo_relationship', 12)
+            ->field('transfer_dojo_belongsto_dojo_relationship_1', 12)
+            ->field('date_transfer', 6)->field('confirmed', 6)
+            ->endDiv()
+            ->beginDiv('col-md-6')
+            ->field('reason', 12)
+            ->field('reason_reject', 12)
+            ->endDiv()
             ->endDiv()
             ->get();
     }

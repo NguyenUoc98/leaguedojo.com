@@ -112,7 +112,10 @@ class TuitionController extends VoyagerBaseController
 
             if ($row->type == 'relationship' && $row->details->type == 'belongsToMany') {
                 // Only if select_multiple is working with a relationship
-                $multi_select[] = ['model' => $row->details->model, 'content' => $content, 'table' => $row->details->pivot_table];
+                $multi_select[] = ['model'   => $row->details->model,
+                                   'content' => $content,
+                                   'table'   => $row->details->pivot_table
+                ];
             } else {
                 $data->{$row->field} = $content;
             }
@@ -126,7 +129,7 @@ class TuitionController extends VoyagerBaseController
             }
         }
 
-        $notes = explode("=================================", $data->note);
+        $notes      = explode("=================================", $data->note);
         $data->note = $notes[0] . 'Trả lại:                            ' . $data->refunds . 'VNĐ' . "\r\n=================================" . $notes[1];
 
         $data->save();
@@ -142,9 +145,9 @@ class TuitionController extends VoyagerBaseController
 
         // Rename folders for newly created data through media-picker
         if ($request->session()->has($slug . '_path') || $request->session()->has($slug . '_uuid')) {
-            $old_path = $request->session()->get($slug . '_path');
-            $uuid = $request->session()->get($slug . '_uuid');
-            $new_path = str_replace($uuid, $data->getKey(), $old_path);
+            $old_path    = $request->session()->get($slug . '_path');
+            $uuid        = $request->session()->get($slug . '_uuid');
+            $new_path    = str_replace($uuid, $data->getKey(), $old_path);
             $folder_path = substr($old_path, 0, strpos($old_path, $uuid)) . $uuid;
 
             $rows->where('type', 'media_picker')->each(function ($row) use ($data, $uuid) {
@@ -185,15 +188,16 @@ class TuitionController extends VoyagerBaseController
 
         // Cập nhật trạng thái các mã giảm giá sử dụng
         if ($data->status == 'SUCCESS' && isset($request->vouchers)) {
-            $vouchers = StudentVoucher::where('student_id', $request->student_id)->whereIn('voucher_id', $request->vouchers)->get();
+            $vouchers = StudentVoucher::where('student_id', $request->student_id)->whereIn('voucher_id',
+                $request->vouchers)->get();
             foreach ($vouchers as $voucher) {
                 $bonus = $data->total_price * $voucher->voucher->percent / 100;
                 $bonus = ($bonus <= $voucher->voucher->max_price) ? $bonus : $voucher->voucher->max_price;
 
                 $voucher->update([
-                    'used' => 1,
+                    'used'            => 1,
                     'money_reduction' => $bonus
-                    ]);
+                ]);
             }
         }
 
@@ -225,38 +229,42 @@ class TuitionController extends VoyagerBaseController
     public function checkHistory(Request $request)
     {
         $student_id = $request->student_id;
-        $month = $request->month;
-        $student = Student::find($student_id);
-        $total = 0;
+        $month      = $request->month;
+        $student    = Student::find($student_id);
+        $total      = 0;
 
         // Check the first pay tuition?
-        $last_tuition = $this->tuition->where('student_id', $student_id)->where('status', 'SUCCESS')->orderBy('created_at', 'desc')->first();
+        $last_tuition = $this->tuition->where('student_id', $student_id)->where('status',
+            'SUCCESS')->orderBy('created_at', 'desc')->first();
 
         // Nếu không có lịch sử nộp học phí thì $first = 1
         $first = is_null($last_tuition) ? 1 : 0;
         if ($first == 1) {
             $month_start = Carbon::now('Asia/Ho_Chi_Minh')->format('Y-m');
-            $month_end = Carbon::now('Asia/Ho_Chi_Minh')->addMonth($month - 1)->format('Y-m');
-            $noteExcess = "";
+            $month_end   = Carbon::now('Asia/Ho_Chi_Minh')->addMonth($month - 1)->format('Y-m');
+            $noteExcess  = "";
         } else {
             $month_start = Carbon::parse($last_tuition->month_end, 'Asia/Ho_Chi_Minh')->addMonth()->format('Y-m');
-            $month_end = Carbon::parse($last_tuition->month_end, 'Asia/Ho_Chi_Minh')->addMonth($month)->format('Y-m');
+            $month_end   = Carbon::parse($last_tuition->month_end, 'Asia/Ho_Chi_Minh')->addMonth($month)->format('Y-m');
 
             // Tiền dư của đợt trước
-            $total -= ($last_tuition->excess_cash - $last_tuition->refunds);
-            $noteExcess = 'Tiền dư đợt trước:        -' . number_format($last_tuition->excess_cash - $last_tuition->refunds, 0, '', '.') . 'VNĐ';
+            $total      -= ($last_tuition->excess_cash - $last_tuition->refunds);
+            $noteExcess = 'Tiền dư đợt trước:        -' . number_format($last_tuition->excess_cash - $last_tuition->refunds,
+                    0, '', '.') . 'VNĐ';
         }
 
         $indexMonth = $month_start;
-        $notePrice = [];
+        $notePrice  = [];
         $totalPrice = 0;
         while ($indexMonth <= $month_end) {
             // Tìm chuyển cơ sở đã được chấp nhận gần nhất
-            $transferDojo = $student->transferDojos()->where('confirmed', 'CONFIRMED')->where('date_transfer', '>', $indexMonth . '-01')->first();
-            $dojo = $transferDojo->currentDojo ?? $student->dojo;
+            $transferDojo = $student->transferDojos()->where('confirmed', 'CONFIRMED')->where('date_transfer', '>',
+                $indexMonth . '-01')->first();
+            $dojo         = $transferDojo->currentDojo ?? $student->dojo;
 
             $policy = $dojo->tuitionPolicys()->where('date_apply', '<=', $indexMonth . '-01')->first();
-            array_push($notePrice, date_create($indexMonth)->format('m/Y') . ': ' . number_format($policy->price, 0, '', '.') . 'VNĐ');
+            array_push($notePrice,
+                date_create($indexMonth)->format('m/Y') . ': ' . number_format($policy->price, 0, '', '.') . 'VNĐ');
             $indexMonth = Carbon::parse($indexMonth, 'Asia/Ho_Chi_Minh')->addMonth()->format('Y-m');
             $totalPrice += $policy->price;
         }
@@ -298,7 +306,8 @@ class TuitionController extends VoyagerBaseController
             foreach ($bonus_defaults as $bonus_default) {
                 $bonus = ($totalPrice * $bonus_default->percent / 100 <= $bonus_default->max_price) ? $totalPrice * $bonus_default->percent / 100 : $bonus_default->max_price;
                 $total -= $bonus;
-                array_push($note1, 'Ưu đãi mặc định:        -' .  number_format($bonus, 0, '', '.') . 'VNĐ(' . $bonus_default->percent . '%)');
+                array_push($note1, 'Ưu đãi mặc định:        -' . number_format($bonus, 0, '',
+                        '.') . 'VNĐ(' . $bonus_default->percent . '%)');
                 array_push($note3, $bonus_default->note);
             }
         } else {
@@ -310,17 +319,16 @@ class TuitionController extends VoyagerBaseController
         ];
 
 
-
         return [
-            "month_start" => $month_start,
-            "month_end" => $month_end,
-            "note1" => $note1,
-            "note2" => $note2,
-            "note3" => $note3,
-            "total" => $total,
-            "dojo_id" => $student->dojo_id,
+            "month_start"   => $month_start,
+            "month_end"     => $month_end,
+            "note1"         => $note1,
+            "note2"         => $note2,
+            "note3"         => $note3,
+            "total"         => $total,
+            "dojo_id"       => $student->dojo_id,
             "bonus_default" => $bonus_defaults,
-            'totalPrice' => $totalPrice,
+            'totalPrice'    => $totalPrice,
         ];
     }
 
@@ -332,14 +340,14 @@ class TuitionController extends VoyagerBaseController
     public function applyVoucher(Request $request)
     {
         $vouchers = Voucher::find($request->vouchers_id);
-        $total = $request->total;
-        $type = $vouchers[0]->type;
+        $total    = $request->total;
+        $type     = $vouchers[0]->type;
         foreach ($vouchers as $index => $voucher) {
 
             // Kiểm tra mỗi loại chỉ được dùng 1 mã giảm giá
             if ($index != 0 && $voucher->type == $type) {
                 return [
-                    "check" => false,
+                    "check"   => false,
                     "message" => "Mỗi loại chỉ được dùng 1 mã giảm giá",
                 ];
             }
@@ -362,24 +370,26 @@ class TuitionController extends VoyagerBaseController
                         $bonus = $request->totalPrice * $voucher->percent / 100;
                         $bonus = ($bonus <= $voucher->max_price) ? $bonus : $voucher->max_price;
                         $total -= $bonus;
-                        array_push($voucherNote1, 'Mã giảm giá:                -' . number_format($bonus, 0, '', '.') . 'VNĐ(' . $voucher->percent . '%) [' . $voucher->code . ']');
+                        array_push($voucherNote1, 'Mã giảm giá:                -' . number_format($bonus, 0, '',
+                                '.') . 'VNĐ(' . $voucher->percent . '%) [' . $voucher->code . ']');
                         array_push($voucherNote2, $voucher->note);
                     } else {
                         return [
-                            "check" => false,
+                            "check"   => false,
                             "message" => "Mã " . $voucher->code . " chỉ áp dụng khi nộp tối thiểu " . $voucher->month_limit . " tháng",
                         ];
                     }
                 } else {
                     return [
-                        "check" => false,
+                        "check"   => false,
                         "message" => "Mã " . $voucher->code . " không được áp dụng tại cơ sở " . $dojo->name,
                     ];
                 }
             } else {
                 return [
-                    "check" => false,
-                    "message" => "Mã " . $voucher->code . " đã hết hạn sử dụng từ ngày " . Carbon::parse($voucher->expiry_date, 'Asia/Ho_Chi_Minh')->addDay()->format('d/m/Y'),
+                    "check"   => false,
+                    "message" => "Mã " . $voucher->code . " đã hết hạn sử dụng từ ngày " . Carbon::parse($voucher->expiry_date,
+                            'Asia/Ho_Chi_Minh')->addDay()->format('d/m/Y'),
                 ];
             }
         }
@@ -387,12 +397,12 @@ class TuitionController extends VoyagerBaseController
         array_push($voucherNote1, 'Tổng:                              ' . number_format($total, 0, '', '.') . 'VNĐ');
 
         return [
-            "check" => true,
+            "check"        => true,
             "voucherNote1" => $voucherNote1,
             "voucherNote2" => $voucherNote2,
-            "total" => $total,
-            "vouchers" => $vouchers,
-            "totalPrice" => $request->totalPrice,
+            "total"        => $total,
+            "vouchers"     => $vouchers,
+            "totalPrice"   => $request->totalPrice,
         ];
     }
 }

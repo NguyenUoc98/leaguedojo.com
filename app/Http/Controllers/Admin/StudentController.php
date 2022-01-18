@@ -13,11 +13,11 @@ use TCG\Voyager\Facades\Voyager;
 use TCG\Voyager\Http\Controllers\VoyagerBaseController;
 
 class StudentController extends VoyagerBaseController
-{    
+{
     /**
      * Get all vouchers student collected and haven't used yet
-     * 
-     * @param  \App\Http\Requests\StudentRequest  $request
+     *
+     * @param \App\Http\Requests\StudentRequest $request
      */
     public function getVouchers(Request $request)
     {
@@ -55,10 +55,10 @@ class StudentController extends VoyagerBaseController
             ]);
         }
 
-        $sub = $data->id % 10000;
+        $sub  = $data->id % 10000;
         $year = ($data->id - $sub) / 10000;
 
-        if($year == Carbon::now()->year) {
+        if ($year == Carbon::now()->year) {
             $id = $year * 10000 + ($data->id % 10000);
         } else {
             $id = Carbon::now()->year * 10000 + 1;
@@ -88,7 +88,7 @@ class StudentController extends VoyagerBaseController
 
     /**
      * Import file excel
-     * 
+     *
      * @return \Illuminate\Support\Collection
      */
     public function import()

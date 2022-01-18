@@ -26,7 +26,7 @@ class DeleteAction extends AbstractAction
         return [
             'class'   => 'btn btn-sm btn-danger delete',
             'data-id' => $this->data->{$this->data->getKeyName()},
-            'id'      => 'delete-'.$this->data->{$this->data->getKeyName()},
+            'id'      => 'delete-' . $this->data->{$this->data->getKeyName()},
         ];
     }
 
@@ -38,7 +38,8 @@ class DeleteAction extends AbstractAction
     public function shouldActionDisplayOnDataType()
     {
         $model = $this->data->getModel();
-        if ($model && in_array(\Illuminate\Database\Eloquent\SoftDeletes::class, class_uses($model)) && $this->data->deleted_at) {
+        if ($model && in_array(\Illuminate\Database\Eloquent\SoftDeletes::class,
+                class_uses($model)) && $this->data->deleted_at) {
             return false;
         }
 

@@ -8,8 +8,22 @@ use Illuminate\Database\Eloquent\Model;
 class Tuition extends Model
 {
     use FormLayoutTrait;
+
     protected $fillable = [
-        'student_id', 'cashier', 'month', 'month_start', 'month_end', 'total_price', 'total', 'amount', 'excess_cash', 'refunds', 'note', 'type', 'trans_id', 'status', 
+        'student_id',
+        'cashier',
+        'month',
+        'month_start',
+        'month_end',
+        'total_price',
+        'total',
+        'amount',
+        'excess_cash',
+        'refunds',
+        'note',
+        'type',
+        'trans_id',
+        'status',
     ];
 
     // cashier: người thu
@@ -39,19 +53,19 @@ class Tuition extends Model
     {
         return $this
             ->beginDiv('row')
-                ->beginDiv('col-md-6')
-                    ->field('month_start', 6)->field('month_end', 6)
-                    ->field('total', 6)->field('amount', 6)
-                    ->field('excess_cash', 6)->field('refunds', 6)
-                    ->field('cashier', 12)
-                    ->field('total_price', 12)->field('status', 12)
-                ->endDiv()
-                ->beginDiv('col-md-6')
-                    ->field('note', 12)
-                ->endDiv()
+            ->beginDiv('col-md-6')
+            ->field('month_start', 6)->field('month_end', 6)
+            ->field('total', 6)->field('amount', 6)
+            ->field('excess_cash', 6)->field('refunds', 6)
+            ->field('cashier', 12)
+            ->field('total_price', 12)->field('status', 12)
+            ->endDiv()
+            ->beginDiv('col-md-6')
+            ->field('note', 12)
+            ->endDiv()
             ->endDiv()
             ->get();
     }
 
-    
+
 }

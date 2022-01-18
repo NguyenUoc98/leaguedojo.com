@@ -42,8 +42,8 @@ class HappyBirthday extends Command
     public function handle()
     {
         $students = Student::all();
-        foreach($students as $student) {
-            if(Carbon::createFromFormat('Y-m-d',$student->birthday, 'Asia/Ho_Chi_Minh')->isBirthday()) {
+        foreach ($students as $student) {
+            if (Carbon::createFromFormat('Y-m-d', $student->birthday, 'Asia/Ho_Chi_Minh')->isBirthday()) {
                 echo 'sending to ' . $student->name . "...\n";
                 Notification::send($student->user, new HappyBirthdayNoti($student->name));
             }

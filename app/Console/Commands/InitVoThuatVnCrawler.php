@@ -41,14 +41,14 @@ class InitVoThuatVnCrawler extends Command
      */
     public function handle()
     {
-        $url = $this->option('url');
-        $client = new Client();
+        $url     = $this->option('url');
+        $client  = new Client();
         $crawler = $client->request('GET', $url);
-        $crawler->filter('.td-ss-main-content')->each(function (Crawler $crawl) use ($url){
+        $crawler->filter('.td-ss-main-content')->each(function (Crawler $crawl) use ($url) {
             $last = $crawl->filter('.page-nav > a.last')->first()->text();
-            for ($i=1; $i<=$last; $i++) {
+            for ($i = 1; $i <= $last; $i++) {
                 $urlCrawl = $url . "/page/$i";
-                $client1 = new Client();
+                $client1  = new Client();
                 $crawler1 = $client1->request('GET', $urlCrawl);
                 $crawler1->filter('.td-ss-main-content')->each(function (Crawler $crawl1) {
                     $this->crawl($crawl1);
@@ -57,14 +57,15 @@ class InitVoThuatVnCrawler extends Command
         });
     }
 
-    protected function crawl(Crawler $crawler) {
+    protected function crawl(Crawler $crawler)
+    {
         $crawler->filter('.td-block-row')->each(function (Crawler $node) {
-            $node->filter('.td-block-span4')->each(function(Crawler $node1) {
-                $link= $node1->filter('h3 > a')->link()->getUri();
-                $title = $node1->filter('h3 > a')->attr('title');
-                $linkCrawl = new LinkCrawl();
+            $node->filter('.td-block-span4')->each(function (Crawler $node1) {
+                $link             = $node1->filter('h3 > a')->link()->getUri();
+                $title            = $node1->filter('h3 > a')->attr('title');
+                $linkCrawl        = new LinkCrawl();
                 $linkCrawl->title = $title;
-                $linkCrawl->link = $link;
+                $linkCrawl->link  = $link;
                 try {
                     $linkCrawl->save();
                     $this->info('Adding: ' . $link);

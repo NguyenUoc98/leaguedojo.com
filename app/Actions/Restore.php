@@ -26,19 +26,20 @@ class Restore extends AbstractAction
         return [
             'class'   => 'btn btn-sm btn-info',
             'data-id' => $this->data->{$this->data->getKeyName()},
-            'id'      => 'restore-'.$this->data->{$this->data->getKeyName()},
+            'id'      => 'restore-' . $this->data->{$this->data->getKeyName()},
         ];
     }
 
     public function getDefaultRoute()
     {
-        return route('voyager.'.$this->dataType->slug.'.restore', $this->data->{$this->data->getKeyName()});
+        return route('voyager.' . $this->dataType->slug . '.restore', $this->data->{$this->data->getKeyName()});
     }
 
     public function shouldActionDisplayOnDataType()
     {
         $model = $this->data->getModel();
-        if (!($model && in_array(\Illuminate\Database\Eloquent\SoftDeletes::class, class_uses($model)) && $this->data->deleted_at)) {
+        if (!($model && in_array(\Illuminate\Database\Eloquent\SoftDeletes::class,
+                class_uses($model)) && $this->data->deleted_at)) {
             return false;
         }
 

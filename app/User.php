@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Notifications\Notifiable;
+use Inani\Larapoll\Traits\Voter;
 use TCG\Voyager\Models\User as Model;
 use App\Models\Student;
 use Laravelista\Comments\Commenter;
@@ -12,7 +13,7 @@ use App\Notifications\VerifyEmail;
 
 class User extends Model implements MustVerifyEmail
 {
-    use Notifiable, Commenter;
+    use Notifiable, Commenter , Voter;
     use \HighIdeas\UsersOnline\Traits\UsersOnlineTrait;
 
     /**
@@ -21,7 +22,13 @@ class User extends Model implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'avatar', 'student_id', 'facebook_id', 'google_id'
+        'name',
+        'email',
+        'password',
+        'avatar',
+        'student_id',
+        'facebook_id',
+        'google_id'
     ];
 
     /**
@@ -30,7 +37,8 @@ class User extends Model implements MustVerifyEmail
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password',
+        'remember_token',
     ];
 
     /**
@@ -45,7 +53,7 @@ class User extends Model implements MustVerifyEmail
     /**
      * Send the password reset notification.
      *
-     * @param  string  $token
+     * @param string $token
      * @return void
      */
     public function sendPasswordResetNotification($token)
@@ -56,13 +64,14 @@ class User extends Model implements MustVerifyEmail
     /**
      * Send the password reset notification.
      *
-     * @param  string  $token
+     * @param string $token
      * @return void
      */
     public function sendEmailVerificationNotification()
     {
         $this->notify(new VerifyEmail());
     }
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
@@ -73,7 +82,7 @@ class User extends Model implements MustVerifyEmail
 
     /**
      * Check User is a student
-     * 
+     *
      * @return boolean
      */
     public function isStudent()

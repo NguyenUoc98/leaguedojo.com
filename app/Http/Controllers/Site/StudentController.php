@@ -29,8 +29,8 @@ class StudentController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\StudentRequest  $request
-     * @param  Student  $student
+     * @param \App\Http\Requests\StudentRequest $request
+     * @param Student $student
      * @return \Illuminate\Http\Response
      */
     public function update(StudentRequest $request, Student $student)
@@ -49,7 +49,7 @@ class StudentController extends Controller
             $data = base64_decode($data);
 
             $imageName = time() . '.png';
-            $path = public_path() . '/storage/students/' . Carbon::now('Asia/Ho_Chi_Minh')->format('FY');
+            $path      = public_path() . '/storage/students/' . Carbon::now('Asia/Ho_Chi_Minh')->format('FY');
             File::isDirectory($path) or File::makeDirectory($path);
             file_put_contents($path . '/' . $imageName, $data);
 
@@ -69,5 +69,5 @@ class StudentController extends Controller
         return view('pages.profile._show', compact('user', 'student'));
     }
 
-    
+
 }

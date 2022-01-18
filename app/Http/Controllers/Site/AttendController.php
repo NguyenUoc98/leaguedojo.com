@@ -58,7 +58,7 @@ class AttendController extends Controller
      *
      * @authenticated
      * @urlParam id required Id của sự kiện. Example: 1
-     * @response 200 
+     * @response 200
      * @response 403 {
      *  "message": "Forbidden"
      * }
@@ -69,14 +69,15 @@ class AttendController extends Controller
             $event = Event::findOrFail($request->id);
 
             // SEO
-            $meta_desc = 'Đăng ký xác nhận sự kiện đã tham gia để tích lũy điểm rèn luyện';
+            $meta_desc     = 'Đăng ký xác nhận sự kiện đã tham gia để tích lũy điểm rèn luyện';
             $meta_keywords = 'xác nhận sự kiện, tích lũy điểm rèn luyện, đăng ký';
             $url_canonical = route('attends.create');
-            $image_og = Voyager::image($event->image);
-            $meta_title = 'Đăng ký xác nhận sự kiện ' . $event->name;
+            $image_og      = Voyager::image($event->image);
+            $meta_title    = 'Đăng ký xác nhận sự kiện ' . $event->name;
             // SEO
 
-            return view('attends.add', compact('event', 'meta_desc', 'meta_keywords', 'url_canonical', 'image_og', 'meta_title'));
+            return view('attends.add',
+                compact('event', 'meta_desc', 'meta_keywords', 'url_canonical', 'image_og', 'meta_title'));
         } else {
             abort(403);
         }
@@ -109,8 +110,8 @@ class AttendController extends Controller
 
                 foreach ($datas as $index => $data) {
                     $imageName = time() . $index . '.png';
-                    $path = 'attends/' . Carbon::now('Asia/Ho_Chi_Minh')->format('FY');
-                    $realPath = public_path() . '/storage/' . $path;
+                    $path      = 'attends/' . Carbon::now('Asia/Ho_Chi_Minh')->format('FY');
+                    $realPath  = public_path() . '/storage/' . $path;
                     File::isDirectory($realPath) or File::makeDirectory($realPath);
                     $img = Image::make($data->getRealPath());
                     $img = $img->resize(700, $img->height() * 700 / $img->width())->save($realPath . '/' . $imageName);
@@ -119,18 +120,18 @@ class AttendController extends Controller
             }
 
             try {
-                $attend = new Attend();
+                $attend             = new Attend();
                 $attend->student_id = Auth::user()->student->id;
-                $attend->event_id = $request->event_id;
-                $attend->note = $request->note;
-                $attend->image = json_encode($image);
+                $attend->event_id   = $request->event_id;
+                $attend->note       = $request->note;
+                $attend->image      = json_encode($image);
                 $attend->save();
 
                 $event = Event::find($attend->event_id);
 
                 $data = [
                     "text" => 'Có một đăng ký xác nhận sự kiện mới từ <b>' . Auth::user()->student->name . '</b>.',
-                    "img" => Voyager::image($event->image),
+                    "img"  => Voyager::image($event->image),
                     "icon" => '/img/core-img/icon-event.png',
                     "href" => route('voyager.attends.show', $attend->id),
                     "time" => Carbon::now(),
@@ -141,13 +142,13 @@ class AttendController extends Controller
                 // Notification::send($user, new EventRegistration($attend));
 
                 return redirect()->back()->with([
-                    'status' => 'Thành công',
+                    'status'  => 'Thành công',
                     'message' => 'Đăng ký thành công',
-                    'type' => 'success',
-                    'color' => '#4caf50',
+                    'type'    => 'success',
+                    'color'   => '#4caf50',
                 ]);
             } catch (Exception $e) {
-                // Xóa ảnh đã lưu 
+                // Xóa ảnh đã lưu
                 foreach ($image as $img) {
                     File::delete(public_path('/storage/' . $img));
                 }
@@ -158,10 +159,10 @@ class AttendController extends Controller
                 }
 
                 return redirect()->back()->with([
-                    'status' => 'Lỗi',
+                    'status'  => 'Lỗi',
                     'message' => $message,
-                    'type' => 'error',
-                    'color' => '#ed3939',
+                    'type'    => 'error',
+                    'color'   => '#ed3939',
                 ]);
             }
         } else {

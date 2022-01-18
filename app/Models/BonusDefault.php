@@ -12,17 +12,18 @@ class BonusDefault extends Model
     public function formFields()
     {
         return $this
-        ->beginDiv('row')
+            ->beginDiv('row')
             ->beginDiv('col-md-6')
-                ->field('bonus_default_belongsto_role_relationship', 6)->field('bonus_default_belongsto_dojo_relationship', 6)
-                ->field('percent', 6)->field('max_price', 6)
-                ->field('level', 4)->field('month_count', 4)->field('first', 4)
-                ->field('kuy', 12)
+            ->field('bonus_default_belongsto_role_relationship', 6)->field('bonus_default_belongsto_dojo_relationship',
+                6)
+            ->field('percent', 6)->field('max_price', 6)
+            ->field('level', 4)->field('month_count', 4)->field('first', 4)
+            ->field('kuy', 12)
             ->endDiv()
             ->beginDiv('col-md-6')
-                ->field('note', 12)
+            ->field('note', 12)
             ->endDiv()
-        ->endDiv()
-        ->get();
+            ->endDiv()
+            ->get();
     }
 }

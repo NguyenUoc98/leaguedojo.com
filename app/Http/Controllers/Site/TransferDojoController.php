@@ -30,7 +30,7 @@ class TransferDojoController extends Controller
     public function __construct(TransferDojo $transferDojo, Dojo $dojo)
     {
         $this->transferDojo = $transferDojo;
-        $this->dojo = $dojo;
+        $this->dojo         = $dojo;
         $this->middleware('auth');
         $this->middleware('verified');
     }
@@ -55,14 +55,15 @@ class TransferDojoController extends Controller
         if (Auth::user()->isStudent() && Auth::user()->student->status == 'STUDYING') {
 
             // SEO
-            $meta_desc = 'Trang đăng ký xin chuyển cơ sở tập luyện';
+            $meta_desc     = 'Trang đăng ký xin chuyển cơ sở tập luyện';
             $meta_keywords = 'đăng ký, chuyển cơ sở';
             $url_canonical = route('transfer-dojos.create');
-            $image_og = '';
-            $meta_title = 'Đăng ký chuyển cơ sở';
+            $image_og      = '';
+            $meta_title    = 'Đăng ký chuyển cơ sở';
             // SEO
 
-            return view('transfer-dojos.add', compact('meta_desc', 'meta_keywords', 'url_canonical', 'image_og', 'meta_title'));
+            return view('transfer-dojos.add',
+                compact('meta_desc', 'meta_keywords', 'url_canonical', 'image_og', 'meta_title'));
         } else {
             abort(403);
         }
@@ -77,26 +78,26 @@ class TransferDojoController extends Controller
      */
     public function store(Request $request)
     {
-        $now = Carbon::now();
+        $now           = Carbon::now();
         $date_transfer = Carbon::parse($request->date_transfer, 'Asia/Ho_Chi_Minh');
         if (($now->year > $date_transfer->year) || (($now->year == $date_transfer->year) && ($now->month >= $date_transfer->month))) {
             return redirect()->back()->with([
                 'message' => 'Tháng chuyển đến cơ sở mới phải bắt đầu từ tháng sau',
-                'type' => 'error',
-                'color' => '#ed3939',
+                'type'    => 'error',
+                'color'   => '#ed3939',
             ]);
         }
         try {
-            $transferDojo = new TransferDojo();
-            $transferDojo->student_id = Auth::user()->student->id;
+            $transferDojo                  = new TransferDojo();
+            $transferDojo->student_id      = Auth::user()->student->id;
             $transferDojo->current_dojo_id = Auth::user()->student->dojo_id;
-            $transferDojo->new_dojo_id = $request->new_dojo;
-            $transferDojo->date_transfer = $request->date_transfer . '-01';
-            $transferDojo->reason = $request->reason;
+            $transferDojo->new_dojo_id     = $request->new_dojo;
+            $transferDojo->date_transfer   = $request->date_transfer . '-01';
+            $transferDojo->reason          = $request->reason;
             $transferDojo->save();
             $data = [
                 "text" => 'Bạn nhận được 1 đơn xin chuyển cơ sở tập luyện từ <b>' . Auth::user()->student->name . '</b>.',
-                "img" => Voyager::image(Auth::user()->avatar),
+                "img"  => Voyager::image(Auth::user()->avatar),
                 "icon" => '/img/core-img/icon-notify.png',
                 "href" => route('voyager.transfer-dojos.show', $transferDojo->id),
                 "time" => Carbon::now(),
@@ -110,17 +111,17 @@ class TransferDojoController extends Controller
 
             return redirect()->back()->with([
                 'message' => 'Đăng ký thành công',
-                'type' => 'success',
-                'color' => '#4caf50',
+                'type'    => 'success',
+                'color'   => '#4caf50',
             ]);
         } catch (Exception $e) {
             $message = $e->getMessage();
 
             return redirect()->back()->with([
-                'status' => 'Lỗi',
+                'status'  => 'Lỗi',
                 'message' => $message,
-                'type' => 'error',
-                'color' => '#ed3939',
+                'type'    => 'error',
+                'color'   => '#ed3939',
             ]);
         }
     }

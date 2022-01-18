@@ -40,14 +40,15 @@ class GenThumbDoc extends Command
     public function handle()
     {
         $documents = Document::all();
-        $image = new \Imagick();
+        $image     = new \Imagick();
 
         foreach ($documents as $doc) {
             echo "Generating $doc->title....\n";
             $imagePath = public_path('storage/' . json_decode($doc->file)[0]) . '[0]';
             $image->readImage($imagePath);
             $image->setImageFormat("jpeg");
-            $output = 'thumbnail/' . substr(json_decode($doc->file)[0], 0, strpos(json_decode($doc->file)[0], '.')) . '.jpeg';
+            $output = 'thumbnail/' . substr(json_decode($doc->file)[0], 0,
+                    strpos(json_decode($doc->file)[0], '.')) . '.jpeg';
             Storage::disk('local')->put('public/' . $output, $image->getImageBlob());
             echo "success!$doc->title\n";
             $doc->update(['thumbnail' => $output]);

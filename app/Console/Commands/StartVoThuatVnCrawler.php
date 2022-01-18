@@ -45,7 +45,7 @@ class StartVoThuatVnCrawler extends Command
     {
         $links = LinkCrawl::whereStatus(LinkCrawl::STATUS['DEFAULT'])->take(10)->get();
         foreach ($links as $link) {
-            DB::transaction(function () use ($link){
+            DB::transaction(function () use ($link) {
                 $this->info('Crawling ' . $link->link);
                 $link->update(['status' => LinkCrawl::STATUS['CRAWLING']]);
                 Artisan::call('vothuat:crawl', ['--url' => $link->link]);

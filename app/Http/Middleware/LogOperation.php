@@ -13,7 +13,7 @@ class LogOperation
     public function handle(Request $request, \Closure $next)
     {
         if ($this->shouldLogOperation($request)) {
-            if(Auth::check()) {
+            if (Auth::check()) {
                 $log = [
                     'user_id' => Auth::user()->id,
                     'path'    => substr($request->path(), 0, 255),
@@ -23,13 +23,13 @@ class LogOperation
                 ];
             } else {
                 $log = [
-                    'path'    => substr($request->path(), 0, 255),
-                    'method'  => $request->method(),
-                    'ip'      => $request->getClientIp(),
-                    'input'   => json_encode($request->input()),
+                    'path'   => substr($request->path(), 0, 255),
+                    'method' => $request->method(),
+                    'ip'     => $request->getClientIp(),
+                    'input'  => json_encode($request->input()),
                 ];
             }
-            
+
 
             try {
                 OperationLog::create($log);

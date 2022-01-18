@@ -97,7 +97,8 @@ class PageController extends Controller
         $testScores = $student->testScores()->get();
 
         // Lấy tất cả sự kiện đã tham gia
-        $event_confirmed = $student->events()->wherePivot('confirmed', 'CONFIRMED')->withPivot('image', 'note')->orderByDesc('date')->paginate(setting('app.event_profile'));
+        $event_confirmed = $student->events()->wherePivot('confirmed', 'CONFIRMED')->withPivot('image',
+            'note')->orderByDesc('date')->paginate(setting('app.event_profile'));
 
         // Điểm rèn luyện
         $pointTraining = $student->getPointTraining();
@@ -110,7 +111,9 @@ class PageController extends Controller
         $meta_title    = 'Trang cá nhân';
         // SEO
 
-        return view('pages.profile.index', compact('user', 'student', 'rank', 'total', 'totalMedals', 'achievements', 'testScores', 'event_confirmed', 'pointTraining', 'meta_desc', 'meta_keywords', 'url_canonical', 'image_og', 'meta_title'));
+        return view('pages.profile.index',
+            compact('user', 'student', 'rank', 'total', 'totalMedals', 'achievements', 'testScores', 'event_confirmed',
+                'pointTraining', 'meta_desc', 'meta_keywords', 'url_canonical', 'image_og', 'meta_title'));
     }
 
     /**
@@ -137,6 +140,7 @@ class PageController extends Controller
         $meta_title    = setting('site.title');
         // SEO
 
-        return view('pages.home', compact('topStudents', 'events', 'meta_desc', 'meta_keywords', 'url_canonical', 'image_og', 'meta_title'));
+        return view('pages.home',
+            compact('topStudents', 'events', 'meta_desc', 'meta_keywords', 'url_canonical', 'image_og', 'meta_title'));
     }
 }

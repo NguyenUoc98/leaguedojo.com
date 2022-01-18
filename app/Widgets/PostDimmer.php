@@ -23,7 +23,7 @@ class PostDimmer extends BaseDimmer
      */
     public function run()
     {
-        $count = Post::count();
+        $count  = Post::count();
         $string = trans_choice('voyager::dimmer.post', $count);
 
         return view('voyager::dimmer', array_merge($this->config, [
@@ -34,7 +34,7 @@ class PostDimmer extends BaseDimmer
                 'text' => __('voyager::dimmer.post_link_text'),
                 'link' => route('voyager.posts.index'),
             ],
-            'image' => '#17a2b8',
+            'image'  => '#17a2b8',
         ]));
     }
 

@@ -13,13 +13,13 @@ class TuitionPolicy extends Model
     {
         return $this
             ->beginDiv('row')
-                ->beginDiv('col-md-6')
-                    ->field('tuition_policy_belongsto_dojo_relationship', 7)->field('price', 5)
-                    ->field('date_apply', 7)->field('policy', 5)
-                ->endDiv()
-                ->beginDiv('col-md-6')
-                ->field('note', 12)
-                ->endDiv()
+            ->beginDiv('col-md-6')
+            ->field('tuition_policy_belongsto_dojo_relationship', 7)->field('price', 5)
+            ->field('date_apply', 7)->field('policy', 5)
+            ->endDiv()
+            ->beginDiv('col-md-6')
+            ->field('note', 12)
+            ->endDiv()
             ->endDiv()->get();
     }
 

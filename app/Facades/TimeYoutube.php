@@ -8,17 +8,17 @@ class TimeYoutube
 {
     /**
      * Format duration of Youtube API
-     * 
+     *
      * @param string $duration (1H12M23S)
      * @return string (1:12:23)
      */
     public function duration($duration)
     {
         $duration = str_replace('PT', '', $duration);
-        $findH = strpos($duration, 'H') ?: 0;
-        $findM = strpos($duration, 'M') ?: 0;
-        $findS = strpos($duration, 'S') ?: 0;
-        $hh = substr($duration, 0, $findH);
+        $findH    = strpos($duration, 'H') ?: 0;
+        $findM    = strpos($duration, 'M') ?: 0;
+        $findS    = strpos($duration, 'S') ?: 0;
+        $hh       = substr($duration, 0, $findH);
         if ($findH == 0) {
             if ($findM == 0) {
                 $mm = '00';
@@ -58,7 +58,7 @@ class TimeYoutube
 
     /**
      * Format date publish of Video
-     * 
+     *
      * @param string $published (2019-04-08T22:52:43.000Z)
      * @return string
      */

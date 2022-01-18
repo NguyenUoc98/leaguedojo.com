@@ -27,6 +27,7 @@ class RoomController extends Controller
         $this->middleware('auth');
         $this->middleware('verified');
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -35,19 +36,21 @@ class RoomController extends Controller
     public function index()
     {
         if (Auth::user()->isStudent()) {
-            $student = Auth::user()->student;
+            $student     = Auth::user()->student;
             $roomBookeds = $student->rooms;
-            $active_tab = 'booked';
+            $active_tab  = 'booked';
 
             // SEO
-            $meta_desc = 'Trang đăng ký mượn phòng tập';
+            $meta_desc     = 'Trang đăng ký mượn phòng tập';
             $meta_keywords = 'đăng ký, mượn phòng tập, võ sinh';
             $url_canonical = route('rooms.index');
-            $image_og = '';
-            $meta_title = 'Mượn phòng tập';
+            $image_og      = '';
+            $meta_title    = 'Mượn phòng tập';
             // SEO
 
-            return view('rooms.index', compact('roomBookeds', 'active_tab', 'meta_desc', 'meta_keywords', 'url_canonical', 'image_og', 'meta_title'));
+            return view('rooms.index',
+                compact('roomBookeds', 'active_tab', 'meta_desc', 'meta_keywords', 'url_canonical', 'image_og',
+                    'meta_title'));
         } else {
             abort(403);
         }
@@ -58,12 +61,12 @@ class RoomController extends Controller
      */
     public function find(Request $request)
     {
-        $date = Carbon::parse($request->date);
+        $date  = Carbon::parse($request->date);
         $start = $request->start_at;
-        $end = $request->end_at;
+        $end   = $request->end_at;
         if ($date->isToday() || $date->isFuture()) {
             $weekDay = $date->dayOfWeek;
-            $rooms = DB::table('rooms')
+            $rooms   = DB::table('rooms')
                 ->join('uptimes', 'rooms.id', '=', 'uptimes.room_id')
                 ->where([
                     ['dojo_id', $request->dojo_id],
@@ -73,7 +76,12 @@ class RoomController extends Controller
                 ->get();
 
             $roomFinded = $rooms->map(function ($room, $index) use ($date) {
-                return ['id' => $room->id, 'name' => $room->name, 'uptimes' => $room->uptimes, 'address' => $room->address, 'spaceTime' => $this->room->spaceTime($room->id, $date->format('Y-m-d'), $room->uptimes)];
+                return ['id'        => $room->id,
+                        'name'      => $room->name,
+                        'uptimes'   => $room->uptimes,
+                        'address'   => $room->address,
+                        'spaceTime' => $this->room->spaceTime($room->id, $date->format('Y-m-d'), $room->uptimes)
+                ];
             })->toArray();
 
             $roomWithSpaceTime = [];
@@ -98,31 +106,31 @@ class RoomController extends Controller
     {
         if (Auth::user()->isStudent()) {
             $start = $request->start_modal;
-            $end = $request->end_modal;
+            $end   = $request->end_modal;
 
             if (!$this->room->checkTime(json_decode($request->space_time), $start, $end)) {
                 return redirect()->back()->with([
-                    'status' => 'Lỗi',
+                    'status'  => 'Lỗi',
                     'message' => 'Khoảng thời gian bạn đăng ký không hợp lệ',
-                    'type' => 'error',
-                    'color' => '#ed3939',
+                    'type'    => 'error',
+                    'color'   => '#ed3939',
                 ]);
             }
 
             try {
-                $bookRoom = new BookRoom();
-                $bookRoom->room_id = $request->room_id;
+                $bookRoom             = new BookRoom();
+                $bookRoom->room_id    = $request->room_id;
                 $bookRoom->student_id = Auth::user()->student->id;
-                $bookRoom->date = Carbon::parse($request->date)->format('Y-m-d');
-                $bookRoom->start_at = $start;
-                $bookRoom->end_at = $end;
-                $bookRoom->note = $request->note;
+                $bookRoom->date       = Carbon::parse($request->date)->format('Y-m-d');
+                $bookRoom->start_at   = $start;
+                $bookRoom->end_at     = $end;
+                $bookRoom->note       = $request->note;
 
                 $bookRoom->save();
 
                 $data = [
                     "text" => 'Có một lịch mượn phòng mới từ <b>' . Auth::user()->student->name . '</b>.',
-                    "img" => Voyager::image(Auth::user()->avatar),
+                    "img"  => Voyager::image(Auth::user()->avatar),
                     "icon" => '/img/core-img/icon-calendar.png',
                     "href" => route('voyager.book-rooms.show', $bookRoom->id),
                     "time" => Carbon::now(),
@@ -133,19 +141,19 @@ class RoomController extends Controller
                 Notification::send($user, new BookRoomRegistration($bookRoom));
 
                 return redirect()->back()->with([
-                    'status' => 'Thành công',
+                    'status'  => 'Thành công',
                     'message' => 'Đặt phòng thành công',
-                    'type' => 'success',
-                    'color' => '#4caf50',
+                    'type'    => 'success',
+                    'color'   => '#4caf50',
                 ]);
             } catch (Exception $e) {
                 $message = $e->getMessage();
 
                 return redirect()->back()->with([
-                    'status' => 'Lỗi',
+                    'status'  => 'Lỗi',
                     'message' => $message,
-                    'type' => 'error',
-                    'color' => '#ed3939',
+                    'type'    => 'error',
+                    'color'   => '#ed3939',
                 ]);
             }
         } else {
@@ -156,7 +164,7 @@ class RoomController extends Controller
     /**
      * Cancel book room registration.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function cancelBook($id)
@@ -166,19 +174,19 @@ class RoomController extends Controller
             try {
                 $bookRoom->delete();
                 return redirect()->back()->with([
-                    'status' => 'Thành công',
+                    'status'  => 'Thành công',
                     'message' => 'Hủy đặt phòng thành công',
-                    'type' => 'success',
-                    'color' => '#4caf50',
+                    'type'    => 'success',
+                    'color'   => '#4caf50',
                 ]);
             } catch (Exception $e) {
                 $message = $e->getMessage();
 
                 return redirect()->back()->with([
-                    'status' => 'Lỗi',
+                    'status'  => 'Lỗi',
                     'message' => $message,
-                    'type' => 'error',
-                    'color' => '#ed3939',
+                    'type'    => 'error',
+                    'color'   => '#ed3939',
                 ]);
             }
         } else {

@@ -49,8 +49,8 @@ class ReportController extends Controller
             return $list;
         }
 
-        $query = Student::with('dojo')->find($request->id);
-        $res = $query->getAttributes();
+        $query       = Student::with('dojo')->find($request->id);
+        $res         = $query->getAttributes();
         $res['dojo'] = $query->dojo->name;
         return $res;
     }
@@ -60,7 +60,7 @@ class ReportController extends Controller
      */
     public function getContentFields(Request $request)
     {
-        $id = $request->divCount;
+        $id    = $request->divCount;
         $varId = 'keyword_' . $id;
         return view("voyager::reports.keyword-fields", compact('id', 'varId'));
     }
@@ -70,7 +70,7 @@ class ReportController extends Controller
      */
     public function getTuitionFields(Request $request)
     {
-        $id = $request->divCount;
+        $id    = $request->divCount;
         $varId = 'keyword_' . $id;
         return view("voyager::reports.tuition-fields", compact('id', 'varId'));
     }

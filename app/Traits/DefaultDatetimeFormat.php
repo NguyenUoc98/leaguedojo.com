@@ -1,11 +1,11 @@
 <?php
 
-    namespace App\Traits;
+namespace App\Traits;
 
-    use Carbon\Carbon;
+use Carbon\Carbon;
 
-    trait DefaultDatetimeFormat
-    {
+trait DefaultDatetimeFormat
+{
     protected function serializeDate(\DateTimeInterface $date)
     {
         if (version_compare(app()->version(), '7.0.0') < 0) {

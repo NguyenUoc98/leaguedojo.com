@@ -27,7 +27,7 @@ class VideoController extends Controller
      */
     public function getCloneFields(Request $request)
     {
-        $id = $request->divCount;
+        $id    = $request->divCount;
         $varId = 'keyword_' . $id;
         return view("voyager::videos.keyword-fields", compact('id', 'varId'));
     }
@@ -49,7 +49,7 @@ class VideoController extends Controller
 
     /**
      * Sync all video in DB with information on Youtube
-     * 
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function syncData()
@@ -69,7 +69,7 @@ class VideoController extends Controller
 
     /**
      * Remove Videos outside Playlist
-     * 
+     *
      * @param $id
      */
     public function removePlaylist(Video $video)

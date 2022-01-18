@@ -41,15 +41,16 @@ class Room extends Model
 
     /**
      * Get space time of room
-     * 
-     * @param $roomId, $date, $uptimes
+     *
+     * @param $roomId , $date, $uptimes
      * @return array
      */
     public function spaceTime($roomId, $date, $uptimes)
     {
         // Những khoảng thời gian đã được đặt
-        $bookRooms = BookRoom::where('room_id', $roomId)->whereDate('date', $date)->whereConfirmed('CONFIRMED')->select('start_at', 'end_at')->get()->toArray();
-        $uptimes = json_decode($uptimes);
+        $bookRooms = BookRoom::where('room_id', $roomId)->whereDate('date',
+            $date)->whereConfirmed('CONFIRMED')->select('start_at', 'end_at')->get()->toArray();
+        $uptimes   = json_decode($uptimes);
 
         // Ghép các khoảnh thời gian lại với nhau
         $spaceTime = [];
@@ -57,7 +58,7 @@ class Room extends Model
             $start = $uptime[0];
             foreach ($bookRooms as $bookRoom) {
                 $bookStart = substr($bookRoom['start_at'], 0, -3);
-                $bookEnd = substr($bookRoom['end_at'], 0, -3);
+                $bookEnd   = substr($bookRoom['end_at'], 0, -3);
                 if ($bookStart >= $start && $bookStart < $uptime[1]) {
                     if ($bookStart > $start) {
                         array_push($spaceTime, [$start, $bookStart]);
@@ -76,26 +77,26 @@ class Room extends Model
 
     /**
      * Check time user want to book room in space time
-     * 
-     * @param $start, $end
+     *
+     * @param $start , $end
      * @param array $spaceTime
      * @return bool
      */
     public function checkTime(array $spaceTime, $start, $end)
     {
-        if(empty($spaceTime)) {
+        if (empty($spaceTime)) {
             return false;
         }
 
         // Nếu cả 2 đều null return true
-        if(is_null($start) && is_null($end)) {
+        if (is_null($start) && is_null($end)) {
             return true;
         }
 
         // Nếu chỉ quan tâm lúc trả phòng
-        if(is_null($start) && !is_null($end)) {
-            foreach($spaceTime as $time) {
-                if($end < $time[1]) {
+        if (is_null($start) && !is_null($end)) {
+            foreach ($spaceTime as $time) {
+                if ($end < $time[1]) {
                     return true;
                 }
             }
@@ -103,9 +104,9 @@ class Room extends Model
         }
 
         // Nếu chỉ quan tâm lúc nhận phòng
-        if(!is_null($start) && is_null($end)) {
-            foreach($spaceTime as $time) {
-                if($start >= $time[0]) {
+        if (!is_null($start) && is_null($end)) {
+            foreach ($spaceTime as $time) {
+                if ($start >= $time[0]) {
                     return true;
                 }
             }
@@ -113,8 +114,8 @@ class Room extends Model
         }
 
         // Có cả 2
-        foreach($spaceTime as $time) {
-            if($start >= $time[0] && $start < $time[1] && $end > $time[0] && $end <= $time[1]) {
+        foreach ($spaceTime as $time) {
+            if ($start >= $time[0] && $start < $time[1] && $end > $time[0] && $end <= $time[1]) {
                 return true;
             }
         }

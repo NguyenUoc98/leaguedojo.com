@@ -42,10 +42,10 @@ class BaseController extends Controller
      */
     public function relation(Request $request)
     {
-        $slug = $this->getSlug($request);
-        $page = $request->input('page');
-        $on_page = 50;
-        $search = $request->input('search', false);
+        $slug     = $this->getSlug($request);
+        $page     = $request->input('page');
+        $on_page  = 50;
+        $search   = $request->input('search', false);
         $dataType = Voyager::model('DataType')->where('slug', '=', $slug)->first();
         if (count($request->label) == 1) {
             $label = $request->label[0];
@@ -62,28 +62,30 @@ class BaseController extends Controller
             $skip = $on_page * ($page - 1);
 
             // If search query, use LIKE to filter results depending on field label
-            if(isset($request->foreign)) {
+            if (isset($request->foreign)) {
                 if ($search) {
-                    $total_count = app($dataType->model_name)->whereNull($request->foreign)->where(DB::raw($label), 'LIKE', '%' . $search . '%')->count();
+                    $total_count         = app($dataType->model_name)->whereNull($request->foreign)->where(DB::raw($label),
+                        'LIKE', '%' . $search . '%')->count();
                     $relationshipOptions = app($dataType->model_name)->whereNull($request->foreign)->take($on_page)->skip($skip)
                         ->where(DB::raw($label), 'LIKE', '%' . $search . '%')
                         ->get();
                 } else {
-                    $total_count = app($dataType->model_name)->whereNull($request->foreign)->count();
+                    $total_count         = app($dataType->model_name)->whereNull($request->foreign)->count();
                     $relationshipOptions = app($dataType->model_name)->whereNull($request->foreign)->take($on_page)->skip($skip)->get();
                 }
             } else {
                 if ($search) {
-                    $total_count = app($dataType->model_name)->where(DB::raw($label), 'LIKE', '%'.$search.'%')->count();
+                    $total_count         = app($dataType->model_name)->where(DB::raw($label), 'LIKE',
+                        '%' . $search . '%')->count();
                     $relationshipOptions = app($dataType->model_name)->take($on_page)->skip($skip)
-                        ->where(DB::raw($label), 'LIKE', '%'.$search.'%')
+                        ->where(DB::raw($label), 'LIKE', '%' . $search . '%')
                         ->get();
                 } else {
-                    $total_count = app($dataType->model_name)->count();
+                    $total_count         = app($dataType->model_name)->count();
                     $relationshipOptions = app($dataType->model_name)->take($on_page)->skip($skip)->get();
                 }
             }
-            
+
 
             $results = [];
 
@@ -130,14 +132,14 @@ class BaseController extends Controller
 
     /**
      * Add objects from belongsTo relationship
-     * 
+     *
      * @param \Illuminate\Http\Request $request
      */
     public function addRelation(Request $request)
     {
-        $slug = $this->getSlug($request);
+        $slug     = $this->getSlug($request);
         $dataType = Voyager::model('DataType')->where('slug', '=', $slug)->first();
-        foreach($dataType->browseRows as $row) {
+        foreach ($dataType->browseRows as $row) {
             if ($row->type == 'relationship' && $row->details->type == 'belongsTo') {
                 $column = $row->details->column;
                 break;
@@ -146,7 +148,7 @@ class BaseController extends Controller
 
         $action = true;
         foreach ($request->$slug as $object) {
-            $object = app($dataType->model_name)::find($object);
+            $object          = app($dataType->model_name)::find($object);
             $object->$column = $request->$column;
             if (!$object->save()) {
                 $action = false;
@@ -168,23 +170,23 @@ class BaseController extends Controller
 
     /**
      * Export excel file
-     * 
-     * @param $id, $field
+     *
+     * @param $id , $field
      * @return \Illuminate\Support\Collection
      */
     public function export(Request $request)
     {
-        
+
         $choose = $request->choose;
         $fields = $request->fields;
 
-        if($choose == 'all') {
+        if ($choose == 'all') {
             $ids = [];
         } else {
-            $ids = explode(',',$request->ids);
+            $ids = explode(',', $request->ids);
         }
 
-        $slug = $this->getSlug1($request);
+        $slug     = $this->getSlug1($request);
         $dataType = Voyager::model('DataType')->where('slug', '=', $slug)->first();
 
         return Excel::download(new BaseExport($ids, $fields, $dataType->model_name), $slug . '.xlsx');

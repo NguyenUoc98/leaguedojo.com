@@ -10,8 +10,7 @@ trait FormLayoutTrait
     public function field($name, $grid, $options = '')
     {
         $type = ':voyager';
-        if (!is_array($options))
-        {
+        if (!is_array($options)) {
             $options = ['class' => $options];
         }
         $element          = compact('type', 'name', 'grid', 'options');
@@ -69,31 +68,31 @@ trait FormLayoutTrait
     function __call($func, $params)
     {
 
-        if (strpos($func, 'begin') === 0)
-        {
+        if (strpos($func, 'begin') === 0) {
             $options = array_shift($params);
-            if (!is_array($options))
-            {
+            if (!is_array($options)) {
                 $options = ['class' => $options];
             }
             $text    = array_shift($params);
             $type    = substr($func, 5);
-            $element = ['type'    => $type,
+            $element = [
+                'type'    => $type,
                 'options' => $options,
                 'text'    => $text,
-                'isEnd'   => false];
+                'isEnd'   => false
+            ];
 
             $this->elements[] = $element;
 
             return $this; //chain
-        }
-        else if (strpos($func, 'end') === 0)
-        {
-            $isEnd            = true;
-            $type             = substr($func, 3);
-            $element          = ['type' => $type, 'isEnd' => true];
-            $this->elements[] = $element;
-            return $this; //chain
+        } else {
+            if (strpos($func, 'end') === 0) {
+                $isEnd            = true;
+                $type             = substr($func, 3);
+                $element          = ['type' => $type, 'isEnd' => true];
+                $this->elements[] = $element;
+                return $this; //chain
+            }
         }
         return parent::__call($func, $params);
     }

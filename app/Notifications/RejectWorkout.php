@@ -11,6 +11,7 @@ use Illuminate\Notifications\Notification;
 class RejectWorkout extends Notification implements ShouldQueue
 {
     use Queueable;
+
     protected $workoutRegistration;
     protected $reason;
 
@@ -22,13 +23,13 @@ class RejectWorkout extends Notification implements ShouldQueue
     public function __construct($workoutRegistration, $reason)
     {
         $this->workoutRegistration = $workoutRegistration;
-        $this->reason = $reason;
+        $this->reason              = $reason;
     }
 
     /**
      * Get the notification's delivery channels.
      *
-     * @param  mixed  $notifiable
+     * @param mixed $notifiable
      * @return array
      */
     public function via($notifiable)
@@ -39,7 +40,7 @@ class RejectWorkout extends Notification implements ShouldQueue
     /**
      * Get the mail representation of the notification.
      *
-     * @param  mixed  $notifiable
+     * @param mixed $notifiable
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
     public function toMail($notifiable)

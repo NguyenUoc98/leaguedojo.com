@@ -85,7 +85,10 @@ class TestScoreController extends VoyagerBaseController
 
             if ($row->type == 'relationship' && $row->details->type == 'belongsToMany') {
                 // Only if select_multiple is working with a relationship
-                $multi_select[] = ['model' => $row->details->model, 'content' => $content, 'table' => $row->details->pivot_table];
+                $multi_select[] = ['model'   => $row->details->model,
+                                   'content' => $content,
+                                   'table'   => $row->details->pivot_table
+                ];
             } else {
                 $data->{$row->field} = $content;
             }
@@ -113,9 +116,9 @@ class TestScoreController extends VoyagerBaseController
 
         // Rename folders for newly created data through media-picker
         if ($request->session()->has($slug . '_path') || $request->session()->has($slug . '_uuid')) {
-            $old_path = $request->session()->get($slug . '_path');
-            $uuid = $request->session()->get($slug . '_uuid');
-            $new_path = str_replace($uuid, $data->getKey(), $old_path);
+            $old_path    = $request->session()->get($slug . '_path');
+            $uuid        = $request->session()->get($slug . '_uuid');
+            $new_path    = str_replace($uuid, $data->getKey(), $old_path);
             $folder_path = substr($old_path, 0, strpos($old_path, $uuid)) . $uuid;
 
             $rows->where('type', 'media_picker')->each(function ($row) use ($data, $uuid) {
@@ -151,7 +154,8 @@ class TestScoreController extends VoyagerBaseController
         // Validate fields with ajax
         $val = $this->validateBread($request->all(), $dataType->addRows)->validate();
 
-        if (!is_null(app($dataType->model_name)->where('test_day', $request->test_day)->where('student_id', $request->student_id)->first())) {
+        if (!is_null(app($dataType->model_name)->where('test_day', $request->test_day)->where('student_id',
+            $request->student_id)->first())) {
             return redirect()->back()->with([
                 'message'    => 'Trùng lặp bản ghi',
                 'alert-type' => 'error',
@@ -187,7 +191,7 @@ class TestScoreController extends VoyagerBaseController
 
     /**
      * Import file excel
-     * 
+     *
      * @return \Illuminate\Support\Collection
      */
     public function import()

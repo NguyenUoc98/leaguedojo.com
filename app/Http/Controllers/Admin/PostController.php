@@ -12,7 +12,7 @@ class PostController extends VoyagerBaseController
      */
     public function getCloneFields(Request $request)
     {
-        $id = $request->divCount;
+        $id    = $request->divCount;
         $varId = 'keyword_' . $id;
         return view("voyager::posts.keyword-fields", compact('id', 'varId'));
     }

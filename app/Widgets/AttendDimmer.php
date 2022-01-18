@@ -21,7 +21,7 @@ class AttendDimmer extends BaseDimmer
      */
     public function run()
     {
-        $count = Attend::where('confirmed', 'WAIT')->count();
+        $count  = Attend::where('confirmed', 'WAIT')->count();
         $string = trans_choice('ĐK sự kiện mới', $count);
 
         return view('voyager::dimmer', array_merge($this->config, [
@@ -32,7 +32,7 @@ class AttendDimmer extends BaseDimmer
                 'text' => __('voyager::dimmer.post_link_text'),
                 'link' => route('voyager.attends.index'),
             ],
-            'image' => '#ffc107',
+            'image'  => '#ffc107',
         ]));
     }
 

@@ -48,7 +48,8 @@ class DocumentController extends Controller
         $meta_title    = 'Tài liệu';
         // SEO
 
-        return view('documents.index', compact('documents', 'meta_desc', 'meta_keywords', 'url_canonical', 'image_og', 'meta_title'));
+        return view('documents.index',
+            compact('documents', 'meta_desc', 'meta_keywords', 'url_canonical', 'image_og', 'meta_title'));
     }
 
     /**
@@ -73,7 +74,8 @@ class DocumentController extends Controller
         $meta_title    = $document->title;
         // SEO
 
-        return view('documents.show', compact('document', 'meta_desc', 'meta_keywords', 'url_canonical', 'image_og', 'meta_title'));
+        return view('documents.show',
+            compact('document', 'meta_desc', 'meta_keywords', 'url_canonical', 'image_og', 'meta_title'));
     }
 
     public function test()
@@ -84,7 +86,7 @@ class DocumentController extends Controller
     public function preview($slug)
     {
         $document = $this->document->whereSlug($slug)->firstOrFail();
-        $path = json_decode($document->file)[0];
+        $path     = json_decode($document->file)[0];
         if (!$path) {
             abort(404);
         }

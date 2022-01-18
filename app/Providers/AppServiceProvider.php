@@ -33,7 +33,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind('TimeYoutube',function(){
+        $this->app->bind('TimeYoutube', function () {
             return new TimeYoutube();
         });
 

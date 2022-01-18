@@ -23,7 +23,7 @@ class StudentDimmer extends BaseDimmer
      */
     public function run()
     {
-        $count = Student::count();
+        $count  = Student::count();
         $string = trans_choice('voyager::dimmer.student', $count);
 
         return view('voyager::dimmer', array_merge($this->config, [
@@ -34,7 +34,7 @@ class StudentDimmer extends BaseDimmer
                 'text' => __('voyager::dimmer.student_link_text'),
                 'link' => route('voyager.students.index'),
             ],
-            'image' => '#dc3545',
+            'image'  => '#dc3545',
         ]));
     }
 

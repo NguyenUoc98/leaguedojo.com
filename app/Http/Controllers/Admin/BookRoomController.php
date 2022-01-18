@@ -24,23 +24,23 @@ class BookRoomController extends Controller
 
     /**
      * Reject attends event
-     * 
+     *
      * @param $request
-     * @return void 
+     * @return void
      */
     public function reject(Request $request)
     {
         $bookRoom = BookRoom::find($request->id);
         $bookRoom->update([
             'reason_reject' => $request->reason,
-            'confirmed' => 'REJECTED',
+            'confirmed'     => 'REJECTED',
         ]);
 
         $room = Room::find($bookRoom->room_id);
 
         $data = [
             "text" => 'Phòng <b>' . $room->name . '</b> bạn book đã bị từ chối',
-            "img" => '/img/core-img/notification.png',
+            "img"  => '/img/core-img/notification.png',
             "icon" => '/img/core-img/icon-notify.png',
             "href" => route('rooms.index'),
             "time" => Carbon::now(),
@@ -48,7 +48,9 @@ class BookRoomController extends Controller
 
         $student = Student::find($bookRoom->student_id);
         Notification::send($student->user, new Notify($data, 'book-room'));
-        Notification::send($student->user, new RejectBookRoom($student->name, $room->name, $room->address, substr($bookRoom->start_at, 0, -3), substr($bookRoom->end_at, 0, -3), $request->reason));
+        Notification::send($student->user,
+            new RejectBookRoom($student->name, $room->name, $room->address, substr($bookRoom->start_at, 0, -3),
+                substr($bookRoom->end_at, 0, -3), $request->reason));
 
         return redirect()->back()->with([
             'message'    => 'Đã từ chối',
@@ -58,25 +60,26 @@ class BookRoomController extends Controller
 
     /**
      * Confirm attends event
-     * 
+     *
      * @param $request
-     * @return void 
+     * @return void
      */
     public function confirm(Request $request)
     {
-        $bookRoom = BookRoom::find($request->id);
-        $room = Room::find($bookRoom->room_id);
-        $uptimes = $room->uptimes()->where('weekdays', Carbon::parse($bookRoom->date)->dayOfWeek)->first();
+        $bookRoom  = BookRoom::find($request->id);
+        $room      = Room::find($bookRoom->room_id);
+        $uptimes   = $room->uptimes()->where('weekdays', Carbon::parse($bookRoom->date)->dayOfWeek)->first();
         $spaceTime = $this->room->spaceTime($room->id, $bookRoom->date, $uptimes->uptimes);
 
-        if ($this->room->checkTime(json_decode($spaceTime), substr($bookRoom->start_at, 0, -3), substr($bookRoom->end_at, 0, -3))) {
+        if ($this->room->checkTime(json_decode($spaceTime), substr($bookRoom->start_at, 0, -3),
+            substr($bookRoom->end_at, 0, -3))) {
             $bookRoom->update([
                 'confirmed' => 'CONFIRMED',
             ]);
 
             $data = [
                 "text" => 'Phòng <b>' . $room->name . '</b> bạn book đã được chấp nhận',
-                "img" => '/img/core-img/notification.png',
+                "img"  => '/img/core-img/notification.png',
                 "icon" => '/img/core-img/icon-notify.png',
                 "href" => route('rooms.index'),
                 "time" => Carbon::now(),
@@ -84,7 +87,9 @@ class BookRoomController extends Controller
 
             $student = Student::find($bookRoom->student_id);
             Notification::send($student->user, new Notify($data, 'book-room'));
-            Notification::send($student->user, new ConfirmBookRoom($student->name, $room->name, $room->address, substr($bookRoom->start_at, 0, -3), substr($bookRoom->end_at, 0, -3)));
+            Notification::send($student->user,
+                new ConfirmBookRoom($student->name, $room->name, $room->address, substr($bookRoom->start_at, 0, -3),
+                    substr($bookRoom->end_at, 0, -3)));
         } else {
             return response()->json([
                 'error' => 'Thời gian đặt phòng không hợp lệ!',

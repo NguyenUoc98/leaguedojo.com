@@ -26,7 +26,7 @@ class RemovePlaylist extends AbstractAction
         return [
             'class'   => 'btn btn-sm btn-dark',
             'data-id' => $this->data->{$this->data->getKeyName()},
-            'id'      => 'remove-'.$this->data->{$this->data->getKeyName()},
+            'id'      => 'remove-' . $this->data->{$this->data->getKeyName()},
         ];
     }
 

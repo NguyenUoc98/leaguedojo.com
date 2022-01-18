@@ -16,22 +16,22 @@ class AttendController extends Controller
 {
     /**
      * Reject attends event
-     * 
+     *
      * @param $request
-     * @return void 
+     * @return void
      */
     public function reject(Request $request)
     {
         $attend = Attend::find($request->id);
         $attend->update([
-            'confirmed' => 'REJECTED',
+            'confirmed'     => 'REJECTED',
             'reason_reject' => $request->reason,
         ]);
 
         $event = Event::find($attend->event_id);
 
         $data = [
-            "text" => 'Sự kiện <b>'. $event->name .'</b> đã bị từ chối. Lý do: ' . $request->reason,
+            "text" => 'Sự kiện <b>' . $event->name .'</b> đã bị từ chối. Lý do: ' . $request->reason,
             "img" => Voyager::image($event->image),
             "icon" => '/img/core-img/icon-notify.png',
             "href" => route('events.index', ['active_tab' => 'signed']),
@@ -49,9 +49,9 @@ class AttendController extends Controller
 
     /**
      * Confirm attends event
-     * 
+     *
      * @param $request
-     * @return void 
+     * @return void
      */
     public function confirm(Request $request)
     {
@@ -64,9 +64,9 @@ class AttendController extends Controller
         $event = Event::find($attend->event_id);
 
         $data = [
-            "text" => 'Sự kiện <b>'. $event->name .'</b> đã được xác nhận',
+            "text" => 'Sự kiện <b>' . $event->name . '</b> đã được xác nhận',
             "icon" => '/img/core-img/icon-notify.png',
-            "img" => Voyager::image($event->image),
+            "img"  => Voyager::image($event->image),
             "href" => route('events.index', ['active_tab' => 'signed']),
             "time" => Carbon::now(),
         ];

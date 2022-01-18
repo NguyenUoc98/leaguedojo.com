@@ -36,14 +36,15 @@ class VoucherController extends Controller
             $voucherCollected = Auth::user()->student->vouchers;
 
             // SEO
-            $meta_desc = 'Trang tổng hợp các mã giảm giá của hệ thống Karate League Dojo mà võ sinh đã thu thập hoặc chưa, đã sử dụng và chưa sử dụng';
+            $meta_desc     = 'Trang tổng hợp các mã giảm giá của hệ thống Karate League Dojo mà võ sinh đã thu thập hoặc chưa, đã sử dụng và chưa sử dụng';
             $meta_keywords = 'mã giảm giá, học phí, thu thập';
             $url_canonical = route('vouchers.index');
-            $image_og = '';
-            $meta_title = 'Hóa đơn nộp học phí';
+            $image_og      = '';
+            $meta_title    = 'Hóa đơn nộp học phí';
             // SEO
 
-            return view('vouchers.index', compact('voucherCollected', 'meta_desc', 'meta_keywords', 'url_canonical', 'image_og', 'meta_title'));
+            return view('vouchers.index',
+                compact('voucherCollected', 'meta_desc', 'meta_keywords', 'url_canonical', 'image_og', 'meta_title'));
         } else {
             abort(403);
         }
@@ -52,7 +53,7 @@ class VoucherController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  string  $code
+     * @param string $code
      * @return \Illuminate\Http\Response
      */
     public function show($code)
@@ -93,12 +94,13 @@ class VoucherController extends Controller
     public function getVoucher(Request $request)
     {
         // Kiểm tra xem có chưa?
-        if (is_null(StudentVoucher::where('student_id', Auth::user()->student->id)->where('voucher_id', $request->voucher_id)->first())) {
+        if (is_null(StudentVoucher::where('student_id', Auth::user()->student->id)->where('voucher_id',
+            $request->voucher_id)->first())) {
             $studentVoucher = StudentVoucher::create([
                 'student_id' => Auth::user()->student->id,
                 'voucher_id' => $request->voucher_id,
             ]);
-            $voucher = Voucher::find($request->voucher_id);
+            $voucher        = Voucher::find($request->voucher_id);
             if ($studentVoucher) {
                 $voucher->update(["used" => $voucher->used + 1]);
             }

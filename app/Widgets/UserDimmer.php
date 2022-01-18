@@ -7,7 +7,7 @@ use Illuminate\Support\Str;
 use TCG\Voyager\Widgets\BaseDimmer;
 use TCG\Voyager\Facades\Voyager;
 use App\User;
-        
+
 class UserDimmer extends BaseDimmer
 {
     /**
@@ -23,7 +23,7 @@ class UserDimmer extends BaseDimmer
      */
     public function run()
     {
-        $count = User::count();
+        $count  = User::count();
         $string = trans_choice('voyager::dimmer.user', $count);
 
         return view('voyager::dimmer', array_merge($this->config, [
@@ -34,7 +34,7 @@ class UserDimmer extends BaseDimmer
                 'text' => __('voyager::dimmer.user_link_text'),
                 'link' => route('voyager.users.index'),
             ],
-            'image' => '#00c0ef',
+            'image'  => '#00c0ef',
         ]));
     }
 

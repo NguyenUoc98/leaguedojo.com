@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3fd5bccb85164339b3efe68e0b5ff8cf",
+    "content-hash": "e6258b41f1ca058816a93965d43bcefe",
     "packages": [
         {
             "name": "aalaap/faker-youtube",
@@ -1712,6 +1712,66 @@
                 "source": "https://github.com/highideas/laravel-users-online/tree/3.0.1"
             },
             "time": "2019-10-07T08:40:06+00:00"
+        },
+        {
+            "name": "inani/larapoll",
+            "version": "3.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/akiyamaSM/larapoll.git",
+                "reference": "5097e9fdf6b696d3d2634ea1ada111be6453282b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/akiyamaSM/larapoll/zipball/5097e9fdf6b696d3d2634ea1ada111be6453282b",
+                "reference": "5097e9fdf6b696d3d2634ea1ada111be6453282b",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "~5|~6|~7|~8"
+            },
+            "require-dev": {
+                "fzaninotto/faker": "~1.4",
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Inani\\Larapoll\\LarapollServiceProvider"
+                    ],
+                    "aliases": {
+                        "PollWriter": "Inani\\Larapoll\\PollWriterFacade"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Inani\\Larapoll\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Inani El Houssain",
+                    "email": "inanielhoussain@gmail.com"
+                }
+            ],
+            "description": "A Laravel package to create polls",
+            "keywords": [
+                "laravel",
+                "php",
+                "polls",
+                "votes"
+            ],
+            "support": {
+                "issues": "https://github.com/akiyamaSM/larapoll/issues",
+                "source": "https://github.com/akiyamaSM/larapoll/tree/3.1"
+            },
+            "time": "2021-06-05T16:03:17+00:00"
         },
         {
             "name": "intervention/image",

@@ -11,19 +11,20 @@ class Attend extends Model
     use FormLayoutTrait;
 
     protected $fillable = [
-        'confirmed', 'reason_reject',
+        'confirmed',
+        'reason_reject',
     ];
 
     public static $methodColors = [
-        'CONFIRMED'    => 'green',
-        'WAIT'   => 'yellow',
-        'REJECTED' => 'red',
+        'CONFIRMED' => 'green',
+        'WAIT'      => 'yellow',
+        'REJECTED'  => 'red',
     ];
 
     public static $methodTexts = [
-        'CONFIRMED'    => 'Đã xác nhận',
-        'WAIT'   => 'Chờ xác nhận',
-        'REJECTED' => 'Bị từ chối',
+        'CONFIRMED' => 'Đã xác nhận',
+        'WAIT'      => 'Chờ xác nhận',
+        'REJECTED'  => 'Bị từ chối',
     ];
 
     public function formFields()

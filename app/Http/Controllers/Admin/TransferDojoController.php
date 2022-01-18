@@ -27,36 +27,39 @@ class TransferDojoController extends Controller
     public function __construct(TransferDojo $transferDojo, Dojo $dojo)
     {
         $this->transferDojo = $transferDojo;
-        $this->dojo = $dojo;
+        $this->dojo         = $dojo;
         $this->middleware('auth');
         $this->middleware('verified');
     }
-    
+
     /**
      * Confirm transfer dojo from student and caculate tuitions again
-     * 
+     *
      * @param $request
-     * @return void 
+     * @return void
      */
     public function confirm(Request $request)
     {
         $transferDojo = TransferDojo::find($request->id);
-        $student = Student::find($transferDojo->student_id);
-        $currentDojo = $this->dojo->find($transferDojo->current_dojo_id);
-        $newDojo = $this->dojo->find($transferDojo->new_dojo_id);
+        $student      = Student::find($transferDojo->student_id);
+        $currentDojo  = $this->dojo->find($transferDojo->current_dojo_id);
+        $newDojo      = $this->dojo->find($transferDojo->new_dojo_id);
 
-        $change = $this->dojo->updatePriceWhenChangDojo($student->id, $transferDojo->date_transfer, $currentDojo, $newDojo);
+        $change = $this->dojo->updatePriceWhenChangDojo($student->id, $transferDojo->date_transfer, $currentDojo,
+            $newDojo);
 
         $data = [
             "text" => 'Đăng ký chuyển cơ sở tập luyện từ <b>' . $currentDojo->name . '</b> sang <b>' . $newDojo->name . '</b> đã được chấp nhận.',
-            "img" => '/img/core-img/notification.png',
+            "img"  => '/img/core-img/notification.png',
             "icon" => '/img/core-img/icon-notify.png',
             "href" => '#',
             "time" => Carbon::now(),
         ];
 
         Notification::send($student->user, new Notify($data, 'transfer-dojo'));
-        Notification::send($student->user, new ConfirmTransferDojo($student->name, $currentDojo->name, $newDojo->name, $change, Carbon::parse($transferDojo->date_transfer)->format('m/Y')));
+        Notification::send($student->user,
+            new ConfirmTransferDojo($student->name, $currentDojo->name, $newDojo->name, $change,
+                Carbon::parse($transferDojo->date_transfer)->format('m/Y')));
 
         // Chuyển dojo_id trong bảng students
         $student->update([
@@ -70,30 +73,31 @@ class TransferDojoController extends Controller
 
     /**
      * Reject transfer dojo from student and caculate tuitions again
-     * 
+     *
      * @param $request
-     * @return void 
+     * @return void
      */
     public function reject(Request $request)
     {
         $transferDojo = TransferDojo::find($request->id);
-        $student = Student::find($transferDojo->student_id);
-        $currentDojo = $this->dojo->find($transferDojo->current_dojo_id);
-        $newDojo = $this->dojo->find($transferDojo->new_dojo_id);
+        $student      = Student::find($transferDojo->student_id);
+        $currentDojo  = $this->dojo->find($transferDojo->current_dojo_id);
+        $newDojo      = $this->dojo->find($transferDojo->new_dojo_id);
 
         $data = [
             "text" => 'Đăng ký chuyển cơ sở tập luyện từ <b>' . $currentDojo->name . '</b> sang <b>' . $newDojo->name . '</b> đã không được chấp nhận.',
-            "img" => '/img/core-img/notification.png',
+            "img"  => '/img/core-img/notification.png',
             "icon" => '/img/core-img/icon-notify.png',
             "href" => '#',
             "time" => Carbon::now(),
         ];
 
         Notification::send($student->user, new Notify($data, 'transfer-dojo'));
-        Notification::send($student->user, new RejectTransferDojo($student->name, $currentDojo->name, $newDojo->name, $request->reason));
+        Notification::send($student->user,
+            new RejectTransferDojo($student->name, $currentDojo->name, $newDojo->name, $request->reason));
 
         $transferDojo->update([
-            'confirmed' => 'REJECTED',
+            'confirmed'     => 'REJECTED',
             'reason_reject' => $request->reason,
         ]);
 

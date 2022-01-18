@@ -38,25 +38,27 @@ class EventController extends Controller
     public function index(Request $request)
     {
         if (Auth::user()->isStudent()) {
-            $student = Auth::user()->student;
+            $student      = Auth::user()->student;
             $eventSigneds = $student->eventSigneds();
-            $signed = collect($eventSigneds)->map(function($value, $index) {
+            $signed       = collect($eventSigneds)->map(function ($value, $index) {
                 return $value->id;
             });
             $eventNotSign = $student->eventNotSign($signed->toArray());
 
             $active_tab = $request->active_tab ?? 'signed';
-            $point = $student->pointCollected();
+            $point      = $student->pointCollected();
 
             // SEO
-            $meta_desc = 'quản lý, tìm kiếm các sự kiện đã đăng ký xác nhận hoặc chưa';
+            $meta_desc     = 'quản lý, tìm kiếm các sự kiện đã đăng ký xác nhận hoặc chưa';
             $meta_keywords = 'sự kiện, tích lũy điểm rèn luyện, đăng ký';
             $url_canonical = route('events.index');
-            $image_og = '';
-            $meta_title = 'Sự kiện';
+            $image_og      = '';
+            $meta_title    = 'Sự kiện';
             // SEO
 
-            return view('events.index', compact('eventSigneds', 'active_tab', 'eventNotSign', 'point', 'meta_desc', 'meta_keywords', 'url_canonical', 'image_og', 'meta_title'));
+            return view('events.index',
+                compact('eventSigneds', 'active_tab', 'eventNotSign', 'point', 'meta_desc', 'meta_keywords',
+                    'url_canonical', 'image_og', 'meta_title'));
         } else {
             abort(403);
         }

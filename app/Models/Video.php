@@ -18,7 +18,15 @@ class Video extends Model
      * @var array
      */
     protected $fillable = [
-        'title', 'description', 'thumbnail', 'duration', 'view_count', 'like_count', 'dislike_count', 'comment_count', 'keywords',
+        'title',
+        'description',
+        'thumbnail',
+        'duration',
+        'view_count',
+        'like_count',
+        'dislike_count',
+        'comment_count',
+        'keywords',
     ];
 
     /**
@@ -36,7 +44,8 @@ class Video extends Model
     {
         return $this->field('youtubeId', 6)->field('thumbnail', 6)
             ->field('title', 6)->field('slug', 6)
-            ->field('duration', 2)->field('description', 6)->field('view_count', 6)->field('like_count', 6)->field('dislike_count', 2)->field('comment_count', 2)
+            ->field('duration', 2)->field('description', 6)->field('view_count', 6)->field('like_count',
+                6)->field('dislike_count', 2)->field('comment_count', 2)
             ->field('seo_title', 12)
             ->field('video_belongsto_playlist_relationship', 8)->field('status', 2)->field('featured', 2)
             ->field('meta_keywords', 6)->field('meta_description', 6)->get();
@@ -44,7 +53,7 @@ class Video extends Model
 
     /**
      * Get 5 latest videos(PUBLISHED)
-     * 
+     *
      * @return array
      */
     public function latestVideos()
@@ -60,7 +69,7 @@ class Video extends Model
 
     /**
      * Get all video in the same playlist
-     * 
+     *
      * @param $id
      * @return Illuminate\Database\Eloquent\Collection
      */
@@ -75,7 +84,7 @@ class Video extends Model
 
     /**
      * Order by views
-     * 
+     *
      * @param int $limit
      * @param boolean $featured
      * @return array
@@ -89,7 +98,7 @@ class Video extends Model
         if ($limit != 0) {
             $videosYouTube = $videosYouTube->limit(setting('app.order_by_view'));
         } else {
-            if($paginate) {
+            if ($paginate) {
                 return $videosYouTube = $videosYouTube->orderBy('view_count', 'desc')->with('comments')->paginate(8);
             }
         }
@@ -99,7 +108,7 @@ class Video extends Model
 
     /**
      * Get the newest feature video
-     * 
+     *
      * @return Illuminate\Database\Eloquent\Collection
      */
     public function newestFeatured()
@@ -110,21 +119,21 @@ class Video extends Model
 
     /**
      * Sync all video in DB with information on Youtube
-     * 
+     *
      * @return boolean
      */
     public function updateAll()
     {
         $videos = $this->all();
         foreach ($videos as $video) {
-            $info = Youtube::getVideoInfo($video->youtubeId);
+            $info    = Youtube::getVideoInfo($video->youtubeId);
             $updated = $video->update([
-                'title' => $info->snippet->title,
-                'description' => $info->snippet->description,
-                'thumbnail' => $info->snippet->thumbnails->high->url,
-                'duration' => $info->contentDetails->duration,
-                'view_count' => $info->statistics->viewCount,
-                'like_count' => $info->statistics->likeCount,
+                'title'         => $info->snippet->title,
+                'description'   => $info->snippet->description,
+                'thumbnail'     => $info->snippet->thumbnails->high->url,
+                'duration'      => $info->contentDetails->duration,
+                'view_count'    => $info->statistics->viewCount,
+                'like_count'    => $info->statistics->likeCount,
                 'dislike_count' => $info->statistics->dislikeCount,
                 'comment_count' => $info->statistics->commentCount
             ]);
@@ -137,7 +146,7 @@ class Video extends Model
 
     /**
      * Remove Videos outside Playlist
-     * 
+     *
      * @return boolean
      */
     public function removePlaylist($video)

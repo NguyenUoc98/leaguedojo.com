@@ -12,6 +12,7 @@ use Illuminate\Queue\SerializesModels;
 class RejectWorkout extends Mailable
 {
     use Queueable, SerializesModels;
+
     protected $workoutRegistration;
     protected $reason;
 
@@ -23,7 +24,7 @@ class RejectWorkout extends Mailable
     public function __construct($workoutRegistration, $reason)
     {
         $this->workoutRegistration = $workoutRegistration;
-        $this->reason = $reason;
+        $this->reason              = $reason;
     }
 
     /**
@@ -34,15 +35,15 @@ class RejectWorkout extends Mailable
     public function build()
     {
         return $this->subject('Thông báo xác nhận đăng ký tập luyện.')
-                ->html(
-                    (new MailMessage)
-                        ->error()
-                        ->greeting('Xin chào ' . $this->workoutRegistration->name . '!')
-                        ->line('Chúng tôi đã nhận được đăng ký tập luyện tại cơ sở ' . Dojo::find($this->workoutRegistration->dojo_id)->name . ' của bạn.')
-                        ->line('Chúng tôi rất tiếc khi phải thông báo rằng đơn đăng ký của bạn đã không được chấp nhận!')
-                        ->line('Lý do: ' . $this->reason)
-                        ->line('Rất mong bạn thông cảm và hẹn gặp bạn vào một dịp khác')
-                        ->line('Hân hạnh được phục vụ bạn!')->render()
-                );
+            ->html(
+                (new MailMessage)
+                    ->error()
+                    ->greeting('Xin chào ' . $this->workoutRegistration->name . '!')
+                    ->line('Chúng tôi đã nhận được đăng ký tập luyện tại cơ sở ' . Dojo::find($this->workoutRegistration->dojo_id)->name . ' của bạn.')
+                    ->line('Chúng tôi rất tiếc khi phải thông báo rằng đơn đăng ký của bạn đã không được chấp nhận!')
+                    ->line('Lý do: ' . $this->reason)
+                    ->line('Rất mong bạn thông cảm và hẹn gặp bạn vào một dịp khác')
+                    ->line('Hân hạnh được phục vụ bạn!')->render()
+            );
     }
 }

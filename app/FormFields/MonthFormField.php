@@ -11,9 +11,9 @@ class MonthFormField extends AbstractHandler
     public function createContent($row, $dataType, $dataTypeContent, $options)
     {
         return view('vendor.voyager.formfields.month', [
-            'row' => $row,
-            'options' => $options,
-            'dataType' => $dataType,
+            'row'             => $row,
+            'options'         => $options,
+            'dataType'        => $dataType,
             'dataTypeContent' => $dataTypeContent
         ]);
     }

@@ -26,7 +26,7 @@ class TuitionPolicyController extends VoyagerBaseController
     public function __construct(TuitionPolicy $tuitionPolicy, Dojo $dojo)
     {
         $this->tuitionPolicy = $tuitionPolicy;
-        $this->dojo = $dojo;
+        $this->dojo          = $dojo;
     }
 
     /**
@@ -48,7 +48,7 @@ class TuitionPolicyController extends VoyagerBaseController
         // Validate fields with ajax
         $val = $this->validateBread($request->all(), $dataType->addRows)->validate();
 
-        $now = Carbon::now();
+        $now        = Carbon::now();
         $monthStart = Carbon::parse($request->date_apply, 'Asia/Ho_Chi_Minh');
 
         // Kiểm tra tháng bắt đầu áp dụng không được là tháng hiện tại hoặc quá khứ
@@ -60,7 +60,7 @@ class TuitionPolicyController extends VoyagerBaseController
         }
 
         $lastPolicy = $this->tuitionPolicy->where('dojo_id', $request->dojo_id)->orderBy('date_apply', 'desc')->first();
-        if(!is_null($lastPolicy)) {
+        if (!is_null($lastPolicy)) {
 
             // Kiểm tra tháng áp dụng với chính sách hiện tại
             $lastPolicyMonthStart = Carbon::parse($lastPolicy->date_apply, 'Asia/Ho_Chi_Minh');
@@ -73,14 +73,14 @@ class TuitionPolicyController extends VoyagerBaseController
 
             // Kiểm tra trùng lặp
             $policy = ($request->policy == 'on') ? 1 : 0;
-            if(($lastPolicy->price == $request->price) && ($lastPolicy->policy == $policy)) {
+            if (($lastPolicy->price == $request->price) && ($lastPolicy->policy == $policy)) {
                 return redirect()->back()->with([
                     'message'    => "Chính sách mới trùng lặp với chính sách hiện tại",
                     'alert-type' => 'warning',
                 ]);
             }
 
-            if($lastPolicy->price == $request->price) {
+            if ($lastPolicy->price == $request->price) {
                 return redirect()->back()->with([
                     'message'    => "Mức học phí không thay đổi so với chính sách hiện tại",
                     'alert-type' => 'warning',
@@ -91,22 +91,26 @@ class TuitionPolicyController extends VoyagerBaseController
         $data = $this->insertUpdateData($request, $slug, $dataType->addRows, new $dataType->model_name());
         event(new BreadDataAdded($dataType, $data));
 
-        $dojo = Dojo::find($data->dojo_id);
+        $dojo     = Dojo::find($data->dojo_id);
         $priceNew = $data->price;
 
         // Cập nhật lại học phí của các võ sinh trong cơ sở
-        if(!is_null($lastPolicy)) {
+        if (!is_null($lastPolicy)) {
             $priceOld = $lastPolicy->price;
             $students = $dojo->students()->whereStatus('STUDYING')->get();
             if ($data->policy == 0) {
                 foreach ($students as $student) {
-                    $change = $this->dojo->updatePrice($student->id,$data->date_apply, $priceOld, $priceNew);
-                    Notification::send($student->user, new UpdatePrice($student->name, $dojo->name, $priceNew, $priceOld, $change, Carbon::parse($data->date_apply)->format('m/Y')));
+                    $change = $this->dojo->updatePrice($student->id, $data->date_apply, $priceOld, $priceNew);
+                    Notification::send($student->user,
+                        new UpdatePrice($student->name, $dojo->name, $priceNew, $priceOld, $change,
+                            Carbon::parse($data->date_apply)->format('m/Y')));
                 }
             } else {
                 foreach ($students as $student) {
                     $change = ['Tuy nhiên, những tháng bạn đã nộp học phí trước đó sẽ được bảo lưu và áp dụng mức học phí mới bắt đầu từ lần nộp học phí tiếp theo.'];
-                    Notification::send($student->user, new UpdatePrice($student->name, $data->name, $priceNew, $priceOld, $change, Carbon::parse($data->date_apply)->format('m/Y')));
+                    Notification::send($student->user,
+                        new UpdatePrice($student->name, $data->name, $priceNew, $priceOld, $change,
+                            Carbon::parse($data->date_apply)->format('m/Y')));
                 }
             }
         }

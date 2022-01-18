@@ -25,13 +25,13 @@ class UserRequest extends FormRequest
     {
         if ($this->has(['name', 'email'])) {
             return [
-                'name' => 'required|string|max:40',
+                'name'  => 'required|string|max:40',
                 'email' => 'required|string|email|max:60|unique:users,email,' . auth()->user()->id,
             ];
         } elseif ($this->has(['password'])) {
             return [
                 'old_password' => 'required',
-                'password' => 'required|string|min:8|confirmed|different:old_password',
+                'password'     => 'required|string|min:8|confirmed|different:old_password',
             ];
         } else {
             return [];

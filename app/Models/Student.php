@@ -23,7 +23,7 @@ class Student extends Model
 
     public function __construct()
     {
-        $this->now = Carbon::now()->format('Y-m-d');
+        $this->now           = Carbon::now()->format('Y-m-d');
         $this->startSemester = Carbon::createFromFormat('d/m', setting('app.deadline_point'))->format('Y-m-d');
         if ($this->now <= $this->startSemester) {
             $this->startSemester = Carbon::parse($this->startSemester)->subYear()->format('Y-m-d');
@@ -31,13 +31,13 @@ class Student extends Model
     }
 
     public static $methodField = [
-        'goldMedal' => 'Huy chương vàng',
-        'silverMedal' => 'Huy chương bạc',
-        'bronzeMedal' => 'Huy chương đồng',
-        'mediumScore' => 'Điểm thi TB',
-        'valedictorian' => 'Thủ khoa',
+        'goldMedal'      => 'Huy chương vàng',
+        'silverMedal'    => 'Huy chương bạc',
+        'bronzeMedal'    => 'Huy chương đồng',
+        'mediumScore'    => 'Điểm thi TB',
+        'valedictorian'  => 'Thủ khoa',
         'pointCollected' => 'Điểm sự kiện',
-        'diligence' => 'Số buổi nghỉ'
+        'diligence'      => 'Số buổi nghỉ'
     ];
 
     /**
@@ -45,7 +45,7 @@ class Student extends Model
      */
     public function paginate($items, $perPage = 15, $page = null, $options = [])
     {
-        $page = $page ?: (PaginationPaginator::resolveCurrentPage() ?: 1);
+        $page  = $page ?: (PaginationPaginator::resolveCurrentPage() ?: 1);
         $items = $items instanceof Collection ? $items : Collection::make($items);
         return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, $options);
     }
@@ -56,8 +56,25 @@ class Student extends Model
      * @var array
      */
     protected $fillable = [
-        'id', 'image', 'name', 'phone', 'cmnd', 'birthday', 'address', 'homeland', 'type', 'work_unit', 'kuy', 'weight', 'height', 'sex',
-        'link_fb', 'admission_day', 'dojo_id', 'diligence', 'status',
+        'id',
+        'image',
+        'name',
+        'phone',
+        'cmnd',
+        'birthday',
+        'address',
+        'homeland',
+        'type',
+        'work_unit',
+        'kuy',
+        'weight',
+        'height',
+        'sex',
+        'link_fb',
+        'admission_day',
+        'dojo_id',
+        'diligence',
+        'status',
     ];
 
     public function getImageAttribute($value)
@@ -96,7 +113,8 @@ class Student extends Model
      */
     public function events()
     {
-        return $this->belongsToMany(Event::class, 'attends')->orderByDesc('date')->orderBy('start_at')->withPivot('confirmed');
+        return $this->belongsToMany(Event::class,
+            'attends')->orderByDesc('date')->orderBy('start_at')->withPivot('confirmed');
     }
 
     /**
@@ -104,7 +122,9 @@ class Student extends Model
      */
     public function rooms()
     {
-        return $this->belongsToMany(Room::class, 'book_rooms')->orderByDesc('book_rooms.date')->orderBy('book_rooms.start_at')->withPivot('id','confirmed', 'date', 'start_at', 'end_at', 'reason_reject');
+        return $this->belongsToMany(Room::class,
+            'book_rooms')->orderByDesc('book_rooms.date')->orderBy('book_rooms.start_at')->withPivot('id', 'confirmed',
+            'date', 'start_at', 'end_at', 'reason_reject');
     }
 
     /**
@@ -165,17 +185,18 @@ class Student extends Model
 
     /**
      * Get events not sign
-     * 
+     *
      * @return Collection
      */
     public function eventNotSign(array $signed)
     {
-        return Event::whereNotIn('id', $signed)->where('date', '>', $this->startSemester)->where('date', '<=', $this->now)->get();
+        return Event::whereNotIn('id', $signed)->where('date', '>', $this->startSemester)->where('date', '<=',
+            $this->now)->get();
     }
 
     /**
      * Get events signed
-     * 
+     *
      * @return Collection
      */
     public function eventSigneds()
@@ -185,7 +206,7 @@ class Student extends Model
 
     /**
      * Get point collected from events joined
-     * 
+     *
      * @return Integer
      */
     public function pointCollected()
@@ -201,14 +222,14 @@ class Student extends Model
 
     /**
      * Get count of medal for each type
-     * 
+     *
      * @return array
      */
     public function countMedal()
     {
         $achievements = $this->achievements->where('date', '>', $this->startSemester)->where('date', '<=', $this->now);
-        $test = collect($achievements)->map(function ($value, $key) {
-            return  $value['medal'];
+        $test         = collect($achievements)->map(function ($value, $key) {
+            return $value['medal'];
         });
 
         return array_count_values($test->toArray());
@@ -216,14 +237,14 @@ class Student extends Model
 
     /**
      * Get medium test score
-     * 
+     *
      * @return Integer
      */
     public function mediumScore()
     {
-        $point = 0;
+        $point         = 0;
         $valedictorian = 0;
-        $sub = 4;
+        $sub           = 4;
         if ($this->kuy >= 7 && $this->kuy <= 10) {
             $sub = 3;
         }
@@ -235,26 +256,29 @@ class Student extends Model
             }
         }
 
-        return ['point' => (count($tests) != 0) ? round($point / count($tests), 2) : 0, 'valedictorian' => $valedictorian];
+        return [
+            'point'         => (count($tests) != 0) ? round($point / count($tests), 2) : 0,
+            'valedictorian' => $valedictorian
+        ];
     }
 
     /**
      * Get information of point training
-     * 
+     *
      * @return array
      */
     public function getPointTraining()
     {
         $pointTraining = [];
-        $medal = $this->countMedal();
+        $medal         = $this->countMedal();
 
         // Tính số huy chương trong khoảng thời gian
-        $pointTraining['goldMedal'] = $medal['GOLD'] ?? 0;
+        $pointTraining['goldMedal']   = $medal['GOLD'] ?? 0;
         $pointTraining['silverMedal'] = $medal['SILVER'] ?? 0;
         $pointTraining['bronzeMedal'] = $medal['BRONZE'] ?? 0;
 
         // Tính điểm thi thăng đai trung bình trong khoảng thời gian
-        $pointTraining['mediumScore'] = $this->mediumScore()['point'];
+        $pointTraining['mediumScore']   = $this->mediumScore()['point'];
         $pointTraining['valedictorian'] = $this->mediumScore()['valedictorian'];
 
         // Tổng điểm rèn luyện
@@ -283,8 +307,14 @@ class Student extends Model
     public function rankResults($perPage = 10)
     {
         $students = $this->whereStatus('STUDYING')->with('User')->get();
-        $array = $students->map(function ($value, $index) {
-            return ['student_id' => $value->id, 'name' => $value->name, 'sex' => $value->sex, 'avatar' => $value->user->avatar, 'result' => $value->getPointTraining()];
+        $array    = $students->map(function ($value, $index) {
+            return [
+                'student_id' => $value->id,
+                'name'       => $value->name,
+                'sex'        => $value->sex,
+                'avatar'     => $value->user->avatar,
+                'result'     => $value->getPointTraining()
+            ];
         })->toArray();
 
         usort($array, function ($student1, $student2) {

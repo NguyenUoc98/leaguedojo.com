@@ -27,8 +27,8 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(UserRequest $request, User $user)
@@ -36,7 +36,7 @@ class UserController extends Controller
         // Update Name and Email
         if ($request->type == 'edit') {
             $user->update([
-                'name' => $request->name,
+                'name'  => $request->name,
                 'email' => $request->email,
             ]);
             $student = $user->student;
@@ -57,7 +57,7 @@ class UserController extends Controller
             $data = base64_decode($data);
 
             $imageName = time() . '.png';
-            $path = public_path() . '/storage/users/' . Carbon::now('Asia/Ho_Chi_Minh')->format('FY');
+            $path      = public_path() . '/storage/users/' . Carbon::now('Asia/Ho_Chi_Minh')->format('FY');
             File::isDirectory($path) or File::makeDirectory($path);
             file_put_contents($path . '/' . $imageName, $data);
 

@@ -11,6 +11,7 @@ use Illuminate\Notifications\Notification;
 class Notify extends Notification implements ShouldQueue
 {
     use Queueable;
+
     public $data;
     public $type;
 
@@ -28,7 +29,7 @@ class Notify extends Notification implements ShouldQueue
     /**
      * Get the notification's delivery channels.
      *
-     * @param  mixed  $notifiable
+     * @param mixed $notifiable
      * @return array
      */
     public function via($notifiable)
@@ -39,7 +40,7 @@ class Notify extends Notification implements ShouldQueue
     /**
      * Get the array representation of the notification.
      *
-     * @param  mixed  $notifiable
+     * @param mixed $notifiable
      * @return array
      */
     public function toDatabase($notifiable)
@@ -53,7 +54,7 @@ class Notify extends Notification implements ShouldQueue
     /**
      * Get the broadcastable representation of the notification.
      *
-     * @param  mixed  $notifiable
+     * @param mixed $notifiable
      * @return BroadcastMessage
      */
     public function toBroadcast($notifiable)

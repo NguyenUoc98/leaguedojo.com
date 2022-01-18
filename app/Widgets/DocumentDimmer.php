@@ -21,7 +21,7 @@ class DocumentDimmer extends BaseDimmer
      */
     public function run()
     {
-        $count = Document::count();
+        $count  = Document::count();
         $string = trans_choice('Tài liệu', $count);
 
         return view('voyager::dimmer', array_merge($this->config, [
@@ -32,7 +32,7 @@ class DocumentDimmer extends BaseDimmer
                 'text' => __('voyager::dimmer.post_link_text'),
                 'link' => route('voyager.documents.index'),
             ],
-            'image' => '#ffde57',
+            'image'  => '#ffde57',
         ]));
     }
 

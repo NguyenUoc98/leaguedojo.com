@@ -29,39 +29,39 @@ class WorkoutRegistrationController extends Controller
         $this->workoutRegistration = $workoutRegistration;
         $this->middleware('auth');
     }
-    
+
     /**
      * Confirm transfer dojo from student and caculate tuitions again
-     * 
+     *
      * @param $request
-     * @return void 
+     * @return void
      */
     public function confirm(Request $request)
     {
         $workoutRegistration = WorkoutRegistration::find($request->id);
 
         // Tạo đối tượng võ sinh và cập nhật MSVS
-        $student = new Student();
-        $student->name = $workoutRegistration->name;
-        $student->phone = $workoutRegistration->phone;
-        $student->cmnd = $workoutRegistration->cmnd;
-        $student->birthday = $workoutRegistration->birthday;
-        $student->address = $workoutRegistration->address;
-        $student->work_unit = $workoutRegistration->work_unit;
-        $student->type = $workoutRegistration->type;
-        $student->weight = $workoutRegistration->weight;
-        $student->height = $workoutRegistration->height;
-        $student->sex = $workoutRegistration->sex;
-        $student->link_fb = $workoutRegistration->link_fb;
-        $student->dojo_id = $workoutRegistration->dojo_id;
+        $student                = new Student();
+        $student->name          = $workoutRegistration->name;
+        $student->phone         = $workoutRegistration->phone;
+        $student->cmnd          = $workoutRegistration->cmnd;
+        $student->birthday      = $workoutRegistration->birthday;
+        $student->address       = $workoutRegistration->address;
+        $student->work_unit     = $workoutRegistration->work_unit;
+        $student->type          = $workoutRegistration->type;
+        $student->weight        = $workoutRegistration->weight;
+        $student->height        = $workoutRegistration->height;
+        $student->sex           = $workoutRegistration->sex;
+        $student->link_fb       = $workoutRegistration->link_fb;
+        $student->dojo_id       = $workoutRegistration->dojo_id;
         $student->admission_day = Carbon::now()->format('Y-m-d');
-        $student->status = 'STUDYING';
+        $student->status        = 'STUDYING';
         $student->save();
 
-        $sub = $student->id % 10000;
+        $sub  = $student->id % 10000;
         $year = ($student->id - $sub) / 10000;
 
-        if($year == Carbon::now()->year) {
+        if ($year == Carbon::now()->year) {
             $student_id = $year * 10000 + ($student->id % 10000);
         } else {
             $student_id = Carbon::now()->year * 10000 + 1;
@@ -75,14 +75,14 @@ class WorkoutRegistrationController extends Controller
             ['email' => $workoutRegistration->email],
             ['name' => $workoutRegistration->name, 'password' => bcrypt($workoutRegistration->phone)]
         );
-        
+
         $user->update([
             'student_id' => $student_id,
         ]);
 
         $data = [
             "text" => 'Đăng ký tập luyện của bạn đã được chấp nhận.',
-            "img" => '/img/core-img/notification.png',
+            "img"  => '/img/core-img/notification.png',
             "icon" => '/img/core-img/icon-notify.png',
             "href" => '#',
             "time" => Carbon::now(),
@@ -98,9 +98,9 @@ class WorkoutRegistrationController extends Controller
 
     /**
      * Reject transfer dojo from student and caculate tuitions again
-     * 
+     *
      * @param $request
-     * @return void 
+     * @return void
      */
     public function reject(Request $request)
     {
@@ -109,7 +109,7 @@ class WorkoutRegistrationController extends Controller
         Mail::to($workoutRegistration->email)->send(new MailRejectWorkout($workoutRegistration, $request->reason));
 
         $workoutRegistration->update([
-            'confirmed' => 'REJECTED',
+            'confirmed'     => 'REJECTED',
             'reason_reject' => $request->reason,
         ]);
 

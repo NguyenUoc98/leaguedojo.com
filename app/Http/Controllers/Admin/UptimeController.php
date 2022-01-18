@@ -27,7 +27,7 @@ class UptimeController extends VoyagerBaseController
      */
     public function getCloneFields(Request $request)
     {
-        $id = $request->divCount;
+        $id    = $request->divCount;
         $varId = 'removeId' . $id;
         return view("voyager::uptimes.dynamic-fields", compact('id', 'varId'));
     }
@@ -104,7 +104,10 @@ class UptimeController extends VoyagerBaseController
 
             if ($row->type == 'relationship' && $row->details->type == 'belongsToMany') {
                 // Only if select_multiple is working with a relationship
-                $multi_select[] = ['model' => $row->details->model, 'content' => $content, 'table' => $row->details->pivot_table];
+                $multi_select[] = ['model'   => $row->details->model,
+                                   'content' => $content,
+                                   'table'   => $row->details->pivot_table
+                ];
             } else {
                 $data->{$row->field} = $content;
             }
@@ -131,12 +134,15 @@ class UptimeController extends VoyagerBaseController
 
         // Sắp xếp
         usort($uptimes, function ($time1, $time2) {
-            if ($time1 == $time2)
+            if ($time1 == $time2) {
                 return 0;
-            else if ($time1 > $time2)
-                return 1;
-            else
-                return -1;
+            } else {
+                if ($time1 > $time2) {
+                    return 1;
+                } else {
+                    return -1;
+                }
+            }
         });
 
         $data->uptimes = json_encode($uptimes);
@@ -157,29 +163,30 @@ class UptimeController extends VoyagerBaseController
             $applyDay->addWeek();
         }
 
-        $bookRoomed = BookRoom::where('room_id', $data->room_id)->whereDate('date', $applyDay)->where('confirmed', '<>', 'REJECTED')->get();
+        $bookRoomed = BookRoom::where('room_id', $data->room_id)->whereDate('date', $applyDay)->where('confirmed', '<>',
+            'REJECTED')->get();
 
         foreach ($bookRoomed as $booked) {
             if (!$this->room->checkTime(json_decode($data->uptimes), $booked->start_at, $booked->end_at)) {
                 $uptimes = json_decode($data->uptimes);
-                $time = '';
+                $time    = '';
                 foreach ($uptimes as $uptime) {
                     $time .= 'từ ' . $uptime[0] . ' đến ' . $uptime[1] . ', ';
                 }
 
                 // Cập nhật trạng thái của lịch book phòng, thêm lý do từ chối
                 $booked->update([
-                    'confirmed' => 'REJECTED',
+                    'confirmed'     => 'REJECTED',
                     'reason_reject' => 'Thời gian hoạt động của phòng thay đổi: ' . $time,
                 ]);
 
                 $student = $booked->student;
-                $room = $booked->room;
+                $room    = $booked->room;
 
                 // Tạo notification
                 $notify = [
                     "text" => 'Phòng <b>' . $room->name . '</b> bạn book đã bị từ chối',
-                    "img" => '/img/core-img/notification.png',
+                    "img"  => '/img/core-img/notification.png',
                     "icon" => '/img/core-img/icon-notify.png',
                     "href" => route('rooms.index'),
                     "time" => Carbon::now(),
@@ -187,7 +194,9 @@ class UptimeController extends VoyagerBaseController
 
                 // Gửi thông báo
                 Notification::send($student->user, new Notify($notify, 'book-room'));
-                Notification::send($student->user, new RejectBookRoom($student->name, $room->name, $room->address, substr($booked->start_at, 0, -3), substr($booked->end_at, 0, -3), 'Thời gian hoạt động của phòng thay đổi như sau: ' . $time));
+                Notification::send($student->user,
+                    new RejectBookRoom($student->name, $room->name, $room->address, substr($booked->start_at, 0, -3),
+                        substr($booked->end_at, 0, -3), 'Thời gian hoạt động của phòng thay đổi như sau: ' . $time));
             }
         }
 
@@ -204,9 +213,9 @@ class UptimeController extends VoyagerBaseController
 
         // Rename folders for newly created data through media-picker
         if ($request->session()->has($slug . '_path') || $request->session()->has($slug . '_uuid')) {
-            $old_path = $request->session()->get($slug . '_path');
-            $uuid = $request->session()->get($slug . '_uuid');
-            $new_path = str_replace($uuid, $data->getKey(), $old_path);
+            $old_path    = $request->session()->get($slug . '_path');
+            $uuid        = $request->session()->get($slug . '_uuid');
+            $new_path    = str_replace($uuid, $data->getKey(), $old_path);
             $folder_path = substr($old_path, 0, strpos($old_path, $uuid)) . $uuid;
 
             $rows->where('type', 'media_picker')->each(function ($row) use ($data, $uuid) {

@@ -21,7 +21,7 @@ class VideoDimmer extends BaseDimmer
      */
     public function run()
     {
-        $count = Video::count();
+        $count  = Video::count();
         $string = trans_choice('Video', $count);
 
         return view('voyager::dimmer', array_merge($this->config, [
@@ -32,7 +32,7 @@ class VideoDimmer extends BaseDimmer
                 'text' => __('voyager::dimmer.post_link_text'),
                 'link' => route('voyager.videos.index'),
             ],
-            'image' => '#28a745',
+            'image'  => '#28a745',
         ]));
     }
 

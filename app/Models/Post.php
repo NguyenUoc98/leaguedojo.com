@@ -27,7 +27,17 @@ class Post extends Model implements ViewableContract
 
     protected $dates = ['deleted_at'];
 
-    protected $translatable = ['title', 'seo_title', 'excerpt', 'body', 'slug', 'meta_description', 'meta_keywords', 'source', 'keywords'];
+    protected $translatable = [
+        'title',
+        'seo_title',
+        'excerpt',
+        'body',
+        'slug',
+        'meta_description',
+        'meta_keywords',
+        'source',
+        'keywords'
+    ];
 
     const PUBLISHED = 'PUBLISHED';
 
@@ -155,10 +165,12 @@ class Post extends Model implements ViewableContract
         if (!$post->is_crawl) {
             $start = strpos($post->body, 'https://www.youtube.com/');
             while ($start) {
-                $end = strpos($post->body, '">https://www.youtube.com/');
-                $link = substr($post->body, $start,  $end - $start);
-                $post->body = str_replace('<a href="' . $link . '">' . $link . '</a>', '<div class="single-video-area">' . Youtube::getVideoInfo(Youtube::parseVidFromURL($link))->player->embedHtml, $post->body . '</div>');
-                $start = strpos($post->body, 'https://www.youtube.com/');
+                $end        = strpos($post->body, '">https://www.youtube.com/');
+                $link       = substr($post->body, $start, $end - $start);
+                $post->body = str_replace('<a href="' . $link . '">' . $link . '</a>',
+                    '<div class="single-video-area">' . Youtube::getVideoInfo(Youtube::parseVidFromURL($link))->player->embedHtml,
+                    $post->body . '</div>');
+                $start      = strpos($post->body, 'https://www.youtube.com/');
             };
         }
         return $post;

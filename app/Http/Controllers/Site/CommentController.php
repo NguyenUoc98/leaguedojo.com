@@ -46,7 +46,7 @@ class CommentController extends Controller
         // Define guest rules if user is not logged in.
         if (!auth()->check()) {
             $guest_rules = [
-                'guest_name' => 'required|string|max:255',
+                'guest_name'  => 'required|string|max:255',
                 'guest_email' => 'required|string|email|max:255',
             ];
         }
@@ -54,32 +54,32 @@ class CommentController extends Controller
         // Merge guest rules, if any, with normal validation rules.
         $this->validate($request, array_merge($guest_rules ?? [], [
             'commentable_type' => 'required|string',
-            'commentable_id' => 'required|string|min:1',
-            'message' => 'required|string'
+            'commentable_id'   => 'required|string|min:1',
+            'message'          => 'required|string'
         ]));
 
         $model = $request->commentable_type::findOrFail($request->commentable_id);
 
         $commentClass = config('comments.model');
-        $comment = new $commentClass;
+        $comment      = new $commentClass;
 
         if (!auth()->check()) {
-            $comment->guest_name = $request->guest_name;
+            $comment->guest_name  = $request->guest_name;
             $comment->guest_email = $request->guest_email;
         } else {
             $comment->commenter()->associate(auth()->user());
         }
 
         $comment->commentable()->associate($model);
-        $comment->comment = $request->message;
+        $comment->comment  = $request->message;
         $comment->approved = !config('comments.approval_required');
         $comment->save();
 
         $commenter = User::find($comment->commenter_id);
-        $slug = $comment->commentable_type::find($comment->commentable_id)->slug;
-        $data = [
+        $slug      = $comment->commentable_type::find($comment->commentable_id)->slug;
+        $data      = [
             "text" => '<b>' . $commenter->name . '</b> đã bình luận một bài viết của bạn.',
-            "img" => Voyager::image($commenter->avatar),
+            "img"  => Voyager::image($commenter->avatar),
             "icon" => '/img/core-img/icon-cmt.png',
             "href" => route($model->getTable() . '.show', $slug),
             "time" => Carbon::now(),
@@ -90,7 +90,7 @@ class CommentController extends Controller
         Notification::send($user, new Notify($data, 'comment'));
 
         return View::make('vendor.comments._comment', [
-            'comment' => $comment,
+            'comment'          => $comment,
             'grouped_comments' => ''
         ]);
     }
@@ -137,32 +137,32 @@ class CommentController extends Controller
         ]);
 
         $commentClass = config('comments.model');
-        $reply = new $commentClass;
+        $reply        = new $commentClass;
         $reply->commenter()->associate(auth()->user());
         $reply->commentable()->associate($comment->commentable);
         $reply->parent()->associate($comment);
-        $reply->comment = $request->message;
+        $reply->comment  = $request->message;
         $reply->approved = !config('comments.approval_required');
         $reply->save();
 
         $commenter = User::find($reply->commenter_id);
-        $model = $comment->commentable_type::find($comment->commentable_id);
-        $slug = $model->slug;
-        $data = [
+        $model     = $comment->commentable_type::find($comment->commentable_id);
+        $slug      = $model->slug;
+        $data      = [
             "text" => '<b>' . $commenter->name . '</b> đã trả lời bình luận của bạn về một bài viết.',
-            "img" => Voyager::image($commenter->avatar),
+            "img"  => Voyager::image($commenter->avatar),
             "icon" => '/img/core-img/icon-cmt.png',
             "href" => route($model->getTable() . '.show', $slug),
             "time" => Carbon::now(),
         ];
 
         $parent = Comment::find($reply->child_id)->commenter_id;
-        $user = User::find($parent);
+        $user   = User::find($parent);
         Notification::send($user, new Notify($data, 'reply'));
 
         return View::make('vendor.comments._comment', [
-            'comment' => $reply,
-            'reply' => true,
+            'comment'          => $reply,
+            'reply'            => true,
             'grouped_comments' => ''
         ]);
     }
@@ -183,11 +183,11 @@ class CommentController extends Controller
         $comment->save();
 
         $commenter = User::find(auth()->user()->id);
-        $model = $comment->commentable_type::find($comment->commentable_id);
-        $slug = $model->slug;
-        $data = [
+        $model     = $comment->commentable_type::find($comment->commentable_id);
+        $slug      = $model->slug;
+        $data      = [
             "text" => '<b>' . $commenter->name . '</b> đã thích một bình luận của bạn.',
-            "img" => Voyager::image($commenter->avatar),
+            "img"  => Voyager::image($commenter->avatar),
             "icon" => '/img/core-img/icon-like.png',
             "href" => route($model->getTable() . '.show', $slug),
             "time" => Carbon::now(),
@@ -215,7 +215,7 @@ class CommentController extends Controller
      */
     public function getLiker(Request $request, Comment $comment)
     {
-        $list = json_decode($comment->likes);
+        $list  = json_decode($comment->likes);
         $users = User::find($list);
         return view('vendor.comments.list_liker', compact('users'));
     }

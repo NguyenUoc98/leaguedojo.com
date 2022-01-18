@@ -14,34 +14,36 @@ class SocialController extends Controller
     {
         return Socialite::driver($provider)->redirect();
     }
- 
+
     public function callback($provider)
     {
-               
+
         $getInfo = Socialite::driver($provider)->user();
 
         $user = $this->createUser($getInfo, $provider);
- 
+
         auth()->login($user);
- 
+
         return redirect()->to('/home');
- 
+
     }
-    function createUser($getInfo, $provider){
-    
-        $user = User::where('email', $getInfo->email)->first();
+
+    function createUser($getInfo, $provider)
+    {
+
+        $user       = User::where('email', $getInfo->email)->first();
         $providerId = $provider . '_id';
         // Tạo user mới
-        if (!$user) { 
+        if (!$user) {
             $user = User::create([
-                'name'       => $getInfo->name,
-                'email'      => $getInfo->email,
-                'password'   => bcrypt(Str::random(8)),
-                $providerId  => $getInfo->id,
+                'name'      => $getInfo->name,
+                'email'     => $getInfo->email,
+                'password'  => bcrypt(Str::random(8)),
+                $providerId => $getInfo->id,
             ]);
         } else {
             $user->update([
-               $providerId   => $getInfo->id
+                $providerId => $getInfo->id
             ]);
         }
 

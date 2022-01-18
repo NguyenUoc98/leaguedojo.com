@@ -21,8 +21,17 @@ class OperationLog extends Model
     ];
 
     public static $methods = [
-        'GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH',
-        'LINK', 'UNLINK', 'COPY', 'HEAD', 'PURGE',
+        'GET',
+        'POST',
+        'PUT',
+        'DELETE',
+        'OPTIONS',
+        'PATCH',
+        'LINK',
+        'UNLINK',
+        'COPY',
+        'HEAD',
+        'PURGE',
     ];
 
     /**

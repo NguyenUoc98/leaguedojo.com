@@ -15,7 +15,13 @@ class TestScore extends Model
      * @var array
      */
     protected $fillable = [
-        'test_day','student_id', 'kihon', 'kata', 'kumite', 'physical', 'total'
+        'test_day',
+        'student_id',
+        'kihon',
+        'kata',
+        'kumite',
+        'physical',
+        'total'
     ];
 
     /**
@@ -29,9 +35,10 @@ class TestScore extends Model
     public function formFields()
     {
         return $this
-        ->beginDiv('row col-md-12')
+            ->beginDiv('row col-md-12')
             ->field('test_day', 3)->field('student_id', 2)
-        ->endDiv()
-        ->field('kihon', 2)->field('kata', 2)->field('kumite', 2)->field('physical', 2)->field('total', 2)->field('valedictorian', 2)->get();
+            ->endDiv()
+            ->field('kihon', 2)->field('kata', 2)->field('kumite', 2)->field('physical', 2)->field('total',
+                2)->field('valedictorian', 2)->get();
     }
 }
