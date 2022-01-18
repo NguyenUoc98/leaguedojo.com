@@ -62,8 +62,13 @@ Breadcrumbs::for('videos', function ($trail) {
     $trail->push('Video', route('videos.index'));
 });
 
-// Trang chủ > Video
 Breadcrumbs::for('video', function ($trail, $video) {
     $trail->parent('videos');
     $trail->push($video->title, route('videos.show', $video->slug));
+});
+
+// Trang chủ > Mã giảm giá
+Breadcrumbs::for('voucher', function ($trail) {
+    $trail->parent('trang-chu');
+    $trail->push('Mã giảm giá', route('vouchers.index'));
 });

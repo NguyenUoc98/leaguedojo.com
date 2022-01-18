@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('page_title','Thể loại')
+@section('page_title','Tài liệu')
 @push('css')
     <style>
         .rm-link {

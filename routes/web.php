@@ -3,19 +3,12 @@ Route::group(['middleware' => ['operation-log']], function () {
     Route::get('/', function () {
         return redirect()->route('home');
     });
-
     Route::get('trang-chu', 'Site\PageController@home')->name('home');
-
     Route::get('tin-tuc', 'Site\PageController@news')->name('news');
-
     Route::get('profile', 'Site\PageController@profile')->name('profile')->middleware('auth')->middleware('verified');
-
     Route::post('vouchers/getVoucher', 'Site\VoucherController@getVoucher')->name('vouchers.getVoucher')->middleware('auth')->middleware('verified');
-
     Route::post('rooms/find', 'Site\RoomController@find')->name('rooms.find')->middleware('auth')->middleware('verified');
-
     Route::post('rooms/book', 'Site\RoomController@book')->name('rooms.book')->middleware('auth')->middleware('verified');
-
     Route::delete('rooms/cancel-book/{id}', 'Site\RoomController@cancelBook')->name('rooms.cancel-book')->middleware('auth')->middleware('verified');
 
     // Resource routes
@@ -23,6 +16,17 @@ Route::group(['middleware' => ['operation-log']], function () {
     Route::resource('bai-viet', 'Site\PostController', ['names' => 'posts']);
     Route::resource('co-so-tap-luyen', 'Site\DojoController', ['names' => 'dojos']);
     Route::resource('tai-lieu', 'Site\DocumentController', ['names' => 'documents']);
+    Route::resource('ma-giam-gia', 'Site\VoucherController', ['names' => 'vouchers']);
+    Route::resources([
+        'videos'         => 'Site\VideoController',
+        'users'          => 'Site\UserController',
+        'students'       => 'Site\StudentController',
+        'tuitions'       => 'Site\TuitionController',
+        'transfer-dojos' => 'Site\TransferDojoController',
+        'events'         => 'Site\EventController',
+        'attends'        => 'Site\AttendController',
+        'rooms'          => 'Site\RoomController',
+    ]);
 
     // Route preview pdf
     Route::get('tai-lieu/preview/{document}', 'Site\DocumentController@preview')->name('documents.preview');
@@ -34,18 +38,6 @@ Route::group(['middleware' => ['operation-log']], function () {
     Route::get('dang-ky', 'Auth\RegisterController@showRegistrationForm')->name('dang-ky');
     Route::get('dat-lai-mat-khau', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
     Route::get('dat-lai-mat-khau/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
-
-    Route::resources([
-        'videos'         => 'Site\VideoController',
-        'users'          => 'Site\UserController',
-        'students'       => 'Site\StudentController',
-        'vouchers'       => 'Site\VoucherController',
-        'tuitions'       => 'Site\TuitionController',
-        'transfer-dojos' => 'Site\TransferDojoController',
-        'events'         => 'Site\EventController',
-        'attends'        => 'Site\AttendController',
-        'rooms'          => 'Site\RoomController',
-    ]);
 
     // Workout Registration
     Route::get('dang-ky-tap-luyen', 'Site\WorkoutRegistrationController@create')->name('workout-registrations.create');
