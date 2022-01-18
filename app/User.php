@@ -4,7 +4,6 @@ namespace App;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Notifications\Notifiable;
-use Inani\Larapoll\Traits\Voter;
 use TCG\Voyager\Models\User as Model;
 use App\Models\Student;
 use Laravelista\Comments\Commenter;
@@ -13,7 +12,7 @@ use App\Notifications\VerifyEmail;
 
 class User extends Model implements MustVerifyEmail
 {
-    use Notifiable, Commenter , Voter;
+    use Notifiable, Commenter;
     use \HighIdeas\UsersOnline\Traits\UsersOnlineTrait;
 
     /**
