@@ -141,7 +141,7 @@ class AttendController extends Controller
                 Notification::send($user, new Notify($data, 'transfer-dojo'));
                 // Notification::send($user, new EventRegistration($attend));
 
-                return redirect()->back()->with([
+                return redirect()->route('events.index')->with([
                     'status'  => 'Thành công',
                     'message' => 'Đăng ký thành công',
                     'type'    => 'success',
@@ -158,7 +158,7 @@ class AttendController extends Controller
                     $message = 'Bạn đã đăng ký sự kiện này rồi';
                 }
 
-                return redirect()->back()->with([
+                return redirect()->route('events.index')->with([
                     'status'  => 'Lỗi',
                     'message' => $message,
                     'type'    => 'error',

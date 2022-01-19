@@ -190,8 +190,10 @@ class Student extends Model
      */
     public function eventNotSign(array $signed)
     {
-        return Event::whereNotIn('id', $signed)->where('date', '>', $this->startSemester)->where('date', '<=',
-            $this->now)->get();
+        return Event::whereNotIn('id', $signed)
+            ->where('date', '>', $this->startSemester)
+            ->where('date', '<=', $this->now)
+            ->get();
     }
 
     /**

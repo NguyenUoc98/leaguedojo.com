@@ -78,3 +78,14 @@ Breadcrumbs::for('hoc-phi', function ($trail) {
     $trail->parent('trang-chu');
     $trail->push('Học phí', route('tuitions.index'));
 });
+
+// Trang chủ > Học phí
+Breadcrumbs::for('su-kien', function ($trail) {
+    $trail->parent('trang-chu');
+    $trail->push('Sự kiện', route('events.index'));
+});
+
+Breadcrumbs::for('dang-ky-su-kien', function ($trail) {
+    $trail->parent('su-kien');
+    $trail->push('Đăng ký xác nhận sự kiện', route('attends.create'));
+});

@@ -16,9 +16,9 @@ class Attend extends Model
     ];
 
     public static $methodColors = [
-        'CONFIRMED' => 'green',
-        'WAIT'      => 'yellow',
-        'REJECTED'  => 'red',
+        'CONFIRMED' => 'success',
+        'WAIT'      => 'yellow-600',
+        'REJECTED'  => 'primary',
     ];
 
     public static $methodTexts = [

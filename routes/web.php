@@ -18,13 +18,13 @@ Route::group(['middleware' => ['operation-log']], function () {
     Route::resource('tai-lieu', 'Site\DocumentController', ['names' => 'documents']);
     Route::resource('ma-giam-gia', 'Site\VoucherController', ['names' => 'vouchers']);
     Route::resource('hoc-phi', 'Site\TuitionController', ['names' => 'tuitions']);
+    Route::resource('su-kien', 'Site\EventController', ['names' => 'events']);
+    Route::resource('dang-ky-xac-nhan-su-kien', 'Site\AttendController', ['names' => 'attends']);
     Route::resources([
         'videos'         => 'Site\VideoController',
         'users'          => 'Site\UserController',
         'students'       => 'Site\StudentController',
         'transfer-dojos' => 'Site\TransferDojoController',
-        'events'         => 'Site\EventController',
-        'attends'        => 'Site\AttendController',
         'rooms'          => 'Site\RoomController',
     ]);
 

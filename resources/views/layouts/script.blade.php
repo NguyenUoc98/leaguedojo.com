@@ -14,32 +14,42 @@
 
 <!-- Sweet Alert -->
 <script>
-function showError(message) {
-    Swal({
-        title: 'Ồ, có lỗi rồi nè',
-        html: message ? message : 'Hừm, có lỗi gì đó rồi!',
-        imageUrl: '{{ asset('img/core-img/error.png') }}',
-        imageWidth: 50,
-        imageHeight: 50,
-        confirmButtonColor: '#ed3939'
-    });
-}
+    function showError(message) {
+        Swal({
+            title: 'Ồ, có lỗi rồi nè',
+            html: message ? message : 'Hừm, có lỗi gì đó rồi!',
+            imageUrl: '{{ asset('img/core-img/error.png') }}',
+            imageWidth: 50,
+            imageHeight: 50,
+            confirmButtonColor: '#ed3939'
+        });
+    }
 
-function showSuccess(message) {
-    Swal({
-        title: 'Thành công',
-        text: message ? message : 'Dễ dàng như ăn bánh rán vậy đó !',
-        type: 'success',
-        showConfirmButton: false,
-        timer: 1500
-    });
-}
-</script>
-<script>
-function closeToast() {
-    $(".toast").addClass('hidden');
-}
-</script>
+    function showSuccess(message) {
+        Swal({
+            title: 'Thành công',
+            text: message ? message : 'Dễ dàng như ăn bánh rán vậy đó !',
+            type: 'success',
+            showConfirmButton: false,
+            timer: 1500
+        });
+    }
 
+    function closeToast() {
+        $(".toast").addClass('hidden');
+    }
+</script>
+@if (session('message'))
+    <script type="text/javascript">
+        $(document).ready(function () {
+            Swal({
+                title: "{{ session('status') }}",
+                text: "{{ session('message') }}",
+                type: "{{ session('type') }}",
+                confirmButtonColor: "{{ session('color') }}"
+            });
+        })
+    </script>
+@endif
 @livewireScripts
 @stack('script')

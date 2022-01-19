@@ -36,35 +36,37 @@
         </div>
     </div>
 
-    <script>
-        $(document).ready(function () {
-            $('#btn-submit').on('click', function () {
-                if ($('#input-code').val() != '') {
-                    $('.loader').removeClass('hidden');
-                    axios.get('ma-giam-gia/' + $('#input-code').val(), {})
-                        .then(response => {
-                            $('.loader').addClass('hidden');
-                            if (response.data.error) {
-                                showError(response.data.error);
-                            } else {
-                                $('.voucher-info').html(response.data);
-                            }
-                        })
-                        .catch(error => {
-                            $('.loader').addClass('hidden');
-                            var errors = error.response.data.errors;
-                            var message = '';
-                            jQuery.each(errors, function (key, value) {
-                                value.forEach(function (error) {
-                                    message += error + '<br>';
+    @push('script')
+        <script>
+            $(document).ready(function () {
+                $('#btn-submit').on('click', function () {
+                    if ($('#input-code').val() != '') {
+                        $('.loader').removeClass('hidden');
+                        axios.get('ma-giam-gia/' + $('#input-code').val(), {})
+                            .then(response => {
+                                $('.loader').addClass('hidden');
+                                if (response.data.error) {
+                                    showError(response.data.error);
+                                } else {
+                                    $('.voucher-info').html(response.data);
+                                }
+                            })
+                            .catch(error => {
+                                $('.loader').addClass('hidden');
+                                var errors = error.response.data.errors;
+                                var message = '';
+                                jQuery.each(errors, function (key, value) {
+                                    value.forEach(function (error) {
+                                        message += error + '<br>';
+                                    });
                                 });
-                            });
-                            showError(message);
-                        })
-                } else {
-                    showError('Nhập mã code để lấy mã nhé');
-                }
+                                showError(message);
+                            })
+                    } else {
+                        showError('Nhập mã code để lấy mã nhé');
+                    }
+                });
             });
-        });
-    </script>
+        </script>
+    @endpush
 @endsection

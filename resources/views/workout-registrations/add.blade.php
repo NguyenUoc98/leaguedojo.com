@@ -247,19 +247,4 @@
             </div>
         </div>
     </div>
-
-
-    @if (session('message'))
-        <script type="text/javascript">
-            $(document).ready(function () {
-                Swal({
-                    title: "{{ session('status ') }}",
-                    text: "{{ session('message') }}",
-                    type: "{{ session('type') }}",
-                    confirmButtonColor: "{{ session('color') }}"
-                });
-            })
-        </script>
-    @endif
-
 @endsection

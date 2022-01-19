@@ -4,13 +4,16 @@
 @section('content')
     {{ Breadcrumbs::render('hoc-phi') }}
 
-    <!-- ##### Archive Post Area Start ##### -->
     <div class="container px-0">
-        <div class="text-right pr-md-0 pr-2">
-            {{--            <span class="btn btn-success mb-3 mr-1" id="btn-show-pay-tuition" style="border-radius: 10px; padding: 8px; font-size:13px"><i class="fa fa-plus" aria-hidden="true"></i> Nộp học phí</span>--}}
-            <span
-                class="border border-cancel rounded-lg text-cancel py-2 px-4 mr-1 cursor-pointer hover:bg-cancel hover:text-white"
-                id="btn-tuition-info">Thông tin học phí</span>
+        <div class="text-right">
+{{--            <span id="btn-show-pay-tuition"--}}
+{{--                  class="border border-success rounded-lg text-success py-2 px-4 mr-1 cursor-pointer hover:bg-success hover:text-white">--}}
+{{--                Nộp học phí--}}
+{{--            </span>--}}
+            <span id="btn-tuition-info"
+                class="border border-cancel rounded-lg text-cancel py-2 px-4 mr-1 cursor-pointer hover:bg-cancel hover:text-white">
+                Thông tin học phí
+            </span>
             <span class="border border-primary rounded-lg text-primary py-2 px-4">
                 Số dư: {{ number_format($excess_cash, 0, '', ' ') }} VNĐ
             </span>
@@ -238,7 +241,7 @@
                                             {{ $tuitionInfo->dojo->name }}
                                         </td>
                                         <td class="text-center border py-1">
-                                            {{ number_format($tuitionInfo->price, 0, '', ' ') . 'VNĐ' }}
+                                            {{ number_format($tuitionInfo->price, 0, '', ',') . 'VNĐ' }}
                                         </td>
                                     </tr>
                                 @empty
@@ -254,71 +257,65 @@
             </div>
         </div>
     </div>
-    <!-- ##### Archive Post Area End ##### -->
 
-    <script src="/js/tail.select-full.js"></script>
+    @push('script')
+        <script src="/js/tail.select-full.js"></script>
 
-    <script>
-        $('#btn-show-pay-tuition').click(function () {
-            $('#pay-tuition-form').show();
-        });
-
-        $('#btn-tuition-info').click(function () {
-            $('#tuition_modal').removeClass('hidden');
-        });
-
-        function closeModal() {
-            $('#tuition_modal').addClass('hidden');
-        }
-
-        // $('#btn-pay').click(function() {
-        //     Swal({
-        //         title: "Thông báo",
-        //         background: 'url(/img/core-img/notify-bg.png)',
-        //         text: "Chức này đang trong quá trình thử nghiệm và sẽ sớm được triển khai trong thời gian tới.",
-        //         type: "info",
-        //     });
-        // });
-
-        tail.select('#voucher-selector', {
-            search: true,
-            hideSelected: true,
-            hideDisabled: true,
-            multiShowCount: false,
-            multiContainer: true,
-            locale: "vi",
-        }).on('change', function () {
-            $('#btn-pay').attr('disabled', 'disabled');
-        });
-    </script>
-
-    <script>
-        var note1;
-        var note2;
-        var note3;
-        var note11;
-        var note33;
-        var total = $("input[name='total']").val();
-        var total_after_apply_voucher;
-        var dojo_id;
-        var totalPrice;
-
-        $(document).ready(function () {
-            $(".table tr").click(function () {
-                $('.note-' + ($(this).index() + 1)).slideToggle("slow");
+        <script>
+            $('#btn-show-pay-tuition').click(function () {
+                $('#pay-tuition-form').show();
             });
 
-            // Lấy thông tin học phí
-            $('#check-info').click(function () {
-                $('.checking').css("display", "");
-                $('.check').css("display", "none");
-                $('#btn-pay').removeAttr('disabled');
+            $('#btn-tuition-info').click(function () {
+                $('#tuition_modal').removeClass('hidden');
+            });
 
-                axios.post("{{ route('tuitions.check') }}", {
-                    student_id: $("input[name='student_id']").val(),
-                    month: $("input[name='month']").val(),
-                })
-                    .then(response => {
+            function closeModal() {
+                $('#tuition_modal').addClass('hidden');
+            }
+
+            $('#btn-show-pay-tuition').click(function () {
+                Swal({
+                    title: "Thông báo",
+                    text: "Chức năng này đang trong quá trình thử nghiệm và sẽ sớm được triển khai trong thời gian tới.",
+                    type: "info",
+                });
+            });
+
+            tail.select('#voucher-selector', {
+                search: true,
+                hideSelected: true,
+                hideDisabled: true,
+                multiShowCount: false,
+                multiContainer: true,
+                locale: "vi",
+            }).on('change', function () {
+                $('#btn-pay').attr('disabled', 'disabled');
+            });
+        </script>
+
+        <script>
+            var note1, note2, note3, note11, note33;
+            var total = $("input[name='total']").val();
+            var total_after_apply_voucher;
+            var dojo_id;
+            var totalPrice;
+
+            $(document).ready(function () {
+                $(".table tr").click(function () {
+                    $('.note-' + ($(this).index() + 1)).slideToggle("slow");
+                });
+
+                // Lấy thông tin học phí
+                $('#check-info').click(function () {
+                    $('.checking').css("display", "");
+                    $('.check').css("display", "none");
+                    $('#btn-pay').removeAttr('disabled');
+
+                    axios.post("{{ route('tuitions.check') }}", {
+                        student_id: $("input[name='student_id']").val(),
+                        month: $("input[name='month']").val(),
+                    }).then(response => {
                         var data = response.data;
                         note1 = "";
                         note2 = "";
@@ -359,25 +356,24 @@
                         $("input[name='total_price']").val(totalPrice);
                         $("input[name='note'], textarea").val(note1 + note2 + note3);
                     });
-            });
-
-            // Áp mã giảm giá
-            $('#apply-voucher').click(function () {
-                $('#btn-pay').removeAttr('disabled');
-                var vouchers = [];
-                $.each($("#voucher-selector :selected"), function () {
-                    vouchers.push($(this).val());
                 });
 
-                if (vouchers.length > 0 && vouchers !== undefined) {
-                    axios.post("{{ route('tuitions.applyVouchers') }}", {
-                        vouchers_id: vouchers,
-                        dojo_id: dojo_id,
-                        month: $("input[name='month']").val(),
-                        total: total,
-                        totalPrice: totalPrice,
-                    })
-                        .then(response => {
+                // Áp mã giảm giá
+                $('#apply-voucher').click(function () {
+                    $('#btn-pay').removeAttr('disabled');
+                    var vouchers = [];
+                    $.each($("#voucher-selector :selected"), function () {
+                        vouchers.push($(this).val());
+                    });
+
+                    if (vouchers.length > 0 && vouchers !== undefined) {
+                        axios.post("{{ route('tuitions.applyVouchers') }}", {
+                            vouchers_id: vouchers,
+                            dojo_id: dojo_id,
+                            month: $("input[name='month']").val(),
+                            total: total,
+                            totalPrice: totalPrice,
+                        }).then(response => {
                             var data = response.data;
                             if (data.check == false) {
                                 showError(data.message);
@@ -385,10 +381,8 @@
                                 total_after_apply_voucher = data.total;
                                 note11 = note1;
                                 note33 = note3;
-
                                 data.voucherNote1.forEach(function (item, index) {
                                     note11 += item + '\r\n';
-
                                 });
                                 data.voucherNote2.forEach(function (item, index) {
                                     if (item != "") {
@@ -405,28 +399,14 @@
                                 $("input[name='total']").val(data.total);
                             }
                         });
-                } else {
-                    $('.voucher-input').html('');
-                    $('.info-voucher-input').html('');
-                    $("input[name='total']").val(total);
-                    $("input[name='note'], textarea").val(note1 + note2 + note3);
-                }
-            });
-        });
-    </script>
-
-    @if (session('message'))
-        <script type="text/javascript">
-            $(document).ready(function () {
-                Swal({
-                    title: "{{ session('status') }}",
-                    background: 'url(/img/core-img/notify-bg.png)',
-                    text: "{{ session('message') }}",
-                    type: "{{ session('type') }}",
-                    confirmButtonColor: "{{ session('color') }}",
+                    } else {
+                        $('.voucher-input').html('');
+                        $('.info-voucher-input').html('');
+                        $("input[name='total']").val(total);
+                        $("input[name='note'], textarea").val(note1 + note2 + note3);
+                    }
                 });
-            })
+            });
         </script>
-    @endif
-
+    @endpush
 @endsection

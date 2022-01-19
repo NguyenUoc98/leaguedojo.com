@@ -2,110 +2,66 @@
 @section('page_title', 'Sự kiện')
 
 @section('content')
+    {{ Breadcrumbs::render('su-kien') }}
 
-<link type="text/css" href="/css/argon.css" rel="stylesheet">
-<div class="loader">
-    <img src="/img/core-img/loading.gif">
-</div>
+    <div class="text-right">
+        <span class="border border-primary rounded-lg text-primary py-2 px-4">
+            {{ 'Điểm tích lũy: ' . $point . 'đ' }}
+        </span>
+    </div>
 
-<!-- ##### Breadcrumb Area Start ##### -->
-<section class="breadcrumb-area bg-img bg-overlay" style="background-image: url(/img/news.jpg);">
-    <div class="container h-100">
-        <div class="row h-100 align-items-center">
-            <div class="col-12">
-                <div class="breadcrumb-content">
-                    <h2>Sự kiện</h2>
+    <ul class="flex text-gray-600 leading-10 mt-5">
+        <li>
+            <a class="px-4 py-2 cursor-pointer border-b-4 border rounded-tl-lg @if(empty($active_tab) || (isset($active_tab) && $active_tab == 'not-sign' )) text-primary border-b-primary @endif"
+               id="btn-not-sign">
+                Chưa đăng ký
+            </a>
+        </li>
+        <li>
+            <a class="px-4 py-2 cursor-pointer border-b-4 border rounded-tr-lg @if($active_tab == 'signed') text-primary border-b-primary @endif"
+               id="btn-signed">
+                Đã đăng ký
+            </a>
+        </li>
+    </ul>
+    <div class="border rounded-b-lg rounded-tr-lg overflow-hidden">
+        <div id="not-sign"
+             class="p-3 bg-white grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 @if($active_tab != 'not-sign') hidden @endif">
+                @forelse($eventNotSign as $event)
+                @include('events.not-sign', ['event' => $event, 'type' => 'not-sign'])
+            @empty
+                <div class="text-center w-full p-10 col-span-3">
+                    <p> Không có sự kiện nào </p>
                 </div>
-            </div>
+            @endforelse
+        </div>
+
+        <div id="signed"
+             class="p-3 bg-white grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 @if($active_tab != 'signed') hidden @endif">
+            @forelse($eventSigneds as $event)
+                @include('events.signed', ['event' => $event])
+            @empty
+                <div class="text-center w-full p-10 col-span-3">
+                    <p> Không có sự kiện nào </p>
+                </div>
+            @endforelse
         </div>
     </div>
-</section>
-<!-- ##### Breadcrumb Area End ##### -->
-
-<!-- ##### Breadcrumb Area Start ##### -->
-<div class="pt-md-3">
-    <div class="container">
-        <div class="row">
-            <div class="col-12 px-0">
-                <div class="pt-breadcrumb">
-                    <div class="breadcrumb">
-                        <a href="{{ route('home') }}" class="mr-2">
-                            <i class="fa fa-home" aria-hidden="true"></i>
-                            Trang chủ
-                        </a>
-                        <span> / </span>
-                        <a href="#" class="mr-2 ml-2">Sự kiện</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- ##### Breadcrumb Area End ##### -->
-
-<!-- ##### Archive Post Area Start ##### -->
-<div class="archive-post-area">
-    <div class="page-content container mb-30 px-0">
-        <div class="text-right pr-md-0 pr-2">
-            <span class="btn btn-danger mb-4 point" style="border-radius: 50px;"> {{ 'Điểm tích lũy: ' . $point . 'đ' }}</span>
-        </div>
-
-        <ul class="nav nav-tabs">
-            <li> <a data-toggle="tab" href="#not-sign" @if(empty($active_tab) || (isset($active_tab) && $active_tab=='not-sign' )){!! 'class="active"' !!}@endif>Chưa đăng ký</a></li>
-            <li> <a data-toggle="tab" href="#signed" @if($active_tab=='signed' ){!! 'class="active"' !!}@endif>Đã đăng ký</a></li>
-        </ul>
-
-        <div class="tab-content">
-            <div id="not-sign" class="p-3 tab-pane fade in @if($active_tab == 'not-sign'){!! 'active show' !!}@endif">
-                <div class="row list-voucher">
-                    @forelse($eventNotSign as $event)
-                    <div class="col-md-6 col-lg-4 mb-3">
-                        @include('events.not-sign', ['event' => $event, 'type' => 'not-sign'])
-                    </div>
-                    @empty
-                    <div class="text-center w-100 p-30">
-                        <p> Không có sự kiện nào </p>
-                    </div>
-                    @endforelse
-                </div>
-            </div>
-
-            <div id="signed" class="p-3 tab-pane fade in @if($active_tab == 'signed'){!! 'active show' !!}@endif">
-                <div class="row list-voucher">
-                    @forelse($eventSigneds as $event)
-                        @include('events.signed', ['event' => $event])
-                    @empty
-                    <div class="text-center w-100 p-30">
-                        <p> Không có sự kiện nào </p>
-                    </div>
-                    @endforelse
-                </div>
-            </div>
-        </div>
-
-        <!-- ad_ngang -->
-        <ins class="adsbygoogle mt-4"
-            style="display:inline-block;width:100%;height:150px"
-            data-ad-client="ca-pub-1747924550904432"
-            data-ad-slot="9889684921"></ins>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-
-    </div>
-</div>
-<!-- ##### Archive Post Area End ##### -->
-@if (session('message'))
-<script type="text/javascript">
-    $(document).ready(function() {
-        Swal({
-            title: "{{ session('status ') }}",
-            background: 'url(/img/core-img/notify-bg.png)',
-            text: "{{ session('message') }}",
-            type: "{{ session('type') }}",
-            confirmButtonColor: "{{ session('color') }}"
-        });
-    })
-</script>
-@endif
 @endsection
+
+@push('script')
+    <script type="application/javascript">
+        $('#btn-not-sign').click(function () {
+            $('#btn-signed').removeClass('text-primary border-b-primary');
+            $('#not-sign').removeClass('hidden');
+            $('#signed').addClass('hidden');
+            $(this).addClass('text-primary border-b-primary');
+        });
+        $('#btn-signed').click(function () {
+            $('#btn-not-sign').removeClass('text-primary border-b-primary');
+            $('#signed').removeClass('hidden');
+            $('#not-sign').addClass('hidden');
+            $(this).addClass('text-primary border-b-primary');
+        });
+    </script>
+@endpush
