@@ -22,7 +22,7 @@
                              alt="{{ $latestPost[0]->title }}">
                     @endif
 
-                    <a class="absolute bg-black bg-opacity-25 h-96 lg:h-lg rounded-lg top-0 lg:p-8 md:p-5 p-3 flex items-stretch"
+                    <a class="absolute bg-black bg-opacity-25 h-96 w-full lg:h-lg rounded-lg top-0 lg:p-8 md:p-5 p-3 flex items-stretch"
                        href="{{ route('posts.show', $latestPost[0]->slug) }}"
                        title="{{ $latestPost[0]->title }}">
                         <div class="self-end space-y-3">

@@ -2,7 +2,9 @@
 
 namespace App;
 
+use App\Models\Coach;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Notifications\Notifiable;
 use TCG\Voyager\Models\User as Model;
 use App\Models\Student;
@@ -87,5 +89,15 @@ class User extends Model implements MustVerifyEmail
     public function isStudent()
     {
         return (empty($this->student->getAttributes()) || ($this->student->status == 'WAITING_CONFIRM')) ? false : true;
+    }
+
+    public function coach(): HasOne
+    {
+        return $this->hasOne(Coach::class, 'user_id', 'id');
+    }
+
+    public function isCoach(): bool
+    {
+        return !empty($this->coach->getAttributes());
     }
 }

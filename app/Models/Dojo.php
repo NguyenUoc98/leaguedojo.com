@@ -48,6 +48,14 @@ class Dojo extends Model
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function coaches()
+    {
+        return $this->belongsToMany(Coach::class, 'dojo_coaches', 'dojo_id', 'coach_id');
+    }
+
+    /**
      * Update tuition when the price of dojo change
      *
      * @param $student_id , $priceOld, $priceNew

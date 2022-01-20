@@ -91,6 +91,31 @@
                 <img src="{{ asset('img/home/IMG30.png') }}" alt="coach" class="img-fluid"/>
             </div>
         </div>
+
+        <div class="mt-10">
+            <div class="title-sec-w3layouts_pvt border-primary">
+                <h4 class="w3layouts_pvt-head text-2xl md:text-3xl">Các huấn luyện viên</h4>
+            </div>
+
+            <div class="snap-x flex overflow-x-auto gap-8 mt-10">
+                @foreach(\App\Models\Coach::all() as $coach)
+                <div class="md:scroll-ml-6 snap-center md:snap-start relative flex-shrink-0">
+                    <div class="border md:w-96 p-4 rounded-lg w-80">
+                        <div class="h-full flex flex-col items-center text-center">
+                            <img alt="team" class="flex-shrink-0 rounded-lg w-75 aspect-square object-cover object-center mb-4"
+                                 src="{{ Voyager::image($coach->image) }}">
+                            <div class="w-full">
+                                <h2 class="title-font font-medium text-lg text-gray-900">{{ $coach->position }}</h2>
+                                <h3 class="text-primary font-bold mb-3">{{ $coach->full_name }}</h3>
+                                <p>{{ $coach->description }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+        </div>
+
         <div class="sec-space" style="text-align: center;">
             <h4 class="w3layouts_pvt-head text-2xl md:text-3xl">
                 Hệ Thống Cấp Đai Tiêu Chuẩn Karate
@@ -372,42 +397,42 @@
                         <ul class="demo mt-5 ">
                             <li>
                                 <div class="gallery-grid1">
-                                    <img src="/img/home/introduce/i1.jpg" alt=" " class="img-fluid"/>
+                                    <img src="{{ asset('img/home/introduce/i1.jpg') }}" alt=" " class="img-fluid"/>
                                 </div>
                             </li>
                             <li>
                                 <div class="gallery-grid1">
-                                    <img src="/img/home/introduce/i2.jpg" alt=" " class="img-fluid"/>
+                                    <img src="{{ asset('img/home/introduce/i2.jpg') }}" alt=" " class="img-fluid"/>
                                 </div>
                             </li>
                             <li>
                                 <div class="gallery-grid1">
-                                    <img src="/img/home/introduce/i5.jpg" alt=" " class="img-fluid"/>
+                                    <img src="{{ asset('img/home/introduce/i5.jpg') }}" alt=" " class="img-fluid"/>
                                 </div>
                             </li>
                             <li>
                                 <div class="gallery-grid1">
-                                    <img src="/img/home/introduce/i6.jpg" alt=" " class="img-fluid"/>
+                                    <img src="{{ asset('img/home/introduce/i6.jpg') }}" alt=" " class="img-fluid"/>
                                 </div>
                             </li>
                             <li>
                                 <div class="gallery-grid1">
-                                    <img src="/img/home/introduce/i8.jpg" alt=" " class="img-fluid"/>
+                                    <img src="{{ asset('img/home/introduce/i8.jpg') }}" alt=" " class="img-fluid"/>
                                 </div>
                             </li>
                             <li>
                                 <div class="gallery-grid1">
-                                    <img src="/img/home/introduce/i12.jpg" alt=" " class="img-fluid"/>
+                                    <img src="{{ asset('img/home/introduce/i12.jpg') }}" alt=" " class="img-fluid"/>
                                 </div>
                             </li>
                             <li>
                                 <div class="gallery-grid1">
-                                    <img src="/img/home/introduce/i13.jpg" alt=" " class="img-fluid"/>
+                                    <img src="{{ asset('img/home/introduce/i13.jpg') }}" alt=" " class="img-fluid"/>
                                 </div>
                             </li>
                             <li>
                                 <div class="gallery-grid1">
-                                    <img src="/img/home/introduce/i16.jpg" alt=" " class="img-fluid"/>
+                                    <img src="{{ asset('img/home/introduce/i16.jpg') }}" alt=" " class="img-fluid"/>
                                 </div>
                             </li>
                         </ul>
@@ -420,42 +445,42 @@
                         <ul class="demo mt-5 ">
                             <li>
                                 <div class="gallery-grid1">
-                                    <img src="/img/home/introduce/i17.jpg" alt=" " class="img-fluid"/>
+                                    <img src="{{ asset('img/home/introduce/i17.jpg') }}" alt=" " class="img-fluid"/>
                                 </div>
                             </li>
                             <li>
                                 <div class="gallery-grid1">
-                                    <img src="/img/home/introduce/i18.jpg" alt=" " class="img-fluid"/>
+                                    <img src="{{ asset('img/home/introduce/i18.jpg') }}" alt=" " class="img-fluid"/>
                                 </div>
                             </li>
                             <li>
                                 <div class="gallery-grid1">
-                                    <img src="/img/home/introduce/i19.jpg" alt=" " class="img-fluid"/>
+                                    <img src="{{ asset('img/home/introduce/i19.jpg') }}" alt=" " class="img-fluid"/>
                                 </div>
                             </li>
                             <li>
                                 <div class="gallery-grid1">
-                                    <img src="/img/home/introduce/i20.jpg" alt=" " class="img-fluid"/>
+                                    <img src="{{ asset('img/home/introduce/i20.jpg') }}" alt=" " class="img-fluid"/>
                                 </div>
                             </li>
                             <li>
                                 <div class="gallery-grid1">
-                                    <img src="/img/home/introduce/i21.jpg" alt=" " class="img-fluid"/>
+                                    <img src="{{ asset('img/home/introduce/i21.jpg') }}" alt=" " class="img-fluid"/>
                                 </div>
                             </li>
                             <li>
                                 <div class="gallery-grid1">
-                                    <img src="/img/home/introduce/i22.jpg" alt=" " class="img-fluid"/>
+                                    <img src="{{ asset('img/home/introduce/i22.jpg') }}" alt=" " class="img-fluid"/>
                                 </div>
                             </li>
                             <li>
                                 <div class="gallery-grid1">
-                                    <img src="/img/home/introduce/i23.jpg" alt=" " class="img-fluid"/>
+                                    <img src="{{ asset('img/home/introduce/i23.jpg') }}" alt=" " class="img-fluid"/>
                                 </div>
                             </li>
                             <li>
                                 <div class="gallery-grid1">
-                                    <img src="/img/home/introduce/i24.jpg" alt=" " class="img-fluid"/>
+                                    <img src="{{ asset('img/home/introduce/i24.jpg') }}" alt=" " class="img-fluid"/>
                                 </div>
                             </li>
                         </ul>
@@ -495,7 +520,7 @@
                         </svg>
                     </div>
                     <div class="col-10 cd-grid d-flex align-items-center">
-                        <a href="tel:0942332444" style="color: #000;letter-spacing: 1px;">+84 942 332 444</a>
+                        <a href="tel:0942332444" style="color: #000;letter-spacing: 1px;">{{ setting('site.hotline') }}</a>
                     </div>
                 </div>
             </div>
@@ -511,7 +536,7 @@
 
                     </div>
                     <div class="col-10 d-grid d-flex align-items-center">
-                        <p>Sảnh 1,CT3 Trung Văn, Từ Liêm, Hà Nội, Việt Nam</p>
+                        <p>{{ setting('site.address') }}</p>
                     </div>
                 </div>
             </div>
@@ -529,7 +554,7 @@
                         </svg>
                     </div>
                     <div class="col-10 cd-grid d-flex align-items-center">
-                        <a href="mailto:karateleaguedojo@gmail.com" style="color: #000;letter-spacing: 1px;">karateleaguedojo@gmail.com</a>
+                        <a href="mailto:karateleaguedojo@gmail.com" style="color: #000;letter-spacing: 1px;">{{ setting('site.email') }}</a>
                     </div>
                 </div>
             </div>
@@ -542,7 +567,7 @@
     <div class="container py-lg-5">
         <ul class="py-4">
             <li>
-                <a href="https://www.facebook.com/votrandojo/">
+                <a href="{{ setting('site.facebook') }}">
                     <svg class="mx-auto" width="30" height="30" viewBox="0 0 30 30" fill="none"
                          xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -552,7 +577,7 @@
                 </a>
             </li>
             <li>
-                <a href="https://www.youtube.com/channel/UCl81LfmyxDUZ1ygd4RNhsAw">
+                <a href="{{ setting('site.youtube') }}">
                     <svg class="mx-auto" width="30" height="30" viewBox="0 0 30 30" fill="none"
                          xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -562,7 +587,7 @@
                 </a>
             </li>
             <li>
-                <a href="https://www.tiktok.com/@votrandojo" class="p-0">
+                <a href="{{ setting('site.tiktok') }}" class="p-0">
                     <svg class="mx-auto" width="48" height="48" viewBox="0 0 48 48" fill="none"
                          xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                         <rect width="48" height="48" fill="url(#pattern0)"/>
