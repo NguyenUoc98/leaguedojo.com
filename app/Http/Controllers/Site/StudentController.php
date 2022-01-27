@@ -29,9 +29,9 @@ class StudentController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \App\Http\Requests\StudentRequest $request
+     * @param StudentRequest $request
      * @param Student $student
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
     public function update(StudentRequest $request, Student $student)
     {
@@ -56,17 +56,20 @@ class StudentController extends Controller
             $student->update([
                 'image' => 'students/' . Carbon::now('Asia/Ho_Chi_Minh')->format('FY') . '/' . $imageName,
             ]);
-        };
-
-        // Update Information
-        if ($request->action == 'edit') {
-            $student->update($request->all());
-            $student->update([
-                'birthday' => Carbon::createFromFormat('d-m-Y', $request->birthday)->format('Y-m-d'),
+            return response()->json([
+                'message' => 'Update success',
             ]);
-        };
-        $user = auth()->user();
-        return view('pages.profile._show', compact('user', 'student'));
+        } else {
+            // Update Information
+            if ($request->action == 'edit') {
+                $student->update($request->all());
+            };
+            return redirect()->back()->with([
+                'message' => 'Cập nhật thành công',
+                'type'    => 'success',
+                'color'   => '#4caf50',
+            ]);
+        }
     }
 
 

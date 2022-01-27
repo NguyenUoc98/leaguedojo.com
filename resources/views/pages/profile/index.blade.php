@@ -203,7 +203,7 @@
                                 <span class="text-danger mr-2">●</span> <b>Chờ xác nhận</b>
                             @endif
                         </p>
-                        <button
+                        <button id="btn-update-student"
                             class="outline-none bg-gray-100 hover:bg-gray-200 py-2 px-4 font-bold whitespace-nowrap rounded-lg w-full">
                             Chỉnh sửa chi tiết
                         </button>
@@ -216,6 +216,7 @@
                 @include('pages.profile._event')
             </div>
         </div>
+        @include('pages.profile._edit_student')
     @endif
 
     @push('head-script')

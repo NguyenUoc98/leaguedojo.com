@@ -25,7 +25,7 @@
                             <div class="relative">
                                 <img id="img-avatar"
                                      class="rounded-full border-4 border-gray-100 shadow-md avatar"
-                                     src="{{ Voyager::image(auth()->user()->avatar) }}" alt="your image"/>
+                                     src="{{ Voyager::image($user->avatar) }}" alt="your image"/>
                                 <button id="btn-open-update-avatar"
                                         class="absolute bg-gray-100 bottom-0 hover:bg-gray-200 p-2 right-[5%] rounded-full shadow text-gray-600">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"

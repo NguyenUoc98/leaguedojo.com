@@ -31,7 +31,7 @@ class StudentRequest extends FormRequest
             'weight'    => 'numeric|between:20,129.9',
             'height'    => 'integer|min:100|max:200',
             'link_fb'   => 'nullable|active_url',
-            'birthday'  => 'date_format:d-m-Y|after:1900-01-01|before:today'
+            'birthday'  => 'date_format:Y-m-d|after:1900-01-01|before:today'
         ];
     }
 
