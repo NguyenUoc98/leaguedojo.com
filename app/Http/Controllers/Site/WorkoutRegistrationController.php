@@ -78,8 +78,7 @@ class WorkoutRegistrationController extends Controller
                 ]);
             }
             $workoutRegistration             = $request->all();
-            $workoutRegistration['birthday'] = Carbon::createFromFormat('d-m-Y',
-                $workoutRegistration['birthday'])->format('Y-m-d');
+            $workoutRegistration['birthday'] = $workoutRegistration['birthday'];
             try {
                 $workoutRegistration = WorkoutRegistration::create($workoutRegistration);
                 $data                = [

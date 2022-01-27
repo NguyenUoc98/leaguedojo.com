@@ -9,7 +9,7 @@
         {{ Breadcrumbs::render('dang-ky-tap-luyen') }}
         <div class="grid md:grid-cols-12 grid-cols-1 gap-8">
             <form class="md:col-span-12 lg:col-span-9" action="{{ route('workout-registrations.store') }}" method="post"
-                  enctype="multipart/form-data">
+                  enctype="multipart/form-data" id="form-workout-registration">
                 @csrf
                 <p class="font-bold text-2xl my-4">Thông tin cơ bản</p>
                 <ul class="text-gray-500 ml-4 text-sm">
@@ -248,3 +248,11 @@
         </div>
     </div>
 @endsection
+
+@push('script')
+    <script type="application/javascript">
+        $("#form-workout-registration").submit(function () {
+            $('.loader').removeClass('hidden');
+        });
+    </script>
+@endpush

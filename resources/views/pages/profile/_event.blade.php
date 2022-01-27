@@ -1,48 +1,52 @@
-<style>
-    .imgs-grid {
-        max-width: unset !important;
-    }
-</style>
+@if($event_confirmed->count() > 0)
+    @push('css')
+        <link rel="stylesheet" href="{{ asset('css/images-grid.css') }}">
+        <style>
+            .imgs-grid {
+                max-width: unset !important;
+            }
 
-<!-- Achievements -->
-<div class="card mt-4 rounded">
-    <div class="card-header bg-orange">
-        <div class="row align-items-center">
-            <i class="fa fa-trophy mx-2" style="font-size:30px;color:white"></i>
-            <h3 class="mb-0 mx-2 text-white">Sự kiện đã tham gia</h3>
+            .imgs-grid-modal .modal-inner .modal-image img {
+                display: initial !important;
+            }
+        </style>
+    @endpush
+
+    <p class="my-4 border-l-4 border-primary pl-2 font-bold text-2xl">Sự kiện đã tham gia</p>
+    <div class="event-scroll">
+        @foreach($event_confirmed as $event)
+            @include('pages.profile._event_item', ['event' => $event])
+        @endforeach
+
+        {{ $event_confirmed->links() }}
+    </div>
+
+    <div class="page-load-status text-center">
+        <div class="infinite-scroll-request">
+            <img height="60px" width="60px" src="{{ asset('img/core-img/loading.gif') }}" class="mx-auto">
         </div>
     </div>
-</div>
-<div class="d-flex justify-content-around row px-3 event-scroll">
-    @forelse($event_confirmed as $event)
-    @include('pages.profile._event_item', ['event' => $event])
-    @empty
-    <p class="bg-white mt-4 p-4 text-center w-100">Không có sự kiện nào</p>
-    @endforelse
-</div>
 
-@if($event_confirmed->total() > 0)
-<!-- status elements -->
-<div class="page-load-status text-center">
-    <div class="infinite-scroll-request">
-        <img height="60px" width="60px" src="/img/core-img/loading.gif">
-    </div>
-    <p class="infinite-scroll-last mt-3">Đã tải hết nội dung</p>
-    <p class="infinite-scroll-error">Không còn gì để load</p>
-</div>
+    @push('head-script')
+        <script type="text/javascript" src="{{ asset('js/site/infinite-scroll.pkgd.min.js') }}"></script>
+    @endpush
 
-<script type="text/javascript">
-    // init Infinite Scroll
-    $('.event-scroll').infiniteScroll({
-        path: function() {
-            if (this.loadCount < {{ $event_confirmed->total() / setting('app.event_profile')}}) {
-                return '?page=' + (this.loadCount + 1);
-            }
-        },
-        append: '.event-item',
-        status: '.page-load-status',
-        hideNav: '.pagination',
-        scrollThreshold: 200,
-    });
-</script>
+    @push('script')
+        <script type="application/javascript" src="{{ asset('js/site/images-grid.js') }}" defer></script>
+        <script type="text/javascript">
+            // init Infinite Scroll
+            $('.event-scroll').infiniteScroll({
+                path: function() {
+                    if (this.loadCount < {{ $event_confirmed->total() / 1 }}) {
+                        return '?page=' + (this.loadCount + 1);
+                    }
+                },
+                append: '.event-item',
+                status: '.page-load-status',
+                hideNav: '.pagination',
+                scrollThreshold: 200,
+                history: false,
+            });
+        </script>
+    @endpush
 @endif

@@ -83,25 +83,15 @@ class PageController extends Controller
             }) + 1;
         $total       = count($listStudent);
 
-        // Lấy tất cả huy chương
-        $achievements = $student->achievements()->select(DB::raw('*,YEAR(date) as year'))->orderByDesc('year')->get()->groupBy('year');
-        $totalMedals  = collect($achievements)->map(function ($value, $key) {
-            return collect($value)->map(function ($vl) {
-                return $vl['medal'];
-            });
-        })->map(function ($achievement) {
-            return array_count_values($achievement->toArray());
-        });
-
-        // Lấy tất cả điểm thi
-        $testScores = $student->testScores()->get();
-
-        // Lấy tất cả sự kiện đã tham gia
-        $event_confirmed = $student->events()->wherePivot('confirmed', 'CONFIRMED')->withPivot('image',
-            'note')->orderByDesc('date')->paginate(setting('app.event_profile'));
-
         // Điểm rèn luyện
         $pointTraining = $student->getPointTraining();
+
+        // Sự kiện đã tham gia
+        $event_confirmed = $student->events()
+            ->wherePivot('confirmed', 'CONFIRMED')
+            ->withPivot('image', 'note')
+            ->orderByDesc('date')
+            ->paginate(1);
 
         // SEO
         $meta_desc     = 'Hệ thống đào tạo và phát triển Karate chất lượng Hà Nội';
@@ -112,7 +102,7 @@ class PageController extends Controller
         // SEO
 
         return view('pages.profile.index',
-            compact('user', 'student', 'rank', 'total', 'totalMedals', 'achievements', 'testScores', 'event_confirmed',
+            compact('user', 'student', 'rank', 'total', 'event_confirmed',
                 'pointTraining', 'meta_desc', 'meta_keywords', 'url_canonical', 'image_og', 'meta_title'));
     }
 

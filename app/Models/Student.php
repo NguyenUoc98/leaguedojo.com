@@ -17,9 +17,9 @@ class Student extends Model
     use FormLayoutTrait;
 
     protected $perPage = 10;
-
-    private $now;
-    private $startSemester;
+    protected $dates   = ['admission_day'];
+    private   $now;
+    private   $startSemester;
 
     public function __construct()
     {

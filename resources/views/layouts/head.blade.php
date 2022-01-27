@@ -33,7 +33,6 @@
     @stack('head-script')
 {{--    <script type="text/javascript" src="/js/croppie.js"></script>--}}
 {{--    <script type="text/javascript" src="/js/readMoreJS.min.js"></script>--}}
-{{--    <script type="text/javascript" src="/js/infinite-scroll.pkgd.min.js"></script>--}}
 {{--    <script type="text/javascript" src="/js/jquery.PrintArea.js" defer></script>--}}
 {{--    <script type="text/javascript" src="/js/dom-to-image.min.js" defer></script>--}}
 
