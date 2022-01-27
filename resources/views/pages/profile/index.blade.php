@@ -1,6 +1,8 @@
 @extends('layouts.master')
 @section('page_title', 'Trang cá nhân')
-
+@push('css')
+    <link rel="stylesheet" href="{{ asset('css/croppie.css') }}">
+@endpush
 
 
 @section('carosel')
@@ -11,7 +13,7 @@
     <div class="md:flex -mt-14 justify-between items-end mb-4">
         <div class="md:flex md:flex-wrap items-center w-full">
             <img
-                class="md:w-1/5 w-1/2 mx-auto -mt-[10.5rem] md:m-0 h-auto rounded-full border-4 md:border-8 border-white shadow-md"
+                class="md:w-1/5 w-1/2 mx-auto -mt-[10.5rem] md:m-0 h-auto rounded-full border-4 md:border-8 border-white shadow-md avatar"
                 src="{{ Voyager::image(Auth::user()->avatar) }}">
             <div class="text-center md:text-left md:ml-4 mt-1">
                 <p class="font-bold md:text-4xl text-2xl">{{ $user->name }}</p>
@@ -65,9 +67,18 @@
                 @endif
             </div>
         </div>
-        <div class="my-5 text-center md:text-right">
-            <button
-                class="outline-none bg-gray-100 hover:bg-gray-200 py-2 px-4 font-bold whitespace-nowrap rounded-lg w-full md:w-auto">
+        <div class="my-5 text-center md:text-right space-y-2">
+            <button id="btn-update-password"
+                    class="outline-none bg-primary hover:bg-primary-darker text-white py-2 px-4 font-bold whitespace-nowrap rounded-lg w-full md:w-auto">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd"
+                          d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
+                          clip-rule="evenodd"/>
+                </svg>
+                Đổi mật khẩu
+            </button>
+            <button id="btn-update-account"
+                    class="outline-none bg-gray-100 hover:bg-gray-200 py-2 px-4 font-bold whitespace-nowrap rounded-lg w-full md:w-auto">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline" viewBox="0 0 20 20" fill="currentColor">
                     <path
                         d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"/>
@@ -75,7 +86,19 @@
                 Chỉnh sửa tài khoản
             </button>
         </div>
+
+        @include('pages.profile._edit_account')
+        @include('pages.profile._edit_password')
     </div>
+
+    @php
+        if($errors->any()) {
+            $message = '';
+            foreach($errors->all() as $error) {
+                $message .= $error . '<br>';
+            }
+        }
+    @endphp
 
     <hr class="hidden my-6 md:block">
     @if($user->isStudent())
@@ -194,4 +217,22 @@
             </div>
         </div>
     @endif
+
+    @push('head-script')
+        <script type="application/javascript" src="{{ asset('js/site/croppie.js') }}"></script>
+    @endpush
+    @push('script')
+        <script>
+            function closeModal(obj) {
+                $(obj).addClass('hidden');
+            }
+        </script>
+        @if(isset($message))
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    showError('{!! $message !!}');
+                })
+            </script>
+        @endif
+    @endpush
 @endsection

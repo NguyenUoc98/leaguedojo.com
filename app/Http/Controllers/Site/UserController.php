@@ -27,20 +27,22 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param int $id
-     * @return \Illuminate\Http\Response
+     * @param UserRequest $request
+     * @param User $user
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse|void
      */
     public function update(UserRequest $request, User $user)
     {
         // Update Name and Email
         if ($request->type == 'edit') {
             $user->update([
-                'name'  => $request->name,
-                'email' => $request->email,
+                'name' => $request->name,
             ]);
-            $student = $user->student;
-            return view('pages.profile._show', compact('user', 'student'));
+            return redirect()->back()->with([
+                'message' => 'Cập nhật thành công',
+                'type'    => 'success',
+                'color'   => '#4caf50',
+            ]);
         };
 
         // Update Avatar
@@ -64,21 +66,28 @@ class UserController extends Controller
             $user->update([
                 'avatar' => 'users/' . Carbon::now('Asia/Ho_Chi_Minh')->format('FY') . '/' . $imageName,
             ]);
-            $student = $user->student;
-            return view('pages.profile._show', compact('user', 'student'));
+            return response()->json([
+                'message' => 'Update success',
+            ]);
         };
 
         // Update Password
         if ($request->type == 'reset') {
             if (!Hash::check($request->old_password, $user->password)) {
-                return response()->json([
-                    'error' => 'Có vẻ như mật khẩu cũ bạn nhập không chính xác',
+                return redirect()->back()->with([
+                    'message' => 'Mật khẩu cũ không chính xác',
+                    'type'    => 'error',
+                    'color'   => '#ed3939',
                 ]);
             } else {
                 $user->update([
                     'password' => Hash::make($request->password),
                 ]);
-                return response('success');
+                return redirect()->back()->with([
+                    'message' => 'Cập nhật thành công',
+                    'type'    => 'success',
+                    'color'   => '#4caf50',
+                ]);
             }
         }
     }

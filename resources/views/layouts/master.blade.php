@@ -9,7 +9,7 @@
 <body class="bg-white">
     <div id="fb-root"></div>
     <div
-        class="loader fixed bg-black bg-opacity-40 flex h-screen items-center justify-center left-0 top-0 w-full hidden z-10">
+        class="loader fixed bg-black bg-opacity-40 flex h-screen items-center justify-center left-0 top-0 w-full hidden z-50">
         <img class="w-44" src="{{ asset('img/core-img/loading.gif') }}">
     </div>
 

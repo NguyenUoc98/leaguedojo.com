@@ -37,7 +37,7 @@
                         <button type="button" id="user-menu-button" aria-expanded="false" aria-haspopup="true"
                                 class="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                             <span class="sr-only">Open user menu</span>
-                            <img class="h-8 w-8 rounded-full" src="{{Voyager::image(Auth::user()->avatar ?? 'users/default.png')}}" alt="user_avatar">
+                            <img class="h-8 w-8 rounded-full avatar" src="{{Voyager::image(Auth::user()->avatar ?? 'users/default.png')}}" alt="user_avatar">
                         </button>
                     </div>
 
@@ -45,7 +45,7 @@
                         class="origin-top-right absolute right-0 mt-2 w-64 rounded-md shadow-lg py-1 pb-3 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none transition ease-in-out duration-200 transform hidden">
                         @if (Auth::check())
                             <div class="flex items-center px-3 mt-2">
-                                <img src="{{ Voyager::image(Auth::user()->avatar) }}" class="rounded-full w-10 h-10">
+                                <img src="{{ Voyager::image(Auth::user()->avatar) }}" class="rounded-full w-10 h-10 avatar">
                                 <div class="ml-2 leading-5">
                                     <p class="font-bold">{{ \Str::limit(Auth::user()->name, 18) }}</p>
                                     <p class="text-xs text-gray-600">{{ \Str::limit(Auth::user()->email, 30) }}</p>
