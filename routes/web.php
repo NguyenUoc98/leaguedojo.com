@@ -5,7 +5,7 @@ Route::group(['middleware' => ['operation-log']], function () {
     });
     Route::get('trang-chu', 'Site\PageController@home')->name('home');
     Route::get('tin-tuc', 'Site\PageController@news')->name('news');
-    Route::get('profile', 'Site\PageController@profile')->name('profile')->middleware('auth')->middleware('verified');
+    Route::get('trang-ca-nhan', 'Site\PageController@profile')->name('profile')->middleware('auth')->middleware('verified');
     Route::post('vouchers/getVoucher', 'Site\VoucherController@getVoucher')->name('vouchers.getVoucher')->middleware('auth')->middleware('verified');
     Route::post('rooms/find', 'Site\RoomController@find')->name('rooms.find')->middleware('auth')->middleware('verified');
     Route::post('rooms/book', 'Site\RoomController@book')->name('rooms.book')->middleware('auth')->middleware('verified');

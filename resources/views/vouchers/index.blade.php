@@ -27,7 +27,7 @@
                 @forelse($voucherCollected as $voucher)
                     @include('vouchers.info_card', ['voucher' => $voucher])
                 @empty
-                    <p class="text-center no-voucher mx-3 p-30 w-full bg-white"> Không có mã giảm giá nào </p>
+                    <p class="text-center no-voucher mx-3 p-30 w-full bg-white col-span-2"> Không có mã giảm giá nào </p>
                 @endforelse
             </div>
         </div>
