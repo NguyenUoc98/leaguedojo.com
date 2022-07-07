@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use App\Indexs\PostIndexConfigurator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
+use ScoutElastic\Searchable;
 use TCG\Voyager\Facades\Voyager;
 use TCG\Voyager\Traits\Resizable;
 use TCG\Voyager\Traits\Translatable;
@@ -23,7 +26,32 @@ class Post extends Model implements ViewableContract
         FormLayoutTrait,
         Viewable,
         SoftDeletes,
-        Commentable;
+        Commentable,
+        Searchable;
+
+    protected $indexConfigurator = PostIndexConfigurator::class;
+    protected $searchRules = [
+        //
+    ];
+    protected $mapping = [
+        'properties' => [
+            'id' => [
+                'type' => 'integer',
+            ],
+            'category_id' => [
+                'type' => 'integer',
+            ],
+            'status' => [
+                'type' => 'keyword',
+            ],
+            'title' => [
+                'type' => 'text',
+            ],
+            'excerpt' => [
+                'type' => 'text',
+            ],
+        ]
+    ];
 
     protected $dates = ['deleted_at'];
 
@@ -47,6 +75,20 @@ class Post extends Model implements ViewableContract
     ];
 
     protected $guarded = [];
+
+    /**
+     * Get the indexable data array for the model.
+     *
+     * @return array
+     */
+    public function toSearchableArray()
+    {
+        $array = $this->toArray();
+
+        $array = Arr::only($array, ['title', 'category_id', 'status', 'excerpt']);
+
+        return $array;
+    }
 
     public function save(array $options = [])
     {

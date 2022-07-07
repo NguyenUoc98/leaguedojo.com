@@ -19,7 +19,7 @@ class DojoController extends Controller
         $dojos = Dojo::all();
 
         // SEO
-        $meta_desc     = 'Tổng hợp các cơ sở tập luyện của hệ thống Karate League Dojo';
+        $meta_desc     = 'Tổng hợp các cơ sở tập luyện của hệ thống ' . config('app.name');
         $meta_keywords = 'võ thuật, cơ sở tập luyện';
         $url_canonical = route('dojos.index');
         $image_og      = '';
@@ -43,7 +43,7 @@ class DojoController extends Controller
         $otherDojos = Dojo::where('slug', '<>', $slug)->get();
 
         // SEO
-        $meta_desc     = 'cơ sở ' . $dojo->name . 'của hệ thống Karate League Dojo';
+        $meta_desc     = 'cơ sở ' . $dojo->name . 'của hệ thống ' . config('app.name');
         $meta_keywords = 'võ thuật, cơ sở tập luyện, ' . $dojo->name;
         $url_canonical = route('dojos.show', $slug);
         $image_og      = Voyager::image(json_decode($dojo->image)[0]);

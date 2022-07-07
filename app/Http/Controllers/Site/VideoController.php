@@ -36,7 +36,7 @@ class VideoController extends Controller
         $playlists      = Playlist::with('videos')->get();
 
         // SEO
-        $meta_desc     = 'Trang tổng hợp các video thi đấu, kiến thức của hệ thống Karate League Dojo cũng như các trang Youtube nổi tiếng';
+        $meta_desc     = 'Trang tổng hợp các video thi đấu, kiến thức của hệ thống ' . config('app.name') . ' cũng như các trang Youtube nổi tiếng';
         $meta_keywords = 'video, thi đấu, kiến thức, youtube, nổi tiếng, karate';
         $url_canonical = route('videos.index');
         $image_og      = '';

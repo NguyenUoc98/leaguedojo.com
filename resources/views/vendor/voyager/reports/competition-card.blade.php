@@ -205,7 +205,7 @@
                                     </div>
 
                                     <div class="dojo-name">
-                                        Karate League Dojo
+                                        {{ config('app.name') }}
                                     </div>
 
                                     <div class="info info-date">
@@ -256,7 +256,7 @@
                     </div>
 
                     <div class="dojo-name" style="font-size: 2rem;">
-                        Karate League Dojo
+                        {{ config('app.name') }}
                     </div>
 
                     <div class="info info-date" style="font-size: 2.4rem;">

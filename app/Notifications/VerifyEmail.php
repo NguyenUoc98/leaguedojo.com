@@ -45,7 +45,7 @@ class VerifyEmail extends Notification
 
         return (new MailMessage)
             ->subject(Lang::get('Yêu cầu xác thực tài khoản'))
-            ->line(Lang::get('Chúng tôi đã nhận được yêu cầu đăng ký tài khoản của bạn trên trang Karate League Dojo.'))
+            ->line(Lang::get('Chúng tôi đã nhận được yêu cầu đăng ký tài khoản của bạn trên trang ' . config('app.name') . '.'))
             ->line(Lang::get('Click vào "Xác thực tài khoản" để thực hiện xác thực tài khoản của bạn:'))
             ->action(Lang::get('Xác thực tài khoản'), $verificationUrl)
             ->line(Lang::get('Nếu bạn không tiến hành xác thực tài khoản sẽ bị hạn chế một số hoạt động trên trang.'));

@@ -158,7 +158,7 @@
                     <div>Liên hệ : 0942332444</div>
                     <div>Fanpage: https://www.facebook.com/LEAGUEDOJO</div>
                     <div>Cảm ơn bạn đã tin tưởng và đồng hành cùng chúng tôi!</div>
-                    <p>Karate League Dojo</p>
+                    <p>{{ config('app.name') }}</p>
                 </div>
             </div>
         </div>

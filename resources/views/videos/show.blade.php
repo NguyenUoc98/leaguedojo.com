@@ -62,7 +62,7 @@
             @if($ortherInPlaylist == '')
                 <div class="border-t py-3">
                     <div class="flex justify-between">
-                        <span class="font-bold">Nguồn: KARATE LEAGUE DOJO</span>
+                        <span class="font-bold">Nguồn: {{ config('app.name') }}</span>
                         <div class="fb-like" data-href="{{ route('videos.show', $video->slug) }}"
                              data-width="" data-layout="button_count" data-action="like" data-size="small"
                              data-share="true">
@@ -182,7 +182,7 @@
             <p class="my-5">{!! str_replace("\n", '<br>', $video->description) !!}</p>
             <div class="border-t py-3">
                 <div class="flex justify-between">
-                    <span class="font-bold">Nguồn: KARATE LEAGUE DOJO</span>
+                    <span class="font-bold">Nguồn: {{ config('app.name') }}</span>
                     <div class="fb-like" data-href="{{ route('videos.show', $video->slug) }}"
                          data-width="" data-layout="button_count" data-action="like" data-size="small"
                          data-share="true">

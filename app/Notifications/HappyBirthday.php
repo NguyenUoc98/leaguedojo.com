@@ -46,7 +46,7 @@ class HappyBirthday extends Notification implements ShouldQueue
         return (new MailMessage)
             ->subject(Lang::get('Thư chúc mừng sinh nhật'))
             ->greeting('Chúc mừng sinh nhật ' . $this->studentName . '!')
-            ->line(Lang::get('Ngày hôm nay ' . \Carbon\Carbon::now()->format('d/m/Y') . ' là một ngày thật tuyệt vời! Chúng tôi - Đội ngũ Admin website Karate League Dojo
+            ->line(Lang::get('Ngày hôm nay ' . \Carbon\Carbon::now()->format('d/m/Y') . ' là một ngày thật tuyệt vời! Chúng tôi - Đội ngũ Admin website ' . config('app.name') . '
             thay mặt cho võ đường xin chân thành cảm ơn bạn đã đồng hành cùng chúng tôi trong suốt quãng đường vừa qua.
             Chúc bạn sẽ có một tuổi mới với nhiều tiếng cười, hạnh phúc và sức khỏe tốt.
             Hy vọng chúng ta có thể đồng hành cùng nhau lâu nhất có thể nhé! Chúc mừng sinh nhật!'));

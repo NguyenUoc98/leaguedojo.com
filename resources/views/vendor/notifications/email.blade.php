@@ -44,7 +44,7 @@
 {{ $salutation }}
 @else
 @lang('Thân ái và quyết thắng!')<br>
-Karate League Dojo - K.L.D
+{{ config('app.name') }} - K.L.D
 @endif
 
 {{-- Subcopy --}}

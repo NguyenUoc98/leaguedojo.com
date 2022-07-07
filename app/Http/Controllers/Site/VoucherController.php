@@ -36,7 +36,7 @@ class VoucherController extends Controller
             $voucherCollected = Auth::user()->student->vouchers;
 
             // SEO
-            $meta_desc     = 'Trang tổng hợp các mã giảm giá của hệ thống Karate League Dojo mà võ sinh đã thu thập hoặc chưa, đã sử dụng và chưa sử dụng';
+            $meta_desc     = 'Trang tổng hợp các mã giảm giá của hệ thống ' . config('app.name') . ' mà võ sinh đã thu thập hoặc chưa, đã sử dụng và chưa sử dụng';
             $meta_keywords = 'mã giảm giá, học phí, thu thập';
             $url_canonical = route('vouchers.index');
             $image_og      = '';

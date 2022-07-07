@@ -118,7 +118,7 @@
                                     </div>
 
                                     <div class="paper-body">
-                                        <p><b class="dojo">Karate League Dojo</b> xin gửi tới các bậc phụ huynh, võ sinh đang tập luyện tại võ đường thông báo với nội dung như sau:</p>
+                                        <p><b class="dojo">{{ config('app.name') }}</b> xin gửi tới các bậc phụ huynh, võ sinh đang tập luyện tại võ đường thông báo với nội dung như sau:</p>
                                         <ol>
                                             <li>
                                                 Theo kế hoạch, giáo án tập luyện, kỳ thi thăng đai được đề ra năm {{ Carbon\Carbon::now()->year }}. Sau thời gian tập luyện, tu dưỡng đạo đức,

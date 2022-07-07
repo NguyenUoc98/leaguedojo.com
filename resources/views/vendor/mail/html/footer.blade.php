@@ -64,7 +64,7 @@
     <td align="center" style="font-size:0px;padding:10px 25px;word-break:break-word;">
         <div
             style="font-size:16px;font-weight:400;line-height:24px;text-align:center;color:#333333;">
-            Karate League Dojo - Hệ thống đào tạo và phát triển Karate chất lượng Hà Nội<br>
+            {{ config('app.name') }} - Hệ thống đào tạo và phát triển Karate chất lượng Hà Nội<br>
             Chúng tôi luôn sẵn sàng phục vụ bạn!
         </div>
     </td>

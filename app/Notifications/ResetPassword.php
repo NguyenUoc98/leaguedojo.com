@@ -58,7 +58,7 @@ class ResetPassword extends Notification
 
         return (new MailMessage)
         ->subject(Lang::get('Thông báo đặt lại mật khẩu'))
-        ->line(Lang::get('Chúng tôi đã nhận được yêu cầu đặt lại mật khẩu của bạn trên trang Karate League Dojo.'))
+        ->line(Lang::get('Chúng tôi đã nhận được yêu cầu đặt lại mật khẩu của bạn trên trang ' . config('app.name') . '.'))
         ->line(Lang::get('Click vào "Đặt lại mật khẩu" để thực hiện cập nhật lại mật khẩu của bạn:'))
         ->action(Lang::get('Đặt lại mất khẩu'), url(config('app.url').route('password.reset', ['token' => $this->token, 'email' => $notifiable->getEmailForPasswordReset()], false)))
         ->line(Lang::get('Lưu ý: Liên kết này sẽ hết hạn trong vòng :count phút.', ['count' => config('auth.passwords.users.expire')]))

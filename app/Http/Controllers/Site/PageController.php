@@ -46,7 +46,7 @@ class PageController extends Controller
 
         // SEO
         $meta_desc     = 'Hệ thống đào tạo và phát triển Karate chất lượng Hà Nội';
-        $meta_keywords = 'karate, học võ hà nội, hà nội, karate league dojo, học võ tốt nhất hà nội, tin tức karate';
+        $meta_keywords = 'karate, học võ hà nội, hà nội, học võ tốt nhất hà nội, tin tức karate';
         $url_canonical = route('news');
         $image_og      = Voyager::image($slides[0]->image);
         $meta_title    = 'Tin tức';
@@ -124,7 +124,7 @@ class PageController extends Controller
 
         // SEO
         $meta_desc     = 'Hệ thống đào tạo và phát triển Karate chất lượng Hà Nội';
-        $meta_keywords = 'karate, học võ hà nội, hà nội, karate league dojo, học võ tốt nhất hà nội';
+        $meta_keywords = 'karate, học võ hà nội, hà nội, học võ tốt nhất hà nội';
         $url_canonical = route('home');
         $image_og      = config('app')['url'] . '/img/home/introduce/i8.jpg';
         $meta_title    = setting('site.title');

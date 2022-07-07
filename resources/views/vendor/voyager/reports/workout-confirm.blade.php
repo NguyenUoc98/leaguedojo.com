@@ -94,7 +94,7 @@
                                             Hiện cư trú tại: <b class="address" style="text-transform: capitalize;">Số 21C, ngõ 77, Bùi Xương Trạch, Thanh Xuân, Hà Nội.</b><br>
                                         </p>
 
-                                        <p>Đã tập luyện tại cơ sở <b class="dojo">Karate League Dojo</b> của <b>Công ty TNHH Đào Tạo Và Phát Triển Thể Chất Việt Nam</b> từ ngày <b class="start-at">28/11/2017</b> đến <b class="end-at">nay</b>.</p>
+                                        <p>Đã tập luyện tại cơ sở <b class="dojo">{{ config('app.name') }}</b> của <b>Công ty TNHH Đào Tạo Và Phát Triển Thể Chất Việt Nam</b> từ ngày <b class="start-at">28/11/2017</b> đến <b class="end-at">nay</b>.</p>
                                     </div>
 
                                     <div class="paper-footing" style="font-size: 14px;direction: rtl;">

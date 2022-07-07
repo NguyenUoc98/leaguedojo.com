@@ -126,7 +126,7 @@
                                 </div>
 
                                 <div class="footer-caption">
-                                    <span class="dojo">Karate League Dojo - K.L.D</span><br>
+                                    <span class="dojo">{{ config('app.name') }} - K.L.D</span><br>
                                     <span class="date2">11/12/2019</span>
                                 </div>
                             </div>
@@ -151,7 +151,7 @@
                 </div>
 
                 <div class="footer-caption" style="font-size: 1.5rem;">
-                    <span class="dojo">Karate League Dojo - K.L.D</span><br>
+                    <span class="dojo">{{ config('app.name') }} - K.L.D</span><br>
                     <span class="date2">11/12/2019</span>
                 </div>
             </div>

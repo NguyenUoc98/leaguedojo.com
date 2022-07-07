@@ -57,7 +57,7 @@ return [
 
     'from' => [
         'address' => env('MAIL_FROM_ADDRESS', 'karateleaguedojo@gmail.com'),
-        'name' => env('MAIL_FROM_NAME', 'Karate League Dojo'),
+        'name' => env('MAIL_FROM_NAME', config('app.name')),
     ],
 
     /*

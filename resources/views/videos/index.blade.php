@@ -118,7 +118,7 @@
                         <div class="border-t-4 border-primary p-4 space-y-3">
                             <a class="font-semibold md:text-lg text-black"
                                href="{{ route('videos.show', $playlist->videos[0]->slug ?? '') }}">{{ $playlist->name }}</a>
-                            <p>KARATE LEAGUE DOJO</p>
+                            <p>{{ config('app.name') }}</p>
                             <small>{{ $playlist->updated_at->format('d \\t\\h\\g m, Y') }}</small>
                             <a class="absolute right-4 text-primary bottom-4 shadow-md rounded-full hover:text-primary-darker"
                                href="{{ route('videos.show', $playlist->videos[0]->slug ?? '') }}">
