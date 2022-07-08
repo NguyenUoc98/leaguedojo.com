@@ -20,6 +20,7 @@
                     <img class="w-9 hidden lg:block" src="{{ asset('img/core-img/logo.png') }}" alt="logo">
                     <span class="text-xl text-white font-bold ml-1">{{ setting('site.web_name') }}</span>
                 </a>
+                @livewire('search-post')
                 <div class="hidden lg:block lg:ml-6">
                     {{ menu('site', 'menus.desktop') }}
                 </div>

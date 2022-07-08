@@ -11,6 +11,7 @@
         "php": "^7.2",
         "aalaap/faker-youtube": "^1.2",
         "alaouy/youtube": "^2.2",
+        "babenkoivan/scout-elasticsearch-driver": "^4.3",
         "cyrildewit/eloquent-viewable": "^4.1",
         "davejamesmiller/laravel-breadcrumbs": "^5.3",
         "fabpot/goutte": "^4.0",

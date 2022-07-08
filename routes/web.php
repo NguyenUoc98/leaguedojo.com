@@ -59,6 +59,9 @@ Route::group(['middleware' => ['operation-log']], function () {
     // Route social login
     Route::get('/auth/redirect/{provider}', 'Site\SocialController@redirect')->name('auth.social-login');
     Route::get('/callback/{provider}', 'Site\SocialController@callback');
+
+    // Route search
+    Route::get('tim-kiem', 'Site\SearchController@index')->name('search');
 });
 
 Route::group(['prefix' => 'admin', 'middleware' => ['operation-log']], function () {
