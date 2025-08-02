@@ -79,7 +79,7 @@ class CommentController extends Controller
         $slug      = $comment->commentable_type::find($comment->commentable_id)->slug;
         $data      = [
             "text" => '<b>' . $commenter->name . '</b> đã bình luận một bài viết của bạn.',
-            "img"  => Voyager::image($commenter->avatar),
+            "img"  => $commenter->avatar,
             "icon" => '/img/core-img/icon-cmt.png',
             "href" => route($model->getTable() . '.show', $slug),
             "time" => Carbon::now(),
@@ -150,7 +150,7 @@ class CommentController extends Controller
         $slug      = $model->slug;
         $data      = [
             "text" => '<b>' . $commenter->name . '</b> đã trả lời bình luận của bạn về một bài viết.',
-            "img"  => Voyager::image($commenter->avatar),
+            "img"  => $commenter->avatar,
             "icon" => '/img/core-img/icon-cmt.png',
             "href" => route($model->getTable() . '.show', $slug),
             "time" => Carbon::now(),
@@ -187,7 +187,7 @@ class CommentController extends Controller
         $slug      = $model->slug;
         $data      = [
             "text" => '<b>' . $commenter->name . '</b> đã thích một bình luận của bạn.',
-            "img"  => Voyager::image($commenter->avatar),
+            "img"  => $commenter->avatar,
             "icon" => '/img/core-img/icon-like.png',
             "href" => route($model->getTable() . '.show', $slug),
             "time" => Carbon::now(),

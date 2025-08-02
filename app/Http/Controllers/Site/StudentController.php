@@ -39,7 +39,7 @@ class StudentController extends Controller
         if ($request->action == 'image') {
             $data = $request->image;
 
-            if ($student->image != 'students/default.png') {
+            if ($student->image != 'default/user_default.png') {
                 File::delete(public_path('/storage/' . $student->image));
             }
 

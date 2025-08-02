@@ -6,6 +6,8 @@ use App\Models\Coach;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Storage;
+use TCG\Voyager\Facades\Voyager;
 use TCG\Voyager\Models\User as Model;
 use App\Models\Student;
 use Laravelista\Comments\Commenter;
@@ -71,6 +73,17 @@ class User extends Model implements MustVerifyEmail
     public function sendEmailVerificationNotification()
     {
         $this->notify(new VerifyEmail());
+    }
+
+    public function getAvatarAttribute($value)
+    {
+        $rawImage = parent::getAvatarAttribute($value);
+        if (!Storage::disk(config('voyager.storage.disk'))->exists($rawImage)) {
+            $address = strtolower(trim($this->email));
+            $hash    = hash('sha256', $address);
+            return "https://gravatar.com/avatar/{$hash}?d=initials&s=200";
+        }
+        return Voyager::image($rawImage);
     }
 
     /**

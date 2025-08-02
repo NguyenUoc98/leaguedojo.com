@@ -230,7 +230,7 @@
                         @else
                             <img
                                 class="border-4 border-solid border-yellow-400 mx-auto rounded-full lg:w-32 md:w-28 w-20"
-                                src="{{ Voyager::image($topStudents[1]['avatar'])}}"
+                                src="{{ $topStudents[1]['avatar'] }}"
                                 alt="{{ $topStudents[1]['name'].'.png' }}">
                         @endif
                         <p class="border-b-2 border-primary font-bold mx-4 lg:text-3xl md:text-2xl text-xl text-primary">{{ $topStudents[1]['result']['total'] }}</p>
@@ -253,7 +253,7 @@
                         @else
                             <img
                                 class="border-4 border-solid border-yellow-400 mx-auto rounded-full lg:w-36 md:w-32 w-20"
-                                src="{{ Voyager::image($topStudents[0]['avatar'])}}"
+                                src="{{ $topStudents[0]['avatar'] }}"
                                 alt="{{ $topStudents[0]['name'].'.png' }}">
                         @endif
                         <p class="border-b-2 border-primary font-bold mx-4 text-primary ls:text-4xl md:text-3xl text-xl">{{ $topStudents[0]['result']['total'] }}</p>
@@ -277,7 +277,7 @@
                         @else
                             <img
                                 class="border-4 border-solid border-yellow-400 mx-auto rounded-full lg:w-32 md:w-28 w-20"
-                                src="{{ Voyager::image($topStudents[2]['avatar'])}}"
+                                src="{{ $topStudents[2]['avatar'] }}"
                                 alt="{{ $topStudents[2]['name'].'.png' }}">
                         @endif
                         <p class="border-b-2 border-primary font-bold mx-4 lg:text-3xl md:text-2xl text-xl text-primary">{{ $topStudents[2]['result']['total'] }}</p>

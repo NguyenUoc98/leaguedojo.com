@@ -130,7 +130,7 @@ class RoomController extends Controller
 
                 $data = [
                     "text" => 'Có một lịch mượn phòng mới từ <b>' . Auth::user()->student->name . '</b>.',
-                    "img"  => Voyager::image(Auth::user()->avatar),
+                    "img"  => Auth::user()->avatar,
                     "icon" => '/img/core-img/icon-calendar.png',
                     "href" => route('voyager.book-rooms.show', $bookRoom->id),
                     "time" => Carbon::now(),

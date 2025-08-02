@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Models\Post;
 use Carbon\Carbon;
+use Exception;
 use Goutte\Client;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
@@ -46,7 +47,7 @@ class VoThuatVnCrawler extends Command
     public function handle()
     {
         $url = $this->option('url');
-        $this->info('Crawling ' . $url);
+        $this->info('Crawling '.$url);
 
         $client  = new Client();
         $crawler = $client->request('GET', $url);
@@ -90,23 +91,28 @@ class VoThuatVnCrawler extends Command
             $title       = $title1;
         });
 
-        $path  = 'posts/' . Carbon::now()->format('FY');
-        $path1 = public_path('storage/') . $path;
+        $path  = 'posts/'.Carbon::now()->format('FY');
+        $path1 = public_path('storage/').$path;
         File::isDirectory($path1) or File::makeDirectory($path1);
-        if ($image) {
-            $filename = basename($image);
-            $path1    .= '/' . $filename;
-            $thumb    = Image::make($image);
-            $h        = $thumb->getHeight();
-            $w        = $thumb->getWidth();
-            if ($w * 3 / 4 <= $h) {
-                $h = $w * 3 / 4;
+        try {
+            if ($image) {
+                $image    = $this->normalize_url_filename($image);
+                $filename = basename($image);
+                $path1    .= '/'.$filename;
+                $thumb    = Image::make($image);
+                $h        = $thumb->getHeight();
+                $w        = $thumb->getWidth();
+                if ($w * 3 / 4 <= $h) {
+                    $h = $w * 3 / 4;
+                } else {
+                    $w = $h * 4 / 3;
+                }
+                $thumb->crop((int) $w, (int) $h, 0, 0)->save($path1);
             } else {
-                $w = $h * 4 / 3;
+                $filename = 'post-defautl.jpeg';
             }
-            $thumb->crop((int)$w, (int)$h, 0, 0)->save($path1);
-        } else {
-            $filename = 'post-defautl.jpeg';
+        } catch (Exception $e) {
+            $image = null;
         }
 
         $post              = new Post();
@@ -120,7 +126,7 @@ class VoThuatVnCrawler extends Command
         $post->is_crawl    = Post::IS_CRAWL['YES'];
         $post->category_id = 1;
         $post->author_id   = 1;
-        $post->image       = $image ? '["' . $path . '/' . $filename . '"]' : '[]';
+        $post->image       = $image ? '["'.$path.'/'.$filename.'"]' : '[]';
         try {
             $post->save();
             $this->info('Success!');
@@ -128,4 +134,38 @@ class VoThuatVnCrawler extends Command
             Log::error($e->getMessage());
         }
     }
+
+    function normalize_url_filename(string $url): string
+    {
+        // Kiểm tra xem có extension intl không
+        if (!class_exists('Normalizer')) {
+            throw new Exception("PHP intl extension chưa được cài hoặc bật.");
+        }
+
+        // Tách URL thành 2 phần: base path và tên file
+        $parsed = parse_url($url);
+        if (!isset($parsed['path'])) {
+            throw new Exception("URL không hợp lệ");
+        }
+
+        // Tách phần path
+        $path     = $parsed['path'];
+        $dirname  = dirname($path);
+        $basename = basename($url);
+
+        // Normalize tên file sang dạng NFD (Unicode tổ hợp)
+        $normalized_basename = \Normalizer::normalize($basename, \Normalizer::FORM_D);
+
+        // Encode phần tên file đã chuẩn hóa
+        $encoded_basename = rawurlencode($normalized_basename);
+
+        // Ghép lại URL đầy đủ
+        $scheme   = $parsed['scheme'] ?? 'https';
+        $host     = $parsed['host'] ?? '';
+        $port     = isset($parsed['port']) ? ':'.$parsed['port'] : '';
+        $new_path = rtrim($dirname, '/').'/'.$encoded_basename;
+
+        return $scheme.'://'.$host.$port.$new_path;
+    }
+
 }

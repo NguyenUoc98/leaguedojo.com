@@ -43,7 +43,7 @@ class StartVoThuatVnCrawler extends Command
      */
     public function handle()
     {
-        $links = LinkCrawl::whereStatus(LinkCrawl::STATUS['DEFAULT'])->take(10)->get();
+        $links = LinkCrawl::whereStatus(LinkCrawl::STATUS['DEFAULT'])->get();
         foreach ($links as $link) {
             DB::transaction(function () use ($link) {
                 $this->info('Crawling ' . $link->link);

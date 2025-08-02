@@ -66,7 +66,7 @@
 if (\Illuminate\Support\Str::startsWith(Auth::user()->avatar, 'http://') || \Illuminate\Support\Str::startsWith(Auth::user()->avatar, 'https://')) {
     $user_avatar = Auth::user()->avatar;
 } else {
-    $user_avatar = Voyager::image(Auth::user()->avatar);
+    $user_avatar = Auth::user()->avatar;
 }
 ?>
 

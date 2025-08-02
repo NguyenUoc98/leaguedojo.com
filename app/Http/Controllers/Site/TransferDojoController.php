@@ -97,7 +97,7 @@ class TransferDojoController extends Controller
             $transferDojo->save();
             $data = [
                 "text" => 'Bạn nhận được 1 đơn xin chuyển cơ sở tập luyện từ <b>' . Auth::user()->student->name . '</b>.',
-                "img"  => Voyager::image(Auth::user()->avatar),
+                "img"  => Auth::user()->avatar,
                 "icon" => '/img/core-img/icon-notify.png',
                 "href" => route('voyager.transfer-dojos.show', $transferDojo->id),
                 "time" => Carbon::now(),

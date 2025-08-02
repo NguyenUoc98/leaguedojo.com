@@ -20,18 +20,19 @@ class SearchPost extends Component
     public function render()
     {
         sleep(1);
-        $posts = Post::search($this->query)
-            ->rule(function ($builder) {
-                return [
-                    'must' => [
-                        'match' => [
-                            'title' => $builder->query
-                        ]
-                    ]
-                ];
-            })
-            ->take(5)
-            ->get();
+//        $posts = Post::search($this->query)
+//            ->rule(function ($builder) {
+//                return [
+//                    'must' => [
+//                        'match' => [
+//                            'title' => $builder->query
+//                        ]
+//                    ]
+//                ];
+//            })
+//            ->take(5)
+//            ->get();
+        $posts = collect();
         return view('livewire.search-post', [ 'posts' => $posts]);
     }
 }

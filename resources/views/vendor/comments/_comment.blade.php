@@ -8,12 +8,12 @@
     <div id="comment-{{ $comment->id }}" class="reply-to-reply">
     @endif
         <div class="gap-2 grid grid-cols-6 md:grid-cols-12">
-            <img class="col-span-1 h-auto rounded-full w-14" src="{{ Voyager::image($comment->commenter->avatar) }}" alt="{{ $comment->commenter->name ?? $comment->guest_name }} Avatar">
+            <img class="col-span-1 h-auto rounded-full w-14" src="{{ $comment->commenter->avatar }}" alt="{{ $comment->commenter->name ?? $comment->guest_name }} Avatar">
 @else
     <li id="comment-{{ $comment->id }}">
         <div class="grid md:grid-cols-12 grid-cols-6 gap-2">
             <img class="col-span-1 w-14 h-14 rounded-full"
-                 src="{{ Voyager::image($comment->commenter->avatar) }}"
+                 src="{{ $comment->commenter->avatar }}"
                  alt="{{ $comment->commenter->name ?? $comment->guest_name }}">
 @endif
             <div class="@if(isset($reply) && $reply === true)comment-meta-reply @endif comment-meta meta-{{ $comment->id }} col-span-5 md:col-span-11">

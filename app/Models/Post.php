@@ -26,8 +26,7 @@ class Post extends Model implements ViewableContract
         FormLayoutTrait,
         Viewable,
         SoftDeletes,
-        Commentable,
-        Searchable;
+        Commentable;
 
     protected $indexConfigurator = PostIndexConfigurator::class;
     protected $searchRules = [

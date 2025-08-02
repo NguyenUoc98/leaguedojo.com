@@ -197,7 +197,7 @@
                                     </div>
 
                                     <div class="img-card">
-                                        <img src="{{ config('app')['url'] . '/storage/students/default.png' }}">
+                                        <img src="{{ config('app')['url'] . '/storage/default/user_default.png' }}">
                                     </div>
 
                                     <div class="student-name">
@@ -248,7 +248,7 @@
                     </div>
 
                     <div class="img-card">
-                        <img src="{{ config('app')['url'] . '/storage/students/default.png' }}">
+                        <img src="{{ config('app')['url'] . '/storage/default/user_default.png' }}">
                     </div>
 
                     <div class="student-name" style="font-size: 4.2rem;">

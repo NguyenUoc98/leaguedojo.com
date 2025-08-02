@@ -14,7 +14,7 @@
         <div class="md:flex md:flex-wrap items-center w-full">
             <img
                 class="md:w-1/5 w-1/2 mx-auto -mt-[10.5rem] md:m-0 h-auto rounded-full border-4 md:border-8 border-white shadow-md avatar"
-                src="{{ Voyager::image(Auth::user()->avatar) }}">
+                src="{{ Auth::user()->avatar }}">
             <div class="text-center md:text-left md:ml-4 mt-1">
                 <p class="font-bold md:text-4xl text-2xl">{{ $user->name }}</p>
                 <p class="font-bold md:text-2xl">{{ $user->email }}</p>

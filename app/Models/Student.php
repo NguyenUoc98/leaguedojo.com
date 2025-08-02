@@ -79,7 +79,7 @@ class Student extends Model
 
     public function getImageAttribute($value)
     {
-        return $value ?? 'students/default.png';
+        return $value ?? 'default/user_default.png';
     }
 
     /**

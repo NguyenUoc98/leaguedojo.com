@@ -35,7 +35,7 @@
                             @if (($student['avatar'] == 'users/default.png') && ($student['sex'] == 1))
                             <img class="rounded-full w-12" src="/storage/users/user_woman.jpg" alt="user_woman.jpg">
                             @else
-                            <img class="rounded-full w-12" src="{{ Voyager::image($student['avatar']) }}" alt="{{ $student['name'].'.png'}}">
+                            <img class="rounded-full w-12" src="{{ $student['avatar'] }}" alt="{{ $student['name'].'.png'}}">
                             @endif
                         </a>
                         <div class="ml-2">
