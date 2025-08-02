@@ -1,0 +1,27 @@
+<?php
+
+return [
+    'usage_help'           => 'Bạn có thể nhận giá trị của từng cài đặt ở bất kỳ đâu trên trang web của mình bằng cách gọi',
+    'save'                 => 'Lưu các thiết lập',
+    'new'                  => 'Cài đặt mới',
+    'help_name'            => 'Đặt tên ví dụ: Tiêu đề quản trị viên',
+    'help_key'             => 'Cài đặt khóa ví dụ: admin_title',
+    'help_option'          => '(tùy chọn, các tùy chọn tương tự như áp dụng cho trường mẫu tương ứng)',
+    'add_new'              => 'Thêm cài đặt mới',
+    'delete_question'      => 'Bạn có chắc chắn muốn xóa cài đặt :setting?',
+    'delete_confirm'       => 'Có, xóa cài đặt này',
+    'successfully_created' => 'Cài đặt được tạo thành công',
+    'successfully_saved'   => 'Cài đặt đã lưu thành công',
+    'successfully_deleted' => 'Đã xóa thành công cài đặt',
+    'already_at_top'       => 'Điều này đã ở đầu danh sách',
+    'already_at_bottom'    => 'Điều này đã ở cuối danh sách',
+    'key_already_exists'   => 'Khóa :key đã tồn tại',
+    'moved_order_up'       => 'Đã di chuyển cài đặt :name lên trên',
+    'moved_order_down'     => 'Đã di chuyển cài đặt :name xuống dưới',
+    'successfully_removed' => 'Xóa thành công giá trị :name',
+    'group_general'        => 'General',
+    'group_admin'          => 'Admin',
+    'group_site'           => 'Site',
+    'group'                => 'Group',
+    'help_group'           => 'Nhóm cài đặt này được gán cho',
+];

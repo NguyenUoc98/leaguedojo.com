@@ -1,0 +1,93 @@
+<?php
+
+return [
+    'data_rows'  => [
+        'author'           => 'Tác giả',
+        'avatar'           => 'Avatar',
+        'body'             => 'Nội dung',
+        'category'         => 'Thể loại',
+        'created_at'       => 'Được tạo lúc',
+        'display_name'     => 'Tên hiển thị',
+        'email'            => 'Email',
+        'excerpt'          => 'Tóm tắt',
+        'featured'         => 'Đánh dấu là đặc sắc',
+        'id'               => 'ID',
+        'meta_description' => 'Mô tả META',
+        'meta_keywords'    => 'Từ khóa META',
+        'name'             => 'Tên',
+        'order'            => 'Sắp xếp',
+        'page_image'       => 'Hình ảnh trang',
+        'parent'           => 'Cha',
+        'password'         => 'Mật khẩu',
+        'post_image'       => 'Hình ảnh bài viết',
+        'remember_token'   => 'Remember Token',
+        'role'             => 'Vai trò',
+        'seo_title'        => 'Tiêu đề SEO',
+        'slug'             => 'Slug',
+        'status'           => 'Trạng thái',
+        'title'            => 'Tiêu đề',
+        'updated_at'       => 'Cập nhật lúc',
+    ],
+    'data_types' => [
+        'category' => [
+            'singular' => 'Thể loại',
+            'plural'   => 'Những thể loại',
+        ],
+        'menu'     => [
+            'singular' => 'Menu',
+            'plural'   => 'Những Menu',
+        ],
+        'page'     => [
+            'singular' => 'Trang',
+            'plural'   => 'Những trang',
+        ],
+        'post'     => [
+            'singular' => 'Bài viết',
+            'plural'   => 'Những bài viết',
+        ],
+        'role'     => [
+            'singular' => 'Role',
+            'plural'   => 'Roles',
+        ],
+        'user'     => [
+            'singular' => 'Người dùng',
+            'plural'   => 'Những người dùng',
+        ],
+    ],
+    'menu_items' => [
+        'bread'        => 'BREAD',
+        'categories'   => 'Thể loại',
+        'compass'      => 'Compass',
+        'dashboard'    => 'Dashboard',
+        'database'     => 'Cơ sở dữ liệu',
+        'media'        => 'Đa phương tiện',
+        'menu_builder' => 'Trình tạo Menu',
+        'pages'        => 'Trang',
+        'posts'        => 'Bài viết',
+        'roles'        => 'Roles',
+        'settings'     => 'Cài đặt',
+        'tools'        => 'Công cụ',
+        'users'        => 'Người dùng',
+    ],
+    'roles'      => [
+        'admin' => 'Quản trị viên',
+        'user'  => 'Người dùng',
+    ],
+    'settings'   => [
+        'admin' => [
+            'background_image'           => 'Hình nền Admin',
+            'description'                => 'Mô tả Admin',
+            'description_value'          => 'Chào mừng đến với  Voyager. The Missing Admin cho Laravel',
+            'google_analytics_client_id' => 'Google Analytics Client ID (được sử dụng cho bảng điều khiển quản trị)',
+            'icon_image'                 => 'Hình ảnh biểu tượng Admin',
+            'loader'                     => 'Admin Loader',
+            'title'                      => 'Tiêu đề Admin',
+        ],
+        'site'  => [
+            'description'                  => 'Mô tả của Trang',
+            'google_analytics_tracking_id' => 'Google Analytics Tracking ID',
+            'logo'                         => 'Logo của Trang',
+            'title'                        => 'Tiêu đề của trang',
+        ],
+    ],
+];
